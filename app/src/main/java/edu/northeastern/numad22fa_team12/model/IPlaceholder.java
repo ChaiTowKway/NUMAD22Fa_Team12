@@ -6,7 +6,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface IPlaceholder {
-    @GET("api/v1/products.json")    // "post/" is the relative Url of your api. We define base Url at a common place later
+    @GET("api/v1/products.json")
     Call<List<PostModel>>  getPostModels();
 
 

@@ -23,7 +23,8 @@
             android:exported="false" />
         <activity
             android:name=".WebServiceActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
