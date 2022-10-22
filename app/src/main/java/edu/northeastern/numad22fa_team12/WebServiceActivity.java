@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ public class WebServiceActivity extends AppCompatActivity {
     private Hashtable<String, List<String>> allBrandsAndInitial;
     private List<String> allProductTypes;
     private List<String> allProducts;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +57,19 @@ public class WebServiceActivity extends AppCompatActivity {
         initialSpinner = (Spinner) findViewById(R.id.brandInitialSpinner);
         brandSpinner = (Spinner) findViewById(R.id.brandSpinner);
         typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
-
+        progressBar = (ProgressBar)findViewById(R.id.progressBar1);
         allInitials = new ArrayList<>();
         allBrandsAndInitial = new Hashtable<>();
         allProductTypes = new ArrayList<>();
         allProducts = new ArrayList<>();
-
+        progressBar.setVisibility(View.GONE);
         // load brand initials and brands (display loading animation while loading?)
         loadDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 getPosts();
+
             }
         });
 
@@ -189,13 +193,16 @@ public class WebServiceActivity extends AppCompatActivity {
                 }
                 Collections.sort(allInitials);
                 setSpinner();
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<List<PostModel>> call, Throwable t) {
                 // this gets called when url is wrong and therefore calls can't be made OR processing the request goes wrong.
                 Log.d(TAG, "Call failed!" + t.getMessage());
+                progressBar.setVisibility(View.GONE);
             }
+
         });
 
     }
