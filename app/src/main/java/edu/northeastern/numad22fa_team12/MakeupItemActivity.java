@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class MakeupItemActivity extends AppCompatActivity {
 
@@ -17,6 +18,11 @@ public class MakeupItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makeup_item);
+
+        // allProductInfo = {name, category, price, description, imageLink}
+        // must follow this order to get the info
+        Bundle b = this.getIntent().getExtras();
+        ArrayList<String> allProductInfo = b.getStringArrayList("allProductInfo");
 
 
         productImage = findViewById(R.id.product_image);

@@ -1,24 +1,19 @@
 package edu.northeastern.numad22fa_team12;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -43,7 +38,11 @@ public class WebServiceActivity extends AppCompatActivity {
     private List<String> allInitials;
     private Hashtable<String, List<String>> allBrandsAndInitial;
     private List<String> allProductTypes;
-    private List<String> allProducts;
+
+    private RecyclerView productRecyclerView;
+    private List<Product> productList;
+    private ProductAdapter productAdapter;
+    private LinearLayoutManager linearLM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +58,7 @@ public class WebServiceActivity extends AppCompatActivity {
         allInitials = new ArrayList<>();
         allBrandsAndInitial = new Hashtable<>();
         allProductTypes = new ArrayList<>();
-        allProducts = new ArrayList<>();
+        productList = new ArrayList<>();
 
         // load brand initials and brands (display loading animation while loading?)
         loadDataBtn.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +74,12 @@ public class WebServiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 postWithQMultipleParams(brandSelected, productTypeSelected);
+                // set recyclerView
+                productRecyclerView = findViewById(R.id.productRecyclerView);
+                linearLM = new LinearLayoutManager(WebServiceActivity.this);
+                productAdapter = new ProductAdapter(productList, WebServiceActivity.this);
+                productRecyclerView.setLayoutManager(linearLM);
+                productRecyclerView.setAdapter(productAdapter);
             }
         });
 
@@ -277,7 +282,9 @@ public class WebServiceActivity extends AppCompatActivity {
                 Log.d(TAG, "Call Successed!");
                 List<PostModel> postModels = response.body();
                 for(PostModel post : postModels){
-                    allProducts.add(post.getName());
+                    productList.add(new Product(post.getName(),
+                            post.getProductType(), post.getDescription(),
+                            String.valueOf(post.getPrice()), post.getImage_link()));
                     StringBuffer  str = new StringBuffer();
                     str.append("Code:: ")
                             .append(response.code())

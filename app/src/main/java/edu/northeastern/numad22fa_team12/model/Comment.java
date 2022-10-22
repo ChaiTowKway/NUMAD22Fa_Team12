@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class Comment {
 
     private double price;
+    @SerializedName("image_link")
     private String image_link;
     private String name;
     private String brand;
