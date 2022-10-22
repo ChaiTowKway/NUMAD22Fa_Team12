@@ -12,4 +12,8 @@ public interface IPlaceholder {
 
     @GET("api/v1/products.json")
     Call<List<PostModel>>  getPostsWithQuery(@Query("brand") String brand);
+
+    @GET("api/v1/products.json")
+    Call<List<PostModel>>  getPostsWithQueryMultipleParams(@Query("brand") String brand,
+                                                           @Query("product_type") String productType);
 }

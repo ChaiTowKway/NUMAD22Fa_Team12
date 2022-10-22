@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.HashSet;
 import java.util.List;
 
 import edu.northeastern.numad22fa_team12.model.IPlaceholder;
@@ -29,6 +30,8 @@ public class WebServiceActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private IPlaceholder api;
     private String brandSelected = "maybelline";  //placeholder, should be replaced by user input
+    private String productTypeSelected = "EYESHADOW";  //placeholder, should be replaced by user input
+    private HashSet<String> allProductTypes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +41,12 @@ public class WebServiceActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.search_button);
         inputBrand = findViewById(R.id.input_brand);
 
+        allProductTypes = new HashSet<>();
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postWithQ(brandSelected);
+//                postWithQ(brandSelected);
+                postWithQMultipleParams(brandSelected, productTypeSelected);;
             }
         });
 
@@ -72,6 +77,7 @@ public class WebServiceActivity extends AppCompatActivity {
                 Log.d(TAG, "Call Successed!");
                 List<PostModel> postModels = response.body();
                 for(PostModel post : postModels){
+                    allProductTypes.add(post.getProductType().toUpperCase());
                     StringBuffer  str = new StringBuffer();
                     str.append("Code:: ")
                             .append(response.code())
@@ -81,6 +87,9 @@ public class WebServiceActivity extends AppCompatActivity {
                             .append("\n")
                             .append("Name: ")
                             .append(post.getName())
+                            .append("\n")
+                            .append("Product Type: ")
+                            .append(post.getProductType())
                             .append("\n")
                             .append("Price :")
                             .append(post.getPrice())
@@ -104,5 +113,58 @@ public class WebServiceActivity extends AppCompatActivity {
         });
     }
 
+    private void postWithQMultipleParams(String brandSelected, String productTypeSelected){
+        // to execute the call
+        // api::  https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline&product_type=EYESHADOW
+        Call<List<PostModel>> call = api.getPostsWithQueryMultipleParams(brandSelected, productTypeSelected);
+        //call.execute() runs on the current thread, which is main at the momement. This will crash
+        // use Retrofit's method enque. This will automaically push the network call to background thread
+        call.enqueue(new Callback<List<PostModel>>() {
+            @Override
+            public void onResponse(Call<List<PostModel>> call, Response<List<PostModel>> response) {
+                //This gets called when atleast the call reaches a server and there was a response BUT 404 or any legitimate error code from the server, also calls this
+                // check response code is between 200-300 and API was found
+
+                if(!response.isSuccessful()){
+                    Log.d(TAG, "Call failed!" + response.code());
+                    return;
+                }
+
+                Log.d(TAG, "Call Successed!");
+                List<PostModel> postModels = response.body();
+                for(PostModel post : postModels){
+                    StringBuffer  str = new StringBuffer();
+                    str.append("Code:: ")
+                            .append(response.code())
+                            .append("\n")
+                            .append("Brand : ")
+                            .append(post.getBrand())
+                            .append("\n")
+                            .append("Name: ")
+                            .append(post.getName())
+                            .append("\n")
+                            .append("Product Type: ")
+                            .append(post.getProductType())
+                            .append("\n")
+                            .append("Price :")
+                            .append(post.getPrice())
+                            .append("\n")
+                            .append("Image Link: ")
+                            .append(post.getImage_link())
+                            .append("\n")
+                            .append("Description : ")
+                            .append(post.getDescription())
+                            .append("\n");
+                    Log.d(TAG, str.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PostModel>> call, Throwable t) {
+                // this gets called when url is wrong and therefore calls can't be made OR processing the request goes wrong.
+                Log.d(TAG, "Call failed!" + t.getMessage());
+            }
+        });
+    }
 
 }
