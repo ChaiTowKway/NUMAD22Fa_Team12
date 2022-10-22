@@ -1,7 +1,10 @@
 package edu.northeastern.numad22fa_team12;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Product {
     private final String name, category, description, price, imageLink;
@@ -43,5 +46,14 @@ public class Product {
         allProductInfo.add(this.description);
         allProductInfo.add(this.imageLink);
         return allProductInfo;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (!(obj instanceof Product)) return false;
+        Product other = (Product) obj;
+        return Objects.equals(this.name, other.getName()) &&
+                Objects.equals(this.category, other.getCategory()) &&
+                Objects.equals(this.price, other.getPrice());
     }
 }

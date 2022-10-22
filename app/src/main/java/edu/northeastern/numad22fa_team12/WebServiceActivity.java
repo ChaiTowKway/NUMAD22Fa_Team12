@@ -80,16 +80,17 @@ public class WebServiceActivity extends AppCompatActivity {
             }
         });
 
+        // set recyclerView
+        productRecyclerView = findViewById(R.id.productRecyclerView);
+        linearLM = new LinearLayoutManager(WebServiceActivity.this);
+        productAdapter = new ProductAdapter(productList, WebServiceActivity.this);
 
         // search button get the products list and pass it to the recyclerView
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 postWithQMultipleParams(brandSelected, productTypeSelected);
-                // set recyclerView
-                productRecyclerView = findViewById(R.id.productRecyclerView);
-                linearLM = new LinearLayoutManager(WebServiceActivity.this);
-                productAdapter = new ProductAdapter(productList, WebServiceActivity.this);
+                productAdapter.notifyDataSetChanged();
                 productRecyclerView.setLayoutManager(linearLM);
                 productRecyclerView.setAdapter(productAdapter);
             }
@@ -296,10 +297,15 @@ public class WebServiceActivity extends AppCompatActivity {
 
                 Log.d(TAG, "Call Successed!");
                 List<PostModel> postModels = response.body();
+                productList.clear();
+                productAdapter.notifyDataSetChanged();
                 for(PostModel post : postModels){
-                    productList.add(new Product(post.getName(),
+                    Product curProduct = new Product(post.getName(),
                             post.getProductType(), post.getDescription(),
-                            String.valueOf(post.getPrice()), post.getImage_link()));
+                            String.valueOf(post.getPrice()), post.getImage_link());
+                    if (!productList.contains(curProduct)) {
+                        productList.add(curProduct);
+                    }
                     StringBuffer  str = new StringBuffer();
                     str.append("Code:: ")
                             .append(response.code())
@@ -324,6 +330,7 @@ public class WebServiceActivity extends AppCompatActivity {
                             .append("\n");
                     Log.d(TAG, str.toString());
                 }
+                productAdapter.notifyDataSetChanged();
             }
 
             @Override
