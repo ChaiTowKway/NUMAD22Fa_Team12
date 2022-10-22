@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -68,34 +69,53 @@ public class WebServiceActivity extends AppCompatActivity {
             }
         });
 
+
+        // search button get the products list and pass it to the recyclerView
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                postWithQMultipleParams(brandSelected, productTypeSelected);
+            }
+        });
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl("https://makeup-api.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api = retrofit.create(IPlaceholder.class);
+    }
+
+
+    private void setSpinner() {
         //set nested spinner
         ArrayAdapter<String> initialArrayAdapter = new ArrayAdapter<>(
-                this, R.layout.spinner_textview, allInitials);
+                this, android.R.layout.simple_spinner_dropdown_item, allInitials);
+        // not sure if this setDropDownViewResource is needed or no, leave it for now
         initialArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         initialSpinner.setAdapter(initialArrayAdapter);
         initialSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                initialSelected = allInitials.get(i);
+                initialSelected = initialSpinner.getSelectedItem().toString();
                 final List<String> brands = allBrandsAndInitial.get(initialSelected);
                 ArrayAdapter<String> brandArrayAdapter = new ArrayAdapter<>(
-                        WebServiceActivity.this, R.layout.spinner_textview, brands);
+                        WebServiceActivity.this, android.R.layout.simple_spinner_dropdown_item, brands);
                 brandArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 brandSpinner.setAdapter(brandArrayAdapter);
                 brandSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int j, long l) {
-                        brandSelected = brands.get(j);
+                        brandSelected = brandSpinner.getSelectedItem().toString();
                         postWithQ(brandSelected);
                         ArrayAdapter<String> typeArrayAdapter = new ArrayAdapter<>(
                                 WebServiceActivity.this,
-                                R.layout.spinner_textview, allProductTypes);
+                                android.R.layout.simple_spinner_dropdown_item, allProductTypes);
                         typeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         typeSpinner.setAdapter(typeArrayAdapter);
                         typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> adapterView, View view, int k, long l) {
-                                productTypeSelected = allProductTypes.get(k);
+                                productTypeSelected = typeSpinner.getSelectedItem().toString();
                             }
 
                             @Override
@@ -117,74 +137,7 @@ public class WebServiceActivity extends AppCompatActivity {
 
             }
         });
-
-        // search button get the products list and pass it to the recycler view
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                postWithQMultipleParams(brandSelected, productTypeSelected);
-            }
-        });
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl("https://makeup-api.herokuapp.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        api = retrofit.create(IPlaceholder.class);
     }
-
-//    private void setSpinner() {
-//        ArrayAdapter<String> initialArrayAdapter = new ArrayAdapter<>(
-//                this, android.R.layout.simple_dropdown_item_1line, allInitials);
-//        initialArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        initialSpinner.setAdapter(initialArrayAdapter);
-//        initialSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                initialSelected = allInitials.get(i);
-//                final List<String> brands = allBrandsAndInitial.get(initialSelected);
-//                ArrayAdapter<String> brandArrayAdapter = new ArrayAdapter<>(
-//                        WebServiceActivity.this, android.R.layout.simple_dropdown_item_1line, brands);
-//                brandArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                brandSpinner.setAdapter(brandArrayAdapter);
-//                brandSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                    @Override
-//                    public void onItemSelected(AdapterView<?> adapterView, View view, int j, long l) {
-//                        brandSelected = brands.get(j);
-//                        postWithQ(brandSelected);
-//                        ArrayAdapter<String> typeArrayAdapter = new ArrayAdapter<>(
-//                                WebServiceActivity.this,
-//                                android.R.layout.simple_dropdown_item_1line, allProductTypes);
-//                        typeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                        typeSpinner.setAdapter(typeArrayAdapter);
-//                        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                            @Override
-//                            public void onItemSelected(AdapterView<?> adapterView, View view, int k, long l) {
-//                                productTypeSelected = allProductTypes.get(k);
-//                            }
-//
-//                            @Override
-//                            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//                            }
-//                        });
-//                    }
-//
-//                    @Override
-//                    public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//                    }
-//                });
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-//    }
-
     private void getPosts() {
         // to execute the call
         //api:: https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline
@@ -235,6 +188,7 @@ public class WebServiceActivity extends AppCompatActivity {
                     Log.d(TAG, str.toString());
                 }
                 Collections.sort(allInitials);
+                setSpinner();
             }
 
             @Override
@@ -265,7 +219,8 @@ public class WebServiceActivity extends AppCompatActivity {
                 Log.d(TAG, "Call Successed!");
                 List<PostModel> postModels = response.body();
                 for(PostModel post : postModels){
-                    allProductTypes.add(post.getProductType().toUpperCase());
+                    String curProductTypes = post.getProductType().toUpperCase();
+                    if (!allProductTypes.contains(curProductTypes)) allProductTypes.add(curProductTypes);
                     StringBuffer  str = new StringBuffer();
                     str.append("Code:: ")
                             .append(response.code())
