@@ -1,19 +1,27 @@
 package edu.northeastern.numad22fa_team12;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -43,6 +51,7 @@ public class WebServiceActivity extends AppCompatActivity {
     private List<Product> productList;
     private ProductAdapter productAdapter;
     private LinearLayoutManager linearLM;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +63,20 @@ public class WebServiceActivity extends AppCompatActivity {
         initialSpinner = (Spinner) findViewById(R.id.brandInitialSpinner);
         brandSpinner = (Spinner) findViewById(R.id.brandSpinner);
         typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
-
+        progressBar = (ProgressBar)findViewById(R.id.progressBar1);
         allInitials = new ArrayList<>();
         allBrandsAndInitial = new Hashtable<>();
         allProductTypes = new ArrayList<>();
         productList = new ArrayList<>();
 
+        progressBar.setVisibility(View.GONE);
         // load brand initials and brands (display loading animation while loading?)
         loadDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 getPosts();
+
             }
         });
 
@@ -194,13 +206,16 @@ public class WebServiceActivity extends AppCompatActivity {
                 }
                 Collections.sort(allInitials);
                 setSpinner();
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<List<PostModel>> call, Throwable t) {
                 // this gets called when url is wrong and therefore calls can't be made OR processing the request goes wrong.
                 Log.d(TAG, "Call failed!" + t.getMessage());
+                progressBar.setVisibility(View.GONE);
             }
+
         });
 
     }
