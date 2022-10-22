@@ -12,12 +12,12 @@ public class Comment {
         return price;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public String getImage_link() {
         return image_link;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getBrand() {

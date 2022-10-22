@@ -38,7 +38,6 @@ public class WebServiceActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.search_button);
         inputBrand = findViewById(R.id.input_brand);
 
-        searchButton = findViewById(R.id.search_button);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
