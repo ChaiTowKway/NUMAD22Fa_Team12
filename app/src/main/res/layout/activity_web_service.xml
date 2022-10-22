@@ -6,4 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".WebServiceActivity">
 
+
+    <TextView
+        android:id="@+id/makeup_brand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="60dp"
+        android:textSize="20sp"
+        android:layout_marginEnd="42dp"
+        android:text="MakeUp Brand"
+        app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="80dp"
+        android:text="Search"
+        app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/makeup_brand" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="68dp"
+        app:layout_constraintBottom_toBottomOf="@+id/search_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/makeup_brand"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="180dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="168dp" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
