@@ -45,8 +45,8 @@ public class WebServiceActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                postWithQ(brandSelected);
-                postWithQMultipleParams(brandSelected, productTypeSelected);;
+                postWithQ(brandSelected);
+//                postWithQMultipleParams(brandSelected, productTypeSelected);;
             }
         });
 
