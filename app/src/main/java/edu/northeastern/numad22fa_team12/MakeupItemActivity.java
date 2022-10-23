@@ -40,7 +40,6 @@ public class MakeupItemActivity extends AppCompatActivity {
         productType = "Category: " + allProductInfo.get(1);
         price = "Price: $" + allProductInfo.get(2);
         description = "Description: \n" + allProductInfo.get(3);
-        description.replace("\n", "");
         image_link = allProductInfo.get(4);
 
         productImage = findViewById(R.id.product_image);
