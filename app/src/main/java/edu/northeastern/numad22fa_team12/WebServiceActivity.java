@@ -40,9 +40,9 @@ public class WebServiceActivity extends AppCompatActivity {
     private static final String TAG = "WebServiceActivity";
     private Retrofit retrofit;
     private IPlaceholder api;
-    private String initialSelected = "M"; //placeholder, should be replaced by user input
-    private String brandSelected = "maybelline";  //placeholder, should be replaced by user input
-    private String productTypeSelected = "EYESHADOW";  //placeholder, should be replaced by user input
+    private String initialSelected;
+    private String brandSelected;
+    private String productTypeSelected;
     private List<String> allInitials;
     private Hashtable<String, List<String>> allBrandsAndInitial;
     private List<String> allProductTypes;
@@ -84,6 +84,8 @@ public class WebServiceActivity extends AppCompatActivity {
         productRecyclerView = findViewById(R.id.productRecyclerView);
         linearLM = new LinearLayoutManager(WebServiceActivity.this);
         productAdapter = new ProductAdapter(productList, WebServiceActivity.this);
+        productRecyclerView.setAdapter(productAdapter);
+        productRecyclerView.setLayoutManager(linearLM);
 
         // search button get the products list and pass it to the recyclerView
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -91,8 +93,10 @@ public class WebServiceActivity extends AppCompatActivity {
             public void onClick(View view) {
                 postWithQMultipleParams(brandSelected, productTypeSelected);
                 productAdapter.notifyDataSetChanged();
-                productRecyclerView.setLayoutManager(linearLM);
-                productRecyclerView.setAdapter(productAdapter);
+                if (productList.isEmpty()) {
+                    Toast.makeText(WebServiceActivity.this,
+                            "Didn't find match product!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -120,6 +124,7 @@ public class WebServiceActivity extends AppCompatActivity {
                         WebServiceActivity.this, android.R.layout.simple_spinner_dropdown_item, brands);
                 brandArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 brandSpinner.setAdapter(brandArrayAdapter);
+                brandArrayAdapter.notifyDataSetChanged();
                 brandSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int j, long l) {
@@ -130,29 +135,24 @@ public class WebServiceActivity extends AppCompatActivity {
                                 android.R.layout.simple_spinner_dropdown_item, allProductTypes);
                         typeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         typeSpinner.setAdapter(typeArrayAdapter);
+                        typeArrayAdapter.notifyDataSetChanged();
                         typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> adapterView, View view, int k, long l) {
                                 productTypeSelected = typeSpinner.getSelectedItem().toString();
                             }
-
                             @Override
                             public void onNothingSelected(AdapterView<?> adapterView) {
-
                             }
                         });
                     }
-
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {
-
                     }
                 });
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
     }
@@ -239,6 +239,7 @@ public class WebServiceActivity extends AppCompatActivity {
 
                 Log.d(TAG, "Call Successed!");
                 List<PostModel> postModels = response.body();
+                allProductTypes.clear();
                 for(PostModel post : postModels){
                     String curProductTypes = post.getProductType().toUpperCase();
                     if (!allProductTypes.contains(curProductTypes)) allProductTypes.add(curProductTypes);
