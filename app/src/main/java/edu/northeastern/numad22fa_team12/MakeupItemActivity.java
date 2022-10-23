@@ -2,6 +2,7 @@ package edu.northeastern.numad22fa_team12;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -30,6 +31,7 @@ public class MakeupItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makeup_item);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 
         // allProductInfo = {name, category, price, description, imageLink}
         // must follow this order to get the info
@@ -40,7 +42,8 @@ public class MakeupItemActivity extends AppCompatActivity {
         productType = "Category: " + allProductInfo.get(1);
         price = "Price: $" + allProductInfo.get(2);
         description = "Description: \n" + allProductInfo.get(3);
-        description.replace("\n", "");
+        description = description.replace("\n", "");
+        Log.i("Description", description);
         image_link = allProductInfo.get(4);
 
         productImage = findViewById(R.id.product_image);
