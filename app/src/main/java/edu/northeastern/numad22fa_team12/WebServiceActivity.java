@@ -202,7 +202,6 @@ public class WebServiceActivity extends AppCompatActivity {
                 Collections.sort(allInitials);
                 allInitials.add(0, SPINNER_1_DEFAULT);
                 progressBar.setVisibility(View.GONE);
-                Log.d(TAG, allInitials.toString());
                 setSpinner();
             }
 
