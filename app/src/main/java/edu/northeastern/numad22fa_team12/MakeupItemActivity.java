@@ -38,8 +38,8 @@ public class MakeupItemActivity extends AppCompatActivity {
 
         name = "Name: " + allProductInfo.get(0);
         productType = "Category: " + allProductInfo.get(1);
-        price = "price: $" + allProductInfo.get(2);
-        description = allProductInfo.get(3);
+        price = "Price: $" + allProductInfo.get(2);
+        description = "Description: \n" + allProductInfo.get(3);
         description.replace("\n", "");
         image_link = allProductInfo.get(4);
 
