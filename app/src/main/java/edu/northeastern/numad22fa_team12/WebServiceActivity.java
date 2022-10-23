@@ -190,19 +190,8 @@ public class WebServiceActivity extends AppCompatActivity {
                         }
                     }
                     String curType = post.getProductType();
-                    StringBuffer  str = new StringBuffer();
-                    str.append("Code:: ")
-                            .append(response.code())
-                            .append("\n")
-                            .append("Brand : ")
-                            .append(post.getBrand())
-                            .append("\n")
-                            .append("Name: ")
-                            .append(post.getName())
-                            .append("\n")
-                            .append("Product Type: ")
-                            .append(post.getProductType())
-                            .append("\n");
+                    StringBuffer str = new StringBuffer();
+                    generateLogMsg(str, post, response);
                     Log.d(TAG, str.toString());
                 }
                 Collections.sort(allInitials);
@@ -244,28 +233,7 @@ public class WebServiceActivity extends AppCompatActivity {
                     String curProductTypes = post.getProductType().toUpperCase();
                     if (!allProductTypes.contains(curProductTypes)) allProductTypes.add(curProductTypes);
                     StringBuffer  str = new StringBuffer();
-                    str.append("Code:: ")
-                            .append(response.code())
-                            .append("\n")
-                            .append("Brand : ")
-                            .append(post.getBrand())
-                            .append("\n")
-                            .append("Name: ")
-                            .append(post.getName())
-                            .append("\n")
-                            .append("Product Type: ")
-                            .append(post.getProductType())
-                            .append("\n")
-                            .append("Price :")
-                            .append(post.getPrice())
-                            .append("\n")
-                            .append("Image Link: ")
-                            .append(post.getImage_link())
-                            .append("\n")
-                            .append("Description : ")
-                            .append(post.getDescription())
-                            .append("\n");
-
+                    generateLogMsg(str, post, response);
                     Log.d(TAG, str.toString());
                 }
                 Collections.sort(allProductTypes);
@@ -308,27 +276,7 @@ public class WebServiceActivity extends AppCompatActivity {
                         productList.add(curProduct);
                     }
                     StringBuffer  str = new StringBuffer();
-                    str.append("Code:: ")
-                            .append(response.code())
-                            .append("\n")
-                            .append("Brand : ")
-                            .append(post.getBrand())
-                            .append("\n")
-                            .append("Name: ")
-                            .append(post.getName())
-                            .append("\n")
-                            .append("Product Type: ")
-                            .append(post.getProductType())
-                            .append("\n")
-                            .append("Price :")
-                            .append(post.getPrice())
-                            .append("\n")
-                            .append("Image Link: ")
-                            .append(post.getImage_link())
-                            .append("\n")
-                            .append("Description : ")
-                            .append(post.getDescription())
-                            .append("\n");
+                    generateLogMsg(str, post, response);
                     Log.d(TAG, str.toString());
                 }
                 productAdapter.notifyDataSetChanged();
@@ -340,6 +288,30 @@ public class WebServiceActivity extends AppCompatActivity {
                 Log.d(TAG, "Call failed!" + t.getMessage());
             }
         });
+    }
+
+    private void generateLogMsg(StringBuffer str, PostModel post, Response<List<PostModel>> response) {
+        str.append("Code:: ")
+            .append(response.code())
+            .append("\n")
+            .append("Brand : ")
+            .append(post.getBrand())
+            .append("\n")
+            .append("Name: ")
+            .append(post.getName())
+            .append("\n")
+            .append("Product Type: ")
+            .append(post.getProductType())
+            .append("\n")
+            .append("Price :")
+            .append(post.getPrice())
+            .append("\n")
+            .append("Image Link: ")
+            .append(post.getImage_link())
+            .append("\n")
+            .append("Description : ")
+            .append(post.getDescription())
+            .append("\n");
     }
 
 }
