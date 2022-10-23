@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,6 +52,7 @@ public class MakeupItemActivity extends AppCompatActivity {
         categoryTV = findViewById(R.id.category_name);
         priceTV = findViewById(R.id.price);
         descriptionTV = findViewById(R.id.description);
+        descriptionTV.setMovementMethod(new ScrollingMovementMethod());
 
         nameTV.setText(name);
         categoryTV.setText(productType);
