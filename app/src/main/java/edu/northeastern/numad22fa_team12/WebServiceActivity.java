@@ -53,6 +53,10 @@ public class WebServiceActivity extends AppCompatActivity {
     private LinearLayoutManager linearLM;
     private ProgressBar progressBar;
 
+    final static private String SPINNER_1_DEFAULT = "----Select Product Initial----";
+    final static private String SPINNER_2_DEFAULT = "----Select Product Brand----";
+    final static private String SPINNER_3_DEFAULT = "----Select Product Type----";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,13 +74,12 @@ public class WebServiceActivity extends AppCompatActivity {
         productList = new ArrayList<>();
 
         progressBar.setVisibility(View.GONE);
-        // load brand initials and brands (display loading animation while loading?)
+        // load brand initials and brands (display loading animation while loading)
         loadDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
                 getPosts();
-
             }
         });
 
@@ -93,10 +96,6 @@ public class WebServiceActivity extends AppCompatActivity {
             public void onClick(View view) {
                 postWithQMultipleParams(brandSelected, productTypeSelected);
                 productAdapter.notifyDataSetChanged();
-                if (productList.isEmpty()) {
-                    Toast.makeText(WebServiceActivity.this,
-                            "Didn't find match product!", Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
@@ -107,11 +106,10 @@ public class WebServiceActivity extends AppCompatActivity {
         api = retrofit.create(IPlaceholder.class);
     }
 
-
     private void setSpinner() {
         //set nested spinner
         ArrayAdapter<String> initialArrayAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_dropdown_item, allInitials);
+                WebServiceActivity.this, android.R.layout.simple_spinner_item, allInitials);
         // not sure if this setDropDownViewResource is needed or no, leave it for now
         initialArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         initialSpinner.setAdapter(initialArrayAdapter);
@@ -119,43 +117,50 @@ public class WebServiceActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 initialSelected = initialSpinner.getSelectedItem().toString();
-                final List<String> brands = allBrandsAndInitial.get(initialSelected);
-                ArrayAdapter<String> brandArrayAdapter = new ArrayAdapter<>(
-                        WebServiceActivity.this, android.R.layout.simple_spinner_dropdown_item, brands);
-                brandArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                brandSpinner.setAdapter(brandArrayAdapter);
-                brandArrayAdapter.notifyDataSetChanged();
-                brandSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int j, long l) {
-                        brandSelected = brandSpinner.getSelectedItem().toString();
-                        postWithQ(brandSelected);
-                        ArrayAdapter<String> typeArrayAdapter = new ArrayAdapter<>(
-                                WebServiceActivity.this,
-                                android.R.layout.simple_spinner_dropdown_item, allProductTypes);
-                        typeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        typeSpinner.setAdapter(typeArrayAdapter);
-                        typeArrayAdapter.notifyDataSetChanged();
-                        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int k, long l) {
-                                productTypeSelected = typeSpinner.getSelectedItem().toString();
+                if (!initialSelected.equals(SPINNER_1_DEFAULT)) {
+                    final List<String> brands = allBrandsAndInitial.get(initialSelected);
+                    ArrayAdapter<String> brandArrayAdapter = new ArrayAdapter<>(
+                            WebServiceActivity.this, android.R.layout.simple_spinner_item, brands);
+                    brandArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    brandSpinner.setAdapter(brandArrayAdapter);
+                    brandArrayAdapter.notifyDataSetChanged();
+                    brandSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int j, long l) {
+                            brandSelected = brandSpinner.getSelectedItem().toString();
+                            if (!brandSelected.equals(SPINNER_2_DEFAULT)) {
+                                postWithQ(brandSelected);
+                                ArrayAdapter<String> typeArrayAdapter = new ArrayAdapter<>(
+                                        WebServiceActivity.this,
+                                        android.R.layout.simple_spinner_item, allProductTypes);
+                                typeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                typeSpinner.setAdapter(typeArrayAdapter);
+                                typeArrayAdapter.notifyDataSetChanged();
+                                typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int k, long l) {
+                                        if (!typeSpinner.getSelectedItem().toString().equals(SPINNER_3_DEFAULT)) {
+                                            productTypeSelected = typeSpinner.getSelectedItem().toString();
+                                        }
+                                    }
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+                                    }
+                                });
                             }
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
-                            }
-                        });
-                    }
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                    }
-                });
+                        }
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                        }
+                    });
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
     }
+
     private void getPosts() {
         // to execute the call
         //api:: https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline
@@ -174,6 +179,9 @@ public class WebServiceActivity extends AppCompatActivity {
 
                 Log.d(TAG, "Call Successed!");
                 List<PostModel> postModels = response.body();
+
+                allInitials.clear();
+                allBrandsAndInitial.clear();
                 for(PostModel post : postModels){
                     String curBrand = post.getBrand();
                     if (curBrand != null) {
@@ -181,6 +189,7 @@ public class WebServiceActivity extends AppCompatActivity {
                         String curBrandInitialStr = Character.toString(curBrandInitial);
                         if (!allBrandsAndInitial.containsKey(curBrandInitialStr)) {
                             allBrandsAndInitial.put(curBrandInitialStr, new ArrayList<>());
+                            allBrandsAndInitial.get(curBrandInitialStr).add(SPINNER_2_DEFAULT);
                         }
                         if (!allInitials.contains(curBrandInitialStr)) {
                             allInitials.add(curBrandInitialStr);
@@ -189,14 +198,12 @@ public class WebServiceActivity extends AppCompatActivity {
                             allBrandsAndInitial.get(curBrandInitialStr).add(curBrand);
                         }
                     }
-                    String curType = post.getProductType();
-//                    StringBuffer str = new StringBuffer();
-//                    generateLogMsg(str, post, response);
-//                    Log.d(TAG, str.toString());
                 }
                 Collections.sort(allInitials);
-                setSpinner();
+                allInitials.add(0, SPINNER_1_DEFAULT);
                 progressBar.setVisibility(View.GONE);
+                Log.d(TAG, allInitials.toString());
+                setSpinner();
             }
 
             @Override
@@ -230,13 +237,13 @@ public class WebServiceActivity extends AppCompatActivity {
                 List<PostModel> postModels = response.body();
                 allProductTypes.clear();
                 for(PostModel post : postModels){
-                    String curProductTypes = post.getProductType().toUpperCase();
-                    if (!allProductTypes.contains(curProductTypes)) allProductTypes.add(curProductTypes);
-//                    StringBuffer  str = new StringBuffer();
-//                    generateLogMsg(str, post, response);
-//                    Log.d(TAG, str.toString());
+                    String curProductTypes = post.getProductType();
+                    if (!allProductTypes.contains(curProductTypes)) {
+                        allProductTypes.add(curProductTypes);
+                    }
                 }
                 Collections.sort(allProductTypes);
+                allProductTypes.add(0, SPINNER_3_DEFAULT);
             }
 
             @Override
@@ -275,9 +282,6 @@ public class WebServiceActivity extends AppCompatActivity {
                     if (!productList.contains(curProduct)) {
                         productList.add(curProduct);
                     }
-//                    StringBuffer  str = new StringBuffer();
-//                    generateLogMsg(str, post, response);
-//                    Log.d(TAG, str.toString());
                 }
                 productAdapter.notifyDataSetChanged();
             }
