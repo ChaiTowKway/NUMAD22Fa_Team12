@@ -8,12 +8,24 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MakeupItemActivity extends AppCompatActivity {
+    private String price;
+    private String image_link;
+    private String name;
+    private String productType;
+    private String description;
 
     private ImageView productImage;
+    private TextView nameTV;
+    private TextView categoryTV;
+    private TextView priceTV;
+    private TextView descriptionTV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,11 +36,26 @@ public class MakeupItemActivity extends AppCompatActivity {
         Bundle b = this.getIntent().getExtras();
         ArrayList<String> allProductInfo = b.getStringArrayList("allProductInfo");
 
+        name = "Name: " + allProductInfo.get(0);
+        productType = "Category: " + allProductInfo.get(1);
+        price = "price: $" + allProductInfo.get(2);
+        description = allProductInfo.get(3);
+        description.replace("\n", "");
+        image_link = allProductInfo.get(4);
 
         productImage = findViewById(R.id.product_image);
+        nameTV = findViewById(R.id.product_name);
+        categoryTV = findViewById(R.id.category_name);
+        priceTV = findViewById(R.id.price);
+        descriptionTV = findViewById(R.id.description);
 
+        nameTV.setText(name);
+        categoryTV.setText(productType);
+        priceTV.setText(price);
+        descriptionTV.setText(description);
 
-        DownloadImageTask loadImage = new DownloadImageTask(productImage, "https://d3t32hsnjxo7q6.cloudfront.net/i/991799d3e70b8856686979f8ff6dcfe0_ra,w158,h184_pa,w158,h184.png");
+//        DownloadImageTask loadImage = new DownloadImageTask(productImage, "https://d3t32hsnjxo7q6.cloudfront.net/i/991799d3e70b8856686979f8ff6dcfe0_ra,w158,h184_pa,w158,h184.png");
+        DownloadImageTask loadImage = new DownloadImageTask(productImage, image_link);
         new Thread(loadImage).start();
     }
 }

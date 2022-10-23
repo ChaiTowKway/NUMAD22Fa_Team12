@@ -190,9 +190,9 @@ public class WebServiceActivity extends AppCompatActivity {
                         }
                     }
                     String curType = post.getProductType();
-                    StringBuffer str = new StringBuffer();
-                    generateLogMsg(str, post, response);
-                    Log.d(TAG, str.toString());
+//                    StringBuffer str = new StringBuffer();
+//                    generateLogMsg(str, post, response);
+//                    Log.d(TAG, str.toString());
                 }
                 Collections.sort(allInitials);
                 setSpinner();
@@ -232,9 +232,9 @@ public class WebServiceActivity extends AppCompatActivity {
                 for(PostModel post : postModels){
                     String curProductTypes = post.getProductType().toUpperCase();
                     if (!allProductTypes.contains(curProductTypes)) allProductTypes.add(curProductTypes);
-                    StringBuffer  str = new StringBuffer();
-                    generateLogMsg(str, post, response);
-                    Log.d(TAG, str.toString());
+//                    StringBuffer  str = new StringBuffer();
+//                    generateLogMsg(str, post, response);
+//                    Log.d(TAG, str.toString());
                 }
                 Collections.sort(allProductTypes);
             }
@@ -275,9 +275,9 @@ public class WebServiceActivity extends AppCompatActivity {
                     if (!productList.contains(curProduct)) {
                         productList.add(curProduct);
                     }
-                    StringBuffer  str = new StringBuffer();
-                    generateLogMsg(str, post, response);
-                    Log.d(TAG, str.toString());
+//                    StringBuffer  str = new StringBuffer();
+//                    generateLogMsg(str, post, response);
+//                    Log.d(TAG, str.toString());
                 }
                 productAdapter.notifyDataSetChanged();
             }
