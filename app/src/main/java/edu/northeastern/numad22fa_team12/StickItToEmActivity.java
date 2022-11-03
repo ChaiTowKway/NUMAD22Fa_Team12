@@ -16,7 +16,7 @@ public class StickItToEmActivity extends AppCompatActivity {
     private static final String TAG = "StickItToEmActivity";
     private static final String SERVER_KEY = "AAAAn-7LHFg:APA91bFjKqRC26hJV6TSDwVKKmw2frTjAWPBne9-" +
             "SDObmZhYxgZDBNUOvqN4uYIap1flKY-VMT5NhSfpJ2prSPOEJ2L7_ucxU2ybsayIlExHbfcbUVrOMEL56DzbNhy3yTPTkVq8NHUl";
-    private static String CLIENT_REGISTRATION_TOKEN;
+    private static String FCM_REGISTRATION_TOKEN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +28,13 @@ public class StickItToEmActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<String> task) {
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            String errorMsg = "Failed to get registration token " + task.getException();
+                            Log.e(TAG, errorMsg);
+                            Toast.makeText(StickItToEmActivity.this, errorMsg, Toast.LENGTH_LONG).show();
                             return;
                         }
-                        CLIENT_REGISTRATION_TOKEN = task.getResult();
-                        String msg = "Registration Token: " + CLIENT_REGISTRATION_TOKEN;
+                        FCM_REGISTRATION_TOKEN = task.getResult();
+                        String msg = "Registration Token: " + FCM_REGISTRATION_TOKEN;
                         Log.d(TAG, msg);
                     }
                 });
