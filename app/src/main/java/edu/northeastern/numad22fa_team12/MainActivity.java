@@ -21,6 +21,12 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
             case R.id.button_web_service:
                 startActivity(new Intent(MainActivity.this, WebServiceActivity.class));
                 break;
+            case R.id.button_StickItToEm:
+                startActivity(new Intent(MainActivity.this, StickItToEmActivity.class));
+                break;
+            case R.id.button_About:
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                break;
         }
     }
 }
