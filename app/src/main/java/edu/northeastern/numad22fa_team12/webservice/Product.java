@@ -1,9 +1,8 @@
-package edu.northeastern.numad22fa_team12;
+package edu.northeastern.numad22fa_team12.webservice;
 
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Product {

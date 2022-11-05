@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fa_team12;
+package edu.northeastern.numad22fa_team12.webservice;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;

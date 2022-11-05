@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fa_team12;
+package edu.northeastern.numad22fa_team12.webservice;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 
+import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.model.IPlaceholder;
 import edu.northeastern.numad22fa_team12.model.PostModel;
 import retrofit2.Call;

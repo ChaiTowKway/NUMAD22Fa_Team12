@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import edu.northeastern.numad22fa_team12.stickItToEm.StickItToEmActivity;
+import edu.northeastern.numad22fa_team12.webservice.WebServiceActivity;
+
 public class  MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     @Override

@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fa_team12;
+package edu.northeastern.numad22fa_team12.webservice;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.northeastern.numad22fa_team12.R;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     private final List<Product> productList;

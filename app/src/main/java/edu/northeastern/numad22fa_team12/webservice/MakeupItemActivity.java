@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fa_team12;
+package edu.northeastern.numad22fa_team12.webservice;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import edu.northeastern.numad22fa_team12.R;
 
 public class MakeupItemActivity extends AppCompatActivity {
     private String price;

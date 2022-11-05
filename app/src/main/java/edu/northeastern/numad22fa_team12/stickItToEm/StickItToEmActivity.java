@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fa_team12;
+package edu.northeastern.numad22fa_team12.stickItToEm;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import edu.northeastern.numad22fa_team12.R;
 
 public class StickItToEmActivity extends AppCompatActivity {
 
