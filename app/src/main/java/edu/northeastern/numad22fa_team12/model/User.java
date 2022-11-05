@@ -6,15 +6,15 @@ import java.util.List;
 public class User {
 
     private String userName;
-    private String userRegistrationToken;
+//    private String userRegistrationToken;
     private List<Sticker> sentStickerList;
     private int numberOfStickersSent;
     private List<Sticker> receivedStickerList;
     private int numberOfStickersReceived;
 
-    public User(String userName, String userRegistrationToken) {
+    public User(String userName) {
         this.userName = userName;
-        this.userRegistrationToken = userRegistrationToken;
+//        this.userRegistrationToken = userRegistrationToken;
         this.sentStickerList = new ArrayList<>();
         this.numberOfStickersSent = 0;
         this.receivedStickerList = new ArrayList<>();
@@ -25,9 +25,9 @@ public class User {
         return this.userName;
     }
 
-    public String getUserRegistrationToken() {
-        return this.userRegistrationToken;
-    }
+//    public String getUserRegistrationToken() {
+//        return this.userRegistrationToken;
+//    }
 
     public List<Sticker> getSentStickerList() {
         return new ArrayList<>(this.sentStickerList);

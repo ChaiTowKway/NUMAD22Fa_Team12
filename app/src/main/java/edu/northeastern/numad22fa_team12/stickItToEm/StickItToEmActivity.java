@@ -3,12 +3,15 @@ package edu.northeastern.numad22fa_team12.stickItToEm;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -21,6 +24,7 @@ public class StickItToEmActivity extends AppCompatActivity {
             "SDObmZhYxgZDBNUOvqN4uYIap1flKY-VMT5NhSfpJ2prSPOEJ2L7_ucxU2ybsayIlExHbfcbUVrOMEL56DzbNhy3yTPTkVq8NHUl";
     private static String FCM_REGISTRATION_TOKEN;
     private FirebaseDatabase database;
+    private FirebaseAuth userAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,17 @@ public class StickItToEmActivity extends AppCompatActivity {
                 });
 
         database = FirebaseDatabase.getInstance();
+        userAuth = FirebaseAuth.getInstance();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser curUser = userAuth.getCurrentUser();
+        if (curUser == null) {
+            // if user not register, take user to register page
+            startActivity(new Intent(StickItToEmActivity.this, RegisterActivity.class));
+        }
     }
 
 }
