@@ -9,30 +9,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"/>
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/purple_500"
             android:gravity="center"
-            android:textColor="@color/white"
             android:text="Select friends you want to chat with!"
-            android:background="@color/purple_500"/>
+            android:textColor="@color/white" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/friendsListRecycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/purple_500"
             android:gravity="center"
-            android:textColor="@color/white"
             android:text="Select Stickers you want to send!"
-            android:background="@color/purple_500"/>
-
+            android:textColor="@color/white" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RecycleView_Stickers"
@@ -40,35 +39,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-    <ImageView
-        android:id="@+id/imageView_test"
-        android:layout_width="95dp"
-        android:layout_height="83dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.265"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RecycleView_Stickers"
-        app:layout_constraintVertical_bias="0.483"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="91dp"
-        android:layout_height="44dp"
-        android:onClick="onClick"
-        android:text="Send"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView_test"
-        app:layout_constraintTop_toBottomOf="@+id/RecycleView_Stickers" />
-
-    <TextView
-        android:id="@+id/textView_id"
-        android:layout_width="89dp"
-        android:layout_height="28dp"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="654dp" />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:onClick="onClick"
+            android:text="Send" />
     </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
