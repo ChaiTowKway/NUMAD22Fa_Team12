@@ -6,12 +6,17 @@ public class User {
     private String userEmail;
     private int numberOfStickersSent;
     private int numberOfStickersReceived;
+    private StickerHistory history;
 
+    public User(){
+
+    }
     public User(String userEmail, String userName) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.numberOfStickersSent = 0;
         this.numberOfStickersReceived = 0;
+        this.history = new StickerHistory();
     }
 
     public String getUserName() {
@@ -28,5 +33,9 @@ public class User {
 
     public int getNumberOfStickersReceived() {
         return numberOfStickersReceived;
+    }
+
+    public StickerHistory getHistory(){
+        return history;
     }
 }

@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import edu.northeastern.numad22fa_team12.R;
+import edu.northeastern.numad22fa_team12.model.StickerHistory;
 import edu.northeastern.numad22fa_team12.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -74,7 +75,12 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //sign in successful
-                            startActivity(new Intent(RegisterActivity.this, StickItToEmActivity.class));
+
+                            Intent intent = new Intent(RegisterActivity.this, StickItToEmActivity.class);
+                            Bundle b = new Bundle();
+                            b.putString("userEmail",email);
+                            intent.putExtras(b);
+                            startActivity(intent);
                             finish();
                         } else {
                             // something went wrong
@@ -110,8 +116,9 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Username already exist!",
                             Toast.LENGTH_LONG).show();
                 } else {
-                    User newUser = new User(email, name);
+                    User newUser = new User(email, name );
                     myRef.child(name).setValue(newUser);
+                    myRef.child(name).child("history").setValue(newUser.getHistory());
                     Toast.makeText(RegisterActivity.this, "User created!",
                             Toast.LENGTH_LONG).show();
                     myAuth.createUserWithEmailAndPassword(email,DEFAULT_PW).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -119,7 +126,11 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
                                 // user created
-                                startActivity(new Intent(RegisterActivity.this, StickItToEmActivity.class));
+                                Intent intent = new Intent(RegisterActivity.this, StickItToEmActivity.class);
+                                Bundle b = new Bundle();
+                                b.putString("userEmail",email);
+                                intent.putExtras(b);
+                                startActivity(intent);
                                 finish();
                             } else {
                                 // something went wrong
