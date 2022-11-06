@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Enter username"
+            android:text="Register/Sign in"
             android:textColor="@color/purple_200"
             android:textSize="30dp"
             android:textStyle="bold" />
@@ -39,15 +39,32 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/userNameTx"
-            android:hint="Username (letters and numbers only)" />
+            android:id="@+id/emailTx"
+            android:hint="UserEmail (e.g. abc123@email.com)" />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/userNameTx"
+            android:hint="UserName (letters/numbers, for register only)" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/registerBtn"
+            android:textSize="15sp"
+            android:text="Register" />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/loginBtn"
             android:textSize="15sp"
-            android:text="Register" />
+            android:text="log in" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Enter email to log in, do not need password!"/>
     </LinearLayout>
 
 

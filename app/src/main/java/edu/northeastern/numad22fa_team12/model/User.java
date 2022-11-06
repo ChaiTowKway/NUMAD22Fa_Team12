@@ -6,13 +6,15 @@ import java.util.List;
 public class User {
 
     private String userName;
+    private String userEmail;
 //    private String userRegistrationToken;
     private List<Sticker> sentStickerList;
     private int numberOfStickersSent;
     private List<Sticker> receivedStickerList;
     private int numberOfStickersReceived;
 
-    public User(String userName) {
+    public User(String userEmail, String userName) {
+        this.userEmail = userEmail;
         this.userName = userName;
 //        this.userRegistrationToken = userRegistrationToken;
         this.sentStickerList = new ArrayList<>();
@@ -53,4 +55,7 @@ public class User {
         this.receivedStickerList.add(stickerReceived);
     }
 
+    public String getUserEmail() {
+        return userEmail;
+    }
 }
