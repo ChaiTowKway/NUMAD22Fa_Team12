@@ -67,15 +67,15 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        FirebaseUser curUser = userAuth.getCurrentUser();
-//        if (curUser == null) {
-//            // if user not register, take user to register page
-//            startActivity(new Intent(StickItToEmActivity.this, RegisterActivity.class));
-//        }
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser curUser = userAuth.getCurrentUser();
+        if (curUser == null) {
+            // if user not register, take user to register page
+            startActivity(new Intent(StickItToEmActivity.this, RegisterActivity.class));
+        }
+    }
 
     @SuppressLint({"ResourceType", "UseCompatLoadingForDrawables"})
     private void createRecycleView() {
