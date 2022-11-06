@@ -2,7 +2,10 @@ package edu.northeastern.numad22fa_team12.stickItToEm;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,10 +29,18 @@ public class StickItToEmActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private FirebaseAuth userAuth;
 
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter stickerAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private int[] stickersLocations;
+    private int stickerSelected;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stick_it_to_em);
+        createRecycleView();
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -49,6 +60,7 @@ public class StickItToEmActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         userAuth = FirebaseAuth.getInstance();
+
     }
 
     @Override
@@ -61,4 +73,14 @@ public class StickItToEmActivity extends AppCompatActivity {
         }
     }
 
+    private void createRecycleView() {
+        stickersLocations = new int[]{R.drawable.cat, R.drawable.dog, R.drawable.duck, R.drawable.hedgehog,
+                R.drawable.koala, R.drawable.panda, R.drawable.pig, R.drawable.rooster};
+        stickerSelected = R.drawable.cat;
+        recyclerView = findViewById(R.id.RecycleView_Stickers);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        stickerAdapter = new StickerAdapter(this, stickersLocations);
+        recyclerView.setAdapter(stickerAdapter);
+    }
 }
