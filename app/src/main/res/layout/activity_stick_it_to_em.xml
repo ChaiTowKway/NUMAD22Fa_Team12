@@ -6,23 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".stickItToEm.StickItToEmActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="messagePage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="116dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecycleView_Stickers"
-        android:layout_width="119dp"
-        android:layout_height="224dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="Select friends you want to chat with!"
+            android:background="@color/purple_500"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/friendsListRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="Select Stickers you want to send!"
+            android:background="@color/purple_500"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecycleView_Stickers"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sendBtn"
+            android:text="SEND!"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
