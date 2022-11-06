@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,6 +38,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     private int[] stickersLocations;
     private int stickerSelected;
     private ImageView imageSelected;
+    private TextView stickerTextView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -44,6 +46,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stick_it_to_em);
         imageSelected = findViewById(R.id.imageView_test);
+        stickerTextView = findViewById(R.id.textView_s)
         createRecycleView();
 
         FirebaseMessaging.getInstance().getToken()
