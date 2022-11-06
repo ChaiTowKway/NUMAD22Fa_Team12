@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import edu.northeastern.numad22fa_team12.stickItToEm.RegisterActivity;
 import edu.northeastern.numad22fa_team12.stickItToEm.StickItToEmActivity;
 import edu.northeastern.numad22fa_team12.webservice.WebServiceActivity;
 
@@ -25,7 +26,7 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(MainActivity.this, WebServiceActivity.class));
                 break;
             case R.id.button_StickItToEm:
-                startActivity(new Intent(MainActivity.this, StickItToEmActivity.class));
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
                 break;
             case R.id.button_About:
                 startActivity(new Intent(MainActivity.this, AboutActivity.class));

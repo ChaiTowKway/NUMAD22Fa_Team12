@@ -31,6 +31,7 @@ import java.util.Objects;
 
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.model.Sticker;
+import edu.northeastern.numad22fa_team12.model.StickerHistory;
 import edu.northeastern.numad22fa_team12.model.User;
 
 public class StickItToEmActivity extends AppCompatActivity implements View.OnClickListener, StickerAdapter.OnStickerListener, UserAdapter.OnUserListener{
@@ -53,7 +54,9 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     private String imageSelected, userSelected;
     private Button send, userInfoBtn;
     private final static String DEFAULT_VAL = "THIS IS A DEFAULT VAL";
-
+    private String userName;
+    private String userEmail;
+    private List<Integer> usedRecord = new StickerHistory().getUsedRecordList();
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         userRef = database.getReference().child("users");
         stickerRef = database.getReference().child("stickers");
 
+
         stickerSelected = R.drawable.cat;
         stickerList = new ArrayList<>();
         stickerList.add(R.drawable.cat);
@@ -78,6 +82,28 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         stickerList.add(R.drawable.rooster);
 
         createRecycleView();
+
+        Bundle extras = getIntent().getExtras();
+        userEmail = extras.getString("userEmail");
+        Query query = userRef.orderByChild("userEmail").equalTo(userEmail);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap: snapshot.getChildren()){
+                    User usr = snap.getValue(User.class);
+                    userName = usr.getUserName();
+
+                }
+                createRecycleView();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -227,28 +253,66 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
+
+
+        stickerSelected = R.drawable.cat;
+        stickerList = new ArrayList<>();
+        stickerList.add(R.drawable.cat);
+        stickerList.add(R.drawable.dog);
+        stickerList.add(R.drawable.duck);
+        stickerList.add(R.drawable.koala);
+        stickerList.add(R.drawable.pig);
+        stickerList.add(R.drawable.panda);
+        stickerList.add(R.drawable.rooster);
+
         stickerRecyclerView = findViewById(R.id.RecycleView_Stickers);
         stickerLM = new LinearLayoutManager(this);
         stickerRecyclerView.setLayoutManager(stickerLM);
-        stickerAdapter = new StickerAdapter(this, stickerList, this);
+        stickerAdapter = new StickerAdapter(this, stickerList , this,this.usedRecord);
+
+
+            stickerRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot d : snapshot.getChildren()) {
+                        if (d != null) {
+                            Log.i(TAG, "sticker add: " + d.child("name").getValue().toString());
+//                            stickerList.add(new Sticker(d.getValue().toString(), d.child("use").getValue().toString()));
+                        }
+                    }
+                    stickerAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+//        }
+        DatabaseReference opeatingUserRef = userRef.child(userName).child("history");
+
+        opeatingUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    StickerHistory history = snapshot.getValue(StickerHistory.class);
+
+                    updateUsedRecordList(history);
+                    System.out.println(history.getUsedRecordList());
+                }
+                stickerAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         stickerRecyclerView.setAdapter(stickerAdapter);
 
-//        stickerRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot d : snapshot.getChildren()) {
-//                    if (d != null) {
-//                        Log.i(TAG, "sticker add: " + d.child("name").getValue().toString());
-////                            stickerList.add(new Sticker(d.getValue().toString(), d.child("use").getValue().toString()));
-//                    }
-//                }
-//                stickerAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
-//        });
+    }
+
+    public void updateUsedRecordList(StickerHistory h){
+        this.usedRecord = h.getUsedRecordList();
     }
 
     public void sendMessage() {

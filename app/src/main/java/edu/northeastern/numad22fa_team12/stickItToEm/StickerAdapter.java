@@ -23,12 +23,15 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
     private final Context context;
 //    private final List<Sticker> stickersLocations;
     private final List<Integer> stickersLocations;
+    private List<Integer> usedRecord;
     private OnStickerListener onStickerListener;
 
-    public StickerAdapter(Context context, List<Integer> stickersLocations, OnStickerListener onStickerListener) {
+    public StickerAdapter(Context context, List<Integer> stickersLocations, OnStickerListener onStickerListener, List<Integer> usedRecord) {
         this.context = context;
         this.stickersLocations = stickersLocations;
         this.onStickerListener = onStickerListener;
+
+        this.usedRecord = usedRecord;
     }
 
     @NonNull
@@ -42,7 +45,9 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
     @Override
     public void onBindViewHolder(@NonNull StickerViewHolder holder, @SuppressLint("RecyclerView") int position) {
 //        holder.stickerImage.setImageResource(Integer.parseInt(stickersLocations.get(position).getStickerID()));
-//        holder.totalUsed.setText(stickersLocations.get(position).getTotalUse());
+        System.out.println("userRecord: "+ usedRecord.toString());
+        System.out.println(position);
+        holder.totalUsed.setText(String.valueOf(usedRecord.get(position)));
         holder.stickerImage.setImageResource(stickersLocations.get(position));
     }
 
