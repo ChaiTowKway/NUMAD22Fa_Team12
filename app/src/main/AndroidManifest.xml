@@ -21,6 +21,8 @@
             android:exported="false" />
         <activity android:name=".stickItToEm.RegisterActivity"
             android:exported="false"/>
+        <activity android:name=".stickItToEm.NotificationActivity"
+            android:exported="false"/>
         <activity
             android:name=".AboutActivity"
             android:exported="false" />
