@@ -2,7 +2,6 @@ package edu.northeastern.numad22fa_team12.stickItToEm;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,10 +54,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = userName.getText().toString().trim();
                 String email = userEmail.getText().toString().trim();
-
-                Log.d(TAG, "curname: " + name);
-                Log.d(TAG, (name.length()>0) ? ">0" : "<0");
-                Log.d(TAG, name.matches("[a-zA-Z0-9]+") ? "match" : "not match");
 
                 if(name.length() > 0 && name.matches(NAME_REGEX) && email.matches(EMAIL_REGEX)) {
                     createUser(email, name);

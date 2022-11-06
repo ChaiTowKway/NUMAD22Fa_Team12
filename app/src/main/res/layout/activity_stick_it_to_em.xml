@@ -40,11 +40,17 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/sendBtn"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:onClick="onClick"
             android:text="Send" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:id="@+id/userinfoBtn"
+            android:text="My Stickers Received/Sent"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

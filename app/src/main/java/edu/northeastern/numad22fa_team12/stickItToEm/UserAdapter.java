@@ -14,35 +14,34 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import edu.northeastern.numad22fa_team12.R;
-import edu.northeastern.numad22fa_team12.model.Sticker;
+import edu.northeastern.numad22fa_team12.model.User;
 
-public class StickerAdapter extends RecyclerView.Adapter<StickerViewHolder> {
-    private static final String TAG = "StickerAdapter";
+public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
     private final Context context;
-    private final List<Sticker> stickersLocations;
+    private final List<User>  userList;
 
-    public StickerAdapter(Context context, List<Sticker> stickersLocations) {
+
+    public UserAdapter(Context context, List<User> userList) {
         this.context = context;
-        this.stickersLocations = stickersLocations;
+        this.userList = userList;
     }
 
     @NonNull
     @Override
-    public StickerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new StickerViewHolder(LayoutInflater.from(context).inflate(R.layout.sticker_item_for_recycleview, null));
+    public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new UserViewHolder(LayoutInflater.from(context).inflate(R.layout.item_users, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StickerViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.stickerImage.setImageResource(Integer.parseInt(stickersLocations.get(position).getStickerID()));
-        holder.totalUsed.setText(stickersLocations.get(position).getTotalUse());
+    public void onBindViewHolder(@NonNull UserViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        holder.userName.setText(userList.get(position).getUserName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, StickItToEmActivity.class);
                 Bundle b = new Bundle();
-                b.putString("stickerid", stickersLocations.get(position).getStickerID());
+                b.putString("userid", userList.get(position).getUserName());
                 intent.putExtras(b);
                 context.startActivity(intent);
             }
@@ -51,6 +50,6 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerViewHolder> {
 
     @Override
     public int getItemCount() {
-        return stickersLocations.size();
+        return userList.size();
     }
 }
