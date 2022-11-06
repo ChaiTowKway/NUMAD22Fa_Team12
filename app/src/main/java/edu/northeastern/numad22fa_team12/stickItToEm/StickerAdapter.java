@@ -43,9 +43,6 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerViewHolder> {
             public void onClick(View view) {
                 int id = stickersLocations[position];
                 imageView_test.setImageDrawable(context.getDrawable(id));
-                Intent intent = new Intent(context, StickItToEmActivity.class);
-                intent.putExtra("id", id);
-                context.startActivity(intent);
             }
         });
     }
