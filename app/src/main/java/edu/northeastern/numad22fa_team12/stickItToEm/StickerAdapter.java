@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,21 +18,25 @@ import java.util.List;
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.model.Sticker;
 
-public class StickerAdapter extends RecyclerView.Adapter<StickerViewHolder> {
+public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerViewHolder> {
     private static final String TAG = "StickerAdapter";
     private final Context context;
 //    private final List<Sticker> stickersLocations;
     private final List<Integer> stickersLocations;
+    private OnStickerListener onStickerListener;
 
-    public StickerAdapter(Context context, List<Integer> stickersLocations) {
+    public StickerAdapter(Context context, List<Integer> stickersLocations, OnStickerListener onStickerListener) {
         this.context = context;
         this.stickersLocations = stickersLocations;
+        this.onStickerListener = onStickerListener;
     }
 
     @NonNull
     @Override
     public StickerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new StickerViewHolder(LayoutInflater.from(context).inflate(R.layout.sticker_item_for_recycleview, null));
+//        return new StickerViewHolder(LayoutInflater.from(context).inflate(R.layout.sticker_item_for_recycleview, null));
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sticker_item_for_recycleview, parent, false);
+        return new StickerViewHolder(view, onStickerListener);
     }
 
     @Override
@@ -38,22 +44,31 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerViewHolder> {
 //        holder.stickerImage.setImageResource(Integer.parseInt(stickersLocations.get(position).getStickerID()));
 //        holder.totalUsed.setText(stickersLocations.get(position).getTotalUse());
         holder.stickerImage.setImageResource(stickersLocations.get(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, StickItToEmActivity.class);
-                Bundle b = new Bundle();
-//                b.putString("stickerid", stickersLocations.get(position));
-                b.putInt("stickerid", stickersLocations.get(position));
-                intent.putExtras(b);
-                context.startActivity(intent);
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
         return stickersLocations.size();
+    }
+
+    public interface OnStickerListener {
+        void onStickerClick(int position);
+    }
+
+    public class StickerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public ImageView stickerImage;
+//        public TextView totalUsed;
+        OnStickerListener onStickerListener;
+        public StickerViewHolder(@NonNull View itemView, OnStickerListener onStickerListener) {
+            super(itemView);
+            this.stickerImage = itemView.findViewById(R.id.imageView_sticker);
+//            this.totalUsed = itemView.findViewById(R.id.textView7);
+            this.onStickerListener = onStickerListener;
+            itemView.setOnClickListener(this);
+        }
+        @Override
+        public void onClick(View v) {
+            onStickerListener.onStickerClick(getAdapterPosition());
+        }
     }
 }

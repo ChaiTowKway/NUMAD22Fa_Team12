@@ -33,7 +33,7 @@ import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.model.Sticker;
 import edu.northeastern.numad22fa_team12.model.User;
 
-public class StickItToEmActivity extends AppCompatActivity implements View.OnClickListener{
+public class StickItToEmActivity extends AppCompatActivity implements View.OnClickListener, StickerAdapter.OnStickerListener, UserAdapter.OnUserListener{
 
     private static final String TAG = "StickItToEmActivity";
     private static final String SERVER_KEY = "AAAAn-7LHFg:APA91bFjKqRC26hJV6TSDwVKKmw2frTjAWPBne9-" +
@@ -45,6 +45,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
 
     private RecyclerView stickerRecyclerView, userRecyclerView;
     private RecyclerView.Adapter stickerAdapter, userAdapter;
+    StickerAdapter.OnStickerListener onStickerListener;
     private RecyclerView.LayoutManager stickerLM, userLM;
     private List<User> userList;
     private List<Integer> stickerList;
@@ -65,6 +66,16 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
 //        stickerRef = database.getReference("stickers");
         userRef = database.getReference().child("users");
         stickerRef = database.getReference().child("stickers");
+
+        stickerSelected = R.drawable.cat;
+        stickerList = new ArrayList<>();
+        stickerList.add(R.drawable.cat);
+        stickerList.add(R.drawable.dog);
+        stickerList.add(R.drawable.duck);
+        stickerList.add(R.drawable.koala);
+        stickerList.add(R.drawable.pig);
+        stickerList.add(R.drawable.panda);
+        stickerList.add(R.drawable.rooster);
 
         createRecycleView();
 
@@ -87,13 +98,13 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         Bundle b = this.getIntent().getExtras();
 ////
 ////        userSelected = b.containsKey("userid") ? b.getString("key") : DEFAULT_VAL;
-////        imageSelected = b.containsKey("stickerid") ? b.getString("key") : DEFAULT_VAL;
-        if (b != null) {
-            userSelected = b.getString("userid")  != null ? b.getString("userid"): DEFAULT_VAL;
-            Log.e(TAG, String.valueOf(b.getString("userid")));
-            stickerSelected = b.getInt("stickerid") != 0? b.getInt("stickerid") : (R.drawable.cat);
-            Log.e(TAG, String.valueOf(b.getInt("stickerid")));
-        }
+//////        imageSelected = b.containsKey("stickerid") ? b.getString("key") : DEFAULT_VAL;
+//        if (b != null) {
+//            userSelected = b.getString("userid")  != null ? b.getString("userid"): DEFAULT_VAL;
+//            Log.e(TAG, String.valueOf(b.getString("userid")));
+//            stickerSelected = b.getInt("stickerid") != 0? b.getInt("stickerid") : (R.drawable.cat);
+//            Log.e(TAG, String.valueOf(b.getInt("stickerid")));
+//        }
 
         send = findViewById(R.id.sendBtn);
         userInfoBtn = findViewById(R.id.userinfoBtn);
@@ -194,7 +205,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
 
         userRecyclerView = findViewById(R.id.friendsListRecycleView);
         userList = new ArrayList<>();
-        userAdapter = new UserAdapter(this, userList);
+        userAdapter = new UserAdapter(this, userList, this);
         userRecyclerView.setAdapter(userAdapter);
         userLM = new LinearLayoutManager(StickItToEmActivity.this);
         userRecyclerView.setLayoutManager(userLM);
@@ -202,7 +213,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot d : snapshot.getChildren()) {
+                for (DataSnapshot d : snapshot.getChildren()) {
                     if (d != null) {
                         Log.i(TAG, "user add: " + d.child("userName").getValue().toString());
                         userList.add(new User(d.child("userEmail").getValue().toString(), d.child("userName").getValue().toString()));
@@ -210,54 +221,54 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
                 }
                 userAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 
-        stickerSelected = R.drawable.cat;
-        stickerList = new ArrayList<>();
-        stickerList.add(R.drawable.cat);
-        stickerList.add(R.drawable.dog);
-        stickerList.add(R.drawable.duck);
-        stickerList.add(R.drawable.koala);
-        stickerList.add(R.drawable.pig);
-        stickerList.add(R.drawable.panda);
-        stickerList.add(R.drawable.rooster);
-
         stickerRecyclerView = findViewById(R.id.RecycleView_Stickers);
         stickerLM = new LinearLayoutManager(this);
         stickerRecyclerView.setLayoutManager(stickerLM);
-        stickerAdapter = new StickerAdapter(this, stickerList);
+        stickerAdapter = new StickerAdapter(this, stickerList, this);
         stickerRecyclerView.setAdapter(stickerAdapter);
 
-            stickerRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for(DataSnapshot d : snapshot.getChildren()) {
-                        if (d != null) {
-                            Log.i(TAG, "sticker add: " + d.child("name").getValue().toString());
-//                            stickerList.add(new Sticker(d.getValue().toString(), d.child("use").getValue().toString()));
-                        }
-                    }
-                    stickerAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
-//        }
-
+//        stickerRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot d : snapshot.getChildren()) {
+//                    if (d != null) {
+//                        Log.i(TAG, "sticker add: " + d.child("name").getValue().toString());
+////                            stickerList.add(new Sticker(d.getValue().toString(), d.child("use").getValue().toString()));
+//                    }
+//                }
+//                stickerAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        });
     }
 
     public void sendMessage() {
-        stickerSelected = (int) getIntent().getSerializableExtra("id");
         Log.i(TAG, "STICK ID" + stickerSelected);
     }
 
     @Override
     public void onClick(View v) {
         sendMessage();
+    }
+
+    @Override
+    public void onStickerClick(int position) {
+        stickerSelected = stickerList.get(position);
+        Log.d(TAG, "onStickerClick: stickerSelected " + stickerSelected);
+    }
+
+    @Override
+    public void onUserClick(int position) {
+        userSelected = userList.get(position).getUserName();
+        Log.d(TAG, "onStickerClick: userSelected " + userSelected);
     }
 }
