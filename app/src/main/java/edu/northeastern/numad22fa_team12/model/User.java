@@ -1,7 +1,10 @@
 package edu.northeastern.numad22fa_team12.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import edu.northeastern.numad22fa_team12.R;
 
 public class User {
 
@@ -12,6 +15,8 @@ public class User {
     private int numberOfStickersSent;
     private List<Sticker> receivedStickerList;
     private int numberOfStickersReceived;
+    private HashMap<String, Integer> sentHistoryRecord;
+    private HashMap<String, Integer> receivedHistoryRecord;
 
     public User(){
 
@@ -24,6 +29,25 @@ public class User {
         this.numberOfStickersSent = 0;
         this.receivedStickerList = new ArrayList<>();
         this.numberOfStickersReceived = 0;
+        sentHistoryRecord = new HashMap<>();
+        sentHistoryRecord.put(String.valueOf(R.drawable.cat), 0);
+        sentHistoryRecord.put(String.valueOf(R.drawable.dog), 0);
+        sentHistoryRecord.put(String.valueOf(R.drawable.duck), 0);
+        sentHistoryRecord.put(String.valueOf(R.drawable.hedgehog), 0);
+        sentHistoryRecord.put(String.valueOf(R.drawable.koala), 0);
+        sentHistoryRecord.put(String.valueOf(R.drawable.panda), 0);
+        sentHistoryRecord.put(String.valueOf(R.drawable.pig), 0);
+        sentHistoryRecord.put(String.valueOf(R.drawable.rooster), 0);
+
+        receivedHistoryRecord = new HashMap<>();
+        receivedHistoryRecord.put(String.valueOf(R.drawable.cat), 0);
+        receivedHistoryRecord.put(String.valueOf(R.drawable.dog), 0);
+        receivedHistoryRecord.put(String.valueOf(R.drawable.duck), 0);
+        receivedHistoryRecord.put(String.valueOf(R.drawable.hedgehog), 0);
+        receivedHistoryRecord.put(String.valueOf(R.drawable.koala), 0);
+        receivedHistoryRecord.put(String.valueOf(R.drawable.panda), 0);
+        receivedHistoryRecord.put(String.valueOf(R.drawable.pig), 0);
+        receivedHistoryRecord.put(String.valueOf(R.drawable.rooster), 0);
     }
 
     public String getUserEmail() {
@@ -52,6 +76,14 @@ public class User {
 
     public int getNumberOfStickersReceived() {
         return this.receivedStickerList.size();
+    }
+
+    public HashMap<String, Integer> getSentHistoryRecord() {
+        return this.sentHistoryRecord;
+    }
+
+    public HashMap<String, Integer> getReceivedHistoryRecord() {
+        return this.receivedHistoryRecord;
     }
 
     public void setSentStickerList(Sticker stickerSent) {
