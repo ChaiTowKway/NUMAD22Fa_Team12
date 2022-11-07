@@ -103,35 +103,6 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
-
-
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            String errorMsg = "Failed to get registration token " + task.getException();
-                            Log.e(TAG, errorMsg);
-                            Toast.makeText(StickItToEmActivity.this, errorMsg, Toast.LENGTH_LONG).show();
-                            return;
-                        }
-                        FCM_REGISTRATION_TOKEN = task.getResult();
-                        String msg = "Registration Token: " + FCM_REGISTRATION_TOKEN;
-                        Log.d(TAG, msg);
-                    }
-                });
-
-        Bundle b = this.getIntent().getExtras();
-////
-////        userSelected = b.containsKey("userid") ? b.getString("key") : DEFAULT_VAL;
-//////        imageSelected = b.containsKey("stickerid") ? b.getString("key") : DEFAULT_VAL;
-//        if (b != null) {
-//            userSelected = b.getString("userid")  != null ? b.getString("userid"): DEFAULT_VAL;
-//            Log.e(TAG, String.valueOf(b.getString("userid")));
-//            stickerSelected = b.getInt("stickerid") != 0? b.getInt("stickerid") : (R.drawable.cat);
-//            Log.e(TAG, String.valueOf(b.getInt("stickerid")));
-//        }
-
         send = findViewById(R.id.sendBtn);
         userInfoBtn = findViewById(R.id.userinfoBtn);
 
@@ -216,6 +187,24 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
+    public void retrieveRegistrationToken() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            String errorMsg = "Failed to get registration token " + task.getException();
+                            Log.e(TAG, errorMsg);
+                            Toast.makeText(StickItToEmActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        FCM_REGISTRATION_TOKEN = task.getResult();
+                        String msg = "Registration Token: " + FCM_REGISTRATION_TOKEN;
+                        Log.d(TAG, msg);
+                    }
+                });
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -226,7 +215,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    @SuppressLint({"ResourceType", "UseCompatLoadingForDrawables"})
+    @SuppressLint({"ResourceType", "UseCompatLoadingForDrawables", "SuspiciousIndentation"})
     private void createRecycleView() {
 
         userRecyclerView = findViewById(R.id.friendsListRecycleView);
@@ -240,9 +229,21 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot d : snapshot.getChildren()) {
+                    if (d.child("userEmail").getValue() == null
+                            || d.child("userName") == null
+                            || d.child("userRegistrationToken") == null) {
+                        continue;
+                    }
                     if (d != null) {
-                        Log.i(TAG, "user add: " + d.child("userName").getValue().toString());
-                        userList.add(new User(d.child("userEmail").getValue().toString(), d.child("userName").getValue().toString()));
+                        User user = d.getValue(User.class);
+                        if (user == null) {
+                            Log.i(TAG, "user is null!");
+                            continue;
+                        }
+//                        Log.i(TAG, "user add: " + d.child("userName").getValue().toString());
+                        Log.i(TAG, "user add: " + user.toString());
+//                        userList.add(new User(d.child("userEmail").getValue().toString(), d.child("userName").getValue().toString()));
+                        userList.add(new User(user.getUserEmail(), user.getUserName(), user.getUserRegistrationToken()));
                     }
                 }
                 userAdapter.notifyDataSetChanged();
@@ -260,6 +261,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         stickerList.add(R.drawable.cat);
         stickerList.add(R.drawable.dog);
         stickerList.add(R.drawable.duck);
+        stickerList.add(R.drawable.hedgehog);
         stickerList.add(R.drawable.koala);
         stickerList.add(R.drawable.pig);
         stickerList.add(R.drawable.panda);

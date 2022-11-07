@@ -47,7 +47,7 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
 //        holder.stickerImage.setImageResource(Integer.parseInt(stickersLocations.get(position).getStickerID()));
         System.out.println("userRecord: "+ usedRecord.toString());
         System.out.println(position);
-        holder.totalUsed.setText(String.valueOf(usedRecord.get(position)));
+//        holder.totalUsed.setText(String.valueOf(usedRecord.get(position)));
         holder.stickerImage.setImageResource(stickersLocations.get(position));
     }
 

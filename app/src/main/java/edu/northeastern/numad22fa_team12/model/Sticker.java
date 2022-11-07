@@ -3,19 +3,31 @@ package edu.northeastern.numad22fa_team12.model;
 public class Sticker {
 
     private String stickerID;
-    private String totalUse;
+    private String sentByUser;
+    private String receivedByUser;
+    private String dateAndTime;
 
-
-    public Sticker(String stickerID, String totalUse) {
+    public Sticker(String stickerID, String sentByUser, String receivedByUser, String dateAndTime) {
         this.stickerID = stickerID;
-        this.totalUse = totalUse;
+        this.sentByUser = sentByUser;
+        this.receivedByUser = receivedByUser;
+        this.dateAndTime = dateAndTime;
     }
 
     public String getStickerID() {
-        return stickerID;
+        return this.stickerID;
     }
 
-    public String getTotalUse() {
-        return totalUse;
+    public String getSentByUser() {
+        return this.sentByUser;
     }
+
+    public String getReceivedByUser() {
+        return this.receivedByUser;
+    }
+
+    public String getDateAndTime() {
+        return this.dateAndTime;
+    }
+
 }

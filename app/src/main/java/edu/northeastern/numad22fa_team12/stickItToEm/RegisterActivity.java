@@ -2,6 +2,7 @@ package edu.northeastern.numad22fa_team12.stickItToEm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.model.StickerHistory;
@@ -36,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button registerBtn, signinBtn;
     private static final String NAME_REGEX = "[a-zA-Z0-9]+",
             EMAIL_REGEX = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+", DEFAULT_PW = "1234567";
+    private static String FCM_REGISTRATION_TOKEN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,25 @@ public class RegisterActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("users");
         myAuth = FirebaseAuth.getInstance();
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            String errorMsg = "Failed to get registration token " + task.getException();
+                            Log.e(TAG, errorMsg);
+                            Toast.makeText(RegisterActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                            return;
+                        } else {
+                            if (FCM_REGISTRATION_TOKEN == null) {
+                                FCM_REGISTRATION_TOKEN = task.getResult();
+                            }
+                        }
+                        String msg = "Registration Token: " + FCM_REGISTRATION_TOKEN;
+                        Log.d(TAG, msg);
+                    }
+                });
 
         // get the user entered username and check if it already exist in the firebase
         registerBtn.setOnClickListener(new View.OnClickListener() {
@@ -116,9 +138,9 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Username already exist!",
                             Toast.LENGTH_LONG).show();
                 } else {
-                    User newUser = new User(email, name );
-                    myRef.child(name).setValue(newUser);
-                    myRef.child(name).child("history").setValue(newUser.getHistory());
+                    retrieveRegistrationToken();
+                    String msg = "Token: " + FCM_REGISTRATION_TOKEN;
+//                    myRef.child(name).child("history").setValue(newUser.getHistory());
                     Toast.makeText(RegisterActivity.this, "User created!",
                             Toast.LENGTH_LONG).show();
                     myAuth.createUserWithEmailAndPassword(email,DEFAULT_PW).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -153,10 +175,33 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
                 }
-            }
 
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        User newUser = new User(email, name, FCM_REGISTRATION_TOKEN);
+        myRef.child(myAuth.getUid()).setValue(newUser);
+    }
+
+    public void retrieveRegistrationToken() {
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (!task.isSuccessful()) {
+                    String errorMsg = "Failed to get registration token " + task.getException();
+                    Log.e(TAG, errorMsg);
+                    Toast.makeText(RegisterActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                    return;
+                } else {
+                    if (FCM_REGISTRATION_TOKEN.length() < 1) {
+                        FCM_REGISTRATION_TOKEN = task.getResult();
+                    }
+                    String msg = "Registration Token: " + FCM_REGISTRATION_TOKEN;
+                    Log.d(TAG, msg);
+                }
+
             }
         });
     }
