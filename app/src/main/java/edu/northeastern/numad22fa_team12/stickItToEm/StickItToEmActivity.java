@@ -212,6 +212,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
             // if user not register, take user to register page
             startActivity(new Intent(StickItToEmActivity.this, RegisterActivity.class));
         }
+        Log.i(TAG, "------uid: " + curUser.getUid().toString());
     }
 
     @SuppressLint({"ResourceType", "UseCompatLoadingForDrawables", "SuspiciousIndentation"})
