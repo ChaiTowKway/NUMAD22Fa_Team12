@@ -97,7 +97,6 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //sign in successful
-
                             Intent intent = new Intent(RegisterActivity.this, StickItToEmActivity.class);
                             Bundle b = new Bundle();
                             b.putString("userEmail",email);
@@ -148,6 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
                                 // user created
+                                Log.e(TAG, "user created, email: " + email);
                                 Intent intent = new Intent(RegisterActivity.this, StickItToEmActivity.class);
                                 Bundle b = new Bundle();
                                 b.putString("userEmail",email);

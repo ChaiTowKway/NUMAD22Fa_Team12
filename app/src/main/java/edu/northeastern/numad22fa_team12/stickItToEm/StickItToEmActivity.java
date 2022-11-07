@@ -70,7 +70,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         userRef = database.getReference().child("users");
         stickerRef = database.getReference().child("stickers");
 
-
+        // generate sticker list for recyclerview
         stickerSelected = R.drawable.cat;
         stickerList = new ArrayList<>();
         stickerList.add(R.drawable.cat);
@@ -92,7 +92,6 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
                 for(DataSnapshot snap: snapshot.getChildren()){
                     User usr = snap.getValue(User.class);
                     userName = usr.getUserName();
-
                 }
                 createRecycleView();
             }
@@ -290,25 +289,25 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
                 }
             });
 //        }
-        DatabaseReference opeatingUserRef = userRef.child(userName).child("history");
-
-        opeatingUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    StickerHistory history = snapshot.getValue(StickerHistory.class);
-
-                    updateUsedRecordList(history);
-                    System.out.println(history.getUsedRecordList());
-                }
-                stickerAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        DatabaseReference opeatingUserRef = userRef.child(userName).child("history");
+//
+//        opeatingUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if(snapshot.exists()){
+//                    StickerHistory history = snapshot.getValue(StickerHistory.class);
+//
+//                    updateUsedRecordList(history);
+//                    System.out.println(history.getUsedRecordList());
+//                }
+//                stickerAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         stickerRecyclerView.setAdapter(stickerAdapter);
 
     }
