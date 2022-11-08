@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -89,6 +91,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         stickerListMap.put(R.drawable.rooster, 0);
 
         createRecycleView();
+        getNotificationInfo();
     }
 
     @Override
@@ -99,6 +102,41 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
             // if user not register, take user to register page
             startActivity(new Intent(StickItToEmActivity.this, RegisterActivity.class));
         }
+    }
+
+    private void getNotificationInfo() {
+        if (userRef.child(userUID).child("receivedStickerList") != null)
+        userRef.child(userUID).child("receivedStickerList").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Sticker addedSticker = snapshot.getValue(Sticker.class);
+                if (addedSticker != null) {
+                    Log.i(TAG, "sticker received " + addedSticker.getStickerID());
+                    String sendByUser = addedSticker.getSentByUser();
+                    int stickerId = addedSticker.getStickerID();
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @SuppressLint({"ResourceType", "UseCompatLoadingForDrawables", "SuspiciousIndentation"})
@@ -175,26 +213,9 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
-//        DatabaseReference opeatingUserRef = userRef.child(userName).child("history");
-//
-//        opeatingUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if(snapshot.exists()){
-//                    StickerHistory history = snapshot.getValue(StickerHistory.class);
-//
-//                    updateUsedRecordList(history);
-//                    System.out.println(history.getUsedRecordList());
-//                }
-//                stickerAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {d
-//
-//            }
-//        });
         stickerRecyclerView.setAdapter(stickerAdapter);
+
+
 
     }
 
