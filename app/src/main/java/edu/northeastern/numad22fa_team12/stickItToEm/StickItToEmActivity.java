@@ -146,33 +146,27 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         userRecyclerView.setAdapter(userAdapter);
         userLM = new LinearLayoutManager(StickItToEmActivity.this);
         userRecyclerView.setLayoutManager(userLM);
+        userList.clear();
 
-        userRef.addValueEventListener(new ValueEventListener() {
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int count = 0;
                 for (DataSnapshot d : snapshot.getChildren()) {
-//                    if (d.child("userEmail").getValue() == null
-//                            || d.child("userName") == null
-//                            || d.child("userRegistrationToken") == null) {
-//                        continue;
-//                    }
                     if (d != null) {
                         User user = d.getValue(User.class);
-                        if (user == null) {
-                            Log.i(TAG, "user is null!");
-                            continue;
-                        } else {
-    //                        Log.i(TAG, "user add: " + d.child("userName").getValue().toString());
-                            Log.i(TAG, "user add: " + user.toString());
-    //                        userList.add(new User(d.child("userEmail").getValue().toString(), d.child("userName").getValue().toString()));
-                            userList.add(user);}
+                        Log.i(TAG, "user add: " + user.getUserName());
+                        Log.i(TAG, "count: " + count);
+                        userList.add(user);
+                        userAdapter.notifyDataSetChanged();
                     }
+                    count++;
                 }
-                userAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
