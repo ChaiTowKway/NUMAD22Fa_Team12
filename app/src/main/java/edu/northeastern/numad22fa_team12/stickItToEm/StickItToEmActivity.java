@@ -57,7 +57,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     private List<Integer> stickerList;
     private List<Integer> usedRecord;
     private int stickerSelected;
-    private String imageSelected, userSelectedUID, userSelected, currUser;
+    private String imageSelected = "", userSelectedUID = "", userSelected = "", currUser = "";
     private Button send, userInfoBtn;
     private final static String DEFAULT_VAL = "THIS IS A DEFAULT VAL";
     private String userName;
@@ -204,12 +204,14 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
 
     public void sendMessage() {
         Log.i(TAG, "STICK ID" + stickerSelected);
+        getCurrUserInfo();
         if ( userSelectedUID.length() < 1 || stickerSelected < 1) {
             Toast.makeText(StickItToEmActivity.this, "Please select user and sticker first!",
                     Toast.LENGTH_LONG).show();
+            Log.d(TAG, "sendMessage: STICK ID" + stickerSelected);
+            Log.d(TAG, "sendMessage: userSelectedUID" + userSelectedUID);
             return;
         }
-        getCurrUserInfo();
 
         long millis = System.currentTimeMillis();
         java.util.Date date = new java.util.Date(millis);
