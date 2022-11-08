@@ -26,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -49,6 +51,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     StickerAdapter.OnStickerListener onStickerListener;
     private RecyclerView.LayoutManager stickerLM, userLM;
     private List<User> userList;
+    private HashSet<String> userListSet;
     private List<Integer> stickerList;
     private int stickerSelected;
     private String imageSelected, userSelectedUID, userSelected, currUser;
@@ -71,6 +74,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         userRef = database.getReference().child("users");
         stickerRef = database.getReference().child("stickers");
         userUID = userAuth.getUid();
+
         getCurrUserInfo();
 
         stickerList = new ArrayList<>();
@@ -85,24 +89,24 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
 
         createRecycleView();
 
-        Bundle extras = getIntent().getExtras();
-        userEmail = extras.getString("userEmail");
-        Query query = userRef.orderByChild("userEmail").equalTo(userEmail);
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snap: snapshot.getChildren()){
-                    User usr = snap.getValue(User.class);
-                    userName = usr.getUserName();
-                }
-                createRecycleView();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        Bundle extras = getIntent().getExtras();
+//        userEmail = extras.getString("userEmail");
+//        Query query = userRef.orderByChild("userEmail").equalTo(userEmail);
+//        query.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot snap: snapshot.getChildren()){
+//                    User usr = snap.getValue(User.class);
+//                    userName = usr.getUserName();
+//                }
+//                createRecycleView();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
         send = findViewById(R.id.sendBtn);
         userInfoBtn = findViewById(R.id.userinfoBtn);
@@ -165,6 +169,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
 
         userRecyclerView = findViewById(R.id.friendsListRecycleView);
         userList = new ArrayList<>();
+        userListSet = new HashSet<>();
         userAdapter = new UserAdapter(this, userList, this);
         userRecyclerView.setAdapter(userAdapter);
         userLM = new LinearLayoutManager(StickItToEmActivity.this);
@@ -174,20 +179,21 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot d : snapshot.getChildren()) {
-                    if (d.child("userEmail").getValue() == null
-                            || d.child("userName") == null
-                            || d.child("userRegistrationToken") == null) {
-                        continue;
-                    }
                     if (d != null) {
                         User user = d.getValue(User.class);
                         if (user == null) {
                             Log.i(TAG, "user is null!");
                             continue;
                         }
+                        if (userListSet.contains(user.getUserUID())) {
+                            Log.i(TAG, user.getUserName() + " existed!");
+                            continue;
+                        }
+                        userListSet.add(user.getUserUID());
                         userList.add(new User(user.getUserEmail(), user.getUserName(), user.getUserRegistrationToken(), user.getUserUID()));
                     }
                 }
+
                 userAdapter.notifyDataSetChanged();
             }
 
