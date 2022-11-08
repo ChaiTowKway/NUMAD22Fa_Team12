@@ -11,6 +11,7 @@ public class User {
     private String userName;
     private String userEmail;
     private String userRegistrationToken;
+    private String userUID;
     private List<Sticker> sentStickerList;
     private int numberOfStickersSent;
     private List<Sticker> receivedStickerList;
@@ -22,6 +23,7 @@ public class User {
         this.userEmail = "";
         this.userName = "";
         this.userRegistrationToken = "";
+        this.userUID = "";
         this.sentStickerList = new ArrayList<>();
         this.numberOfStickersSent = 0;
         this.receivedStickerList = new ArrayList<>();
@@ -30,10 +32,11 @@ public class User {
         receivedHistoryRecord = new HashMap<>();
 
     }
-    public User(String userEmail, String userName, String userRegistrationToken) {
+    public User(String userEmail, String userName, String userRegistrationToken, String userUID) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userRegistrationToken = userRegistrationToken;
+        this.userUID = userUID;
         this.sentStickerList = new ArrayList<>();
         this.numberOfStickersSent = 0;
         this.receivedStickerList = new ArrayList<>();
@@ -69,6 +72,10 @@ public class User {
 
     public String getUserRegistrationToken() {
         return this.userRegistrationToken;
+    }
+
+    public String getUserUID() {
+        return this.userUID;
     }
 
     public List<Sticker> getSentStickerList() {
