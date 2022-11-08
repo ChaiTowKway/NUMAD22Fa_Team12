@@ -393,7 +393,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         Bitmap bm = BitmapFactory.decodeResource(getResources(), stickerID);
         Notification noti = new NotificationCompat.Builder(this, channelID)
                 .setContentTitle("New message" + Integer.toString(notificationGeneration++) )
-                .setContentText("From " + sentByUser).setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentText("From  " + sentByUser).setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setTicker("Ticker text")
                 .setLargeIcon(bm)
 
