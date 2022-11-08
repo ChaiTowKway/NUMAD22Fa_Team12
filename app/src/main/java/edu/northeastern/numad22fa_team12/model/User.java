@@ -19,6 +19,15 @@ public class User {
     private HashMap<String, Integer> receivedHistoryRecord;
 
     public User(){
+        this.userEmail = "";
+        this.userName = "";
+        this.userRegistrationToken = "";
+        this.sentStickerList = new ArrayList<>();
+        this.numberOfStickersSent = 0;
+        this.receivedStickerList = new ArrayList<>();
+        this.numberOfStickersReceived = 0;
+        sentHistoryRecord = new HashMap<>();
+        receivedHistoryRecord = new HashMap<>();
 
     }
     public User(String userEmail, String userName, String userRegistrationToken) {
@@ -84,6 +93,14 @@ public class User {
 
     public HashMap<String, Integer> getReceivedHistoryRecord() {
         return this.receivedHistoryRecord;
+    }
+
+    public void setNumberOfStickersSent(int num) {
+        this.numberOfStickersSent = num;
+    }
+
+    public void setNumberOfStickersReceived(int num) {
+        this.numberOfStickersReceived = num;
     }
 
     public void setSentStickerList(Sticker stickerSent) {

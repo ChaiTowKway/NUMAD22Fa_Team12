@@ -21,7 +21,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -29,10 +31,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import edu.northeastern.numad22fa_team12.AboutActivity;
+import edu.northeastern.numad22fa_team12.MainActivity;
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.model.Sticker;
 import edu.northeastern.numad22fa_team12.model.StickerHistory;
 import edu.northeastern.numad22fa_team12.model.User;
+import edu.northeastern.numad22fa_team12.webservice.WebServiceActivity;
 
 public class StickItToEmActivity extends AppCompatActivity implements View.OnClickListener, StickerAdapter.OnStickerListener, UserAdapter.OnUserListener{
 
@@ -51,12 +56,14 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     private List<User> userList;
     private List<Integer> stickerList;
     private int stickerSelected;
-    private String imageSelected, userSelected;
+    private String imageSelected, userSelected, currUser;
     private Button send, userInfoBtn;
     private final static String DEFAULT_VAL = "THIS IS A DEFAULT VAL";
     private String userName;
     private String userEmail;
+    private String userUID = "ZaS16imha8ONQn0u9AFny3twRr43";
     private List<Integer> usedRecord = new StickerHistory().getUsedRecordList();
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,17 +72,15 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
 
         database = FirebaseDatabase.getInstance();
         userAuth = FirebaseAuth.getInstance();
-//        userRef = database.getReference("users");
-//        stickerRef = database.getReference("stickers");
         userRef = database.getReference().child("users");
         stickerRef = database.getReference().child("stickers");
+        getCurrUserInfo();
 
-
-        stickerSelected = R.drawable.cat;
         stickerList = new ArrayList<>();
         stickerList.add(R.drawable.cat);
         stickerList.add(R.drawable.dog);
         stickerList.add(R.drawable.duck);
+        stickerList.add(R.drawable.hedgehog);
         stickerList.add(R.drawable.koala);
         stickerList.add(R.drawable.pig);
         stickerList.add(R.drawable.panda);
@@ -106,61 +111,47 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         send = findViewById(R.id.sendBtn);
         userInfoBtn = findViewById(R.id.userinfoBtn);
 
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!Objects.equals(userSelected, DEFAULT_VAL) && !Objects.equals(imageSelected, DEFAULT_VAL)) {
-                    userRef.child(Objects.requireNonNull(userAuth.getUid())).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Integer senderSent;
-                            senderSent = Integer.valueOf(snapshot.child("numberOfStickersSent").getValue().toString());
-                            senderSent++;
-                            userRef.child(userAuth.getUid()).setValue(senderSent);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });
-                    
-                    userRef.child(userSelected).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Integer receiverReceived;
-
-//                            curSent = Integer.valueOf(snapshot.child("numberOfStickersSent").getValue().toString());
-                            receiverReceived = Integer.valueOf(snapshot.child("numberOfStickersReceived").getValue().toString());
-                            receiverReceived++;
-                            userRef.child(userSelected).setValue(receiverReceived);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });
-
-                    stickerRef.child(imageSelected).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Integer totalUsed;
-                            totalUsed = Integer.valueOf(snapshot.child("use").getValue().toString());
-                            totalUsed++;
-                            userRef.child(userAuth.getUid()).setValue(totalUsed);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                    Toast.makeText(StickItToEmActivity.this, "Sticker Sent!",
-                            Toast.LENGTH_LONG).show();
-                    userAdapter.notifyDataSetChanged();
-                    stickerAdapter.notifyDataSetChanged();
-                }
-            }
-        });
+//        send.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if ( userSelected.length() > 0 && stickerSelected > 0) {
+//                    userRef.child(Objects.requireNonNull(userAuth.getUid())).addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            Integer senderSent;
+//                            senderSent = Integer.valueOf(snapshot.child("numberOfStickersSent").getValue().toString());
+//                            senderSent++;
+//                            userRef.child(userAuth.getUid()).setValue(senderSent);
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//                        }
+//                    });
+//
+//                    userRef.child(userSelected).addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            Integer receiverReceived;
+//
+////                            curSent = Integer.valueOf(snapshot.child("numberOfStickersSent").getValue().toString());
+//                            receiverReceived = Integer.valueOf(snapshot.child("numberOfStickersReceived").getValue().toString());
+//                            receiverReceived++;
+//                            userRef.child(userSelected).setValue(receiverReceived);
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//                        }
+//                    });
+//
+//                    Toast.makeText(StickItToEmActivity.this, "Sticker Sent!",
+//                            Toast.LENGTH_LONG).show();
+////                    userAdapter.notifyDataSetChanged();
+////                    stickerAdapter.notifyDataSetChanged();
+//                }
+//            }
+//        });
 
         userInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -254,61 +245,47 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
-
-
-        stickerSelected = R.drawable.cat;
-        stickerList = new ArrayList<>();
-        stickerList.add(R.drawable.cat);
-        stickerList.add(R.drawable.dog);
-        stickerList.add(R.drawable.duck);
-        stickerList.add(R.drawable.hedgehog);
-        stickerList.add(R.drawable.koala);
-        stickerList.add(R.drawable.pig);
-        stickerList.add(R.drawable.panda);
-        stickerList.add(R.drawable.rooster);
-
         stickerRecyclerView = findViewById(R.id.RecycleView_Stickers);
         stickerLM = new LinearLayoutManager(this);
         stickerRecyclerView.setLayoutManager(stickerLM);
         stickerAdapter = new StickerAdapter(this, stickerList , this,this.usedRecord);
 
-
-            stickerRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for(DataSnapshot d : snapshot.getChildren()) {
-                        if (d != null) {
-                            Log.i(TAG, "sticker add: " + d.child("name").getValue().toString());
-//                            stickerList.add(new Sticker(d.getValue().toString(), d.child("use").getValue().toString()));
-                        }
-                    }
-                    stickerAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
+//            stickerRef.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    for(DataSnapshot d : snapshot.getChildren()) {
+//                        if (d != null) {
+//                            Log.i(TAG, "sticker add: " + d.child("name").getValue().toString());
+////                            stickerList.add(new Sticker(d.getValue().toString(), d.child("use").getValue().toString()));
+//                        }
+//                    }
+//                    stickerAdapter.notifyDataSetChanged();
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//                }
+//            });
 //        }
-        DatabaseReference opeatingUserRef = userRef.child(userName).child("history");
-
-        opeatingUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    StickerHistory history = snapshot.getValue(StickerHistory.class);
-
-                    updateUsedRecordList(history);
-                    System.out.println(history.getUsedRecordList());
-                }
-                stickerAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        DatabaseReference opeatingUserRef = userRef.child(userName).child("history");
+//
+//        opeatingUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if(snapshot.exists()){
+//                    StickerHistory history = snapshot.getValue(StickerHistory.class);
+//
+//                    updateUsedRecordList(history);
+//                    System.out.println(history.getUsedRecordList());
+//                }
+//                stickerAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {d
+//
+//            }
+//        });
         stickerRecyclerView.setAdapter(stickerAdapter);
 
     }
@@ -319,11 +296,71 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
 
     public void sendMessage() {
         Log.i(TAG, "STICK ID" + stickerSelected);
+        if ( userSelected.length() < 1 || stickerSelected < 1) {
+            Toast.makeText(StickItToEmActivity.this, "Please select user and sticker first!",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+        getCurrUserInfo();
+
+        long millis = System.currentTimeMillis();
+        java.util.Date date = new java.util.Date(millis);
+        Sticker sentSticker = new Sticker(stickerSelected, currUser, userSelected, String.valueOf(date));
+        Log.d(TAG, "onClick: stickerSelected " + sentSticker.getStickerID());
+        Log.d(TAG, "onClick: currUser " + sentSticker.getSentByUser());
+        Log.d(TAG, "onClick: userSelected " + sentSticker.getReceivedByUser());
+        Log.d(TAG, "onClick: time " + sentSticker.getDateAndTime());
+
+//
+//        userRef.child(userUID).child("sentHistoryRecord").child(String.valueOf(sentSticker.getStickerID())).setValue(String.valueOf((Integer) (userRef.child(userUID).child("sentHistoryRecord").child(String.valueOf(sentSticker.getStickerID())).get().getResult().getValue()) + 1));
+//        userRef.child(userUID).child("numberOfStickersSent").setValue(String.valueOf((Integer) (userRef.child(userUID).child("numberOfStickersSent").get().getResult().getValue()) + 1));
+
+            userRef.child(userUID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Integer senderSent;
+                    senderSent = Integer.valueOf(snapshot.child("numberOfStickersSent").getValue().toString());
+                    senderSent++;
+                    userRef.child(userUID).child("numberOfStickersSent").setValue(senderSent);
+
+                    userRef.child(userUID).child("sentStickerList").push().setValue(sentSticker);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+//
+//            userRef.child(userSelected).addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    Integer receiverReceived;
+//
+//                            curSent = Integer.valueOf(snapshot.child("numberOfStickersSent").getValue().toString());
+//                    receiverReceived = Integer.valueOf(snapshot.child("numberOfStickersReceived").getValue().toString());
+//                    receiverReceived++;
+//                    userRef.child(userSelected).setValue(receiverReceived);
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//                }
+//            });
+
+            Toast.makeText(StickItToEmActivity.this, "Sticker Sent!",
+                    Toast.LENGTH_LONG).show();
+
     }
 
     @Override
-    public void onClick(View v) {
-        sendMessage();
+    public void onClick(View view) {
+        int buttonID = view.getId();
+        switch (buttonID) {
+            case R.id.sendBtn:
+                sendMessage();
+                break;
+
+        }
     }
 
     @Override
@@ -336,5 +373,29 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     public void onUserClick(int position) {
         userSelected = userList.get(position).getUserName();
         Log.d(TAG, "onStickerClick: userSelected " + userSelected);
+    }
+
+    public void getCurrUserInfo() {
+        userRef.child(userUID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    Log.d("firebase ", String.valueOf(task.getResult().getValue()));
+                    Log.d("firebase get task", String.valueOf(task.getResult().getValue()));
+                    Log.d("firebase userAuth.getUid()", String.valueOf(userAuth.getUid()));
+                    User user = task.getResult().getValue(User.class);
+                    if (user != null) {
+                        Log.d(TAG, "onComplete: user name" + user.getUserName());
+                        currUser = user.getUserName();
+                        FCM_REGISTRATION_TOKEN = user.getUserRegistrationToken();
+                    } else {
+                        Log.e(TAG, "onComplete: failed to create new user");
+                    }
+                }
+            }
+        });
     }
 }
