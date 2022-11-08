@@ -49,9 +49,6 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
     @Override
     public void onBindViewHolder(@NonNull StickerViewHolder holder, @SuppressLint("RecyclerView") int position) {
 //        holder.stickerImage.setImageResource(Integer.parseInt(stickersLocations.get(position).getStickerID()));
-        System.out.println("userRecord: "+ usedRecord.toString());
-        System.out.println(position);
-
         holder.stickerImage.setImageResource(stickersLocations.get(position));
     }
 

@@ -220,21 +220,21 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot d : snapshot.getChildren()) {
-                    if (d.child("userEmail").getValue() == null
-                            || d.child("userName") == null
-                            || d.child("userRegistrationToken") == null) {
-                        continue;
-                    }
+//                    if (d.child("userEmail").getValue() == null
+//                            || d.child("userName") == null
+//                            || d.child("userRegistrationToken") == null) {
+//                        continue;
+//                    }
                     if (d != null) {
                         User user = d.getValue(User.class);
                         if (user == null) {
                             Log.i(TAG, "user is null!");
                             continue;
-                        }
-//                        Log.i(TAG, "user add: " + d.child("userName").getValue().toString());
-                        Log.i(TAG, "user add: " + user.toString());
-//                        userList.add(new User(d.child("userEmail").getValue().toString(), d.child("userName").getValue().toString()));
-                        userList.add(new User(user.getUserEmail(), user.getUserName(), user.getUserRegistrationToken()));
+                        } else {
+    //                        Log.i(TAG, "user add: " + d.child("userName").getValue().toString());
+                            Log.i(TAG, "user add: " + user.toString());
+    //                        userList.add(new User(d.child("userEmail").getValue().toString(), d.child("userName").getValue().toString()));
+                            userList.add(user);}
                     }
                 }
                 userAdapter.notifyDataSetChanged();
@@ -359,7 +359,9 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
             case R.id.sendBtn:
                 sendMessage();
                 break;
-
+            case R.id.userinfoBtn:
+                startActivity(new Intent(StickItToEmActivity.this, StickerDetailsActivity.class));
+                break;
         }
     }
 
