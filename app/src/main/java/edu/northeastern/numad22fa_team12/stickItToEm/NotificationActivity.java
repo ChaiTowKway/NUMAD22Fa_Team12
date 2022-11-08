@@ -53,14 +53,37 @@ public class NotificationActivity extends AppCompatActivity {
         }
     }
 
+//    public void sendNotification(View view, Integer stickerID, String sentByUser){
+//
+//
+//        Intent intent = new Intent(this, MainActivity.class);
+//
+//        PendingIntent readIntent = PendingIntent.getActivity(this, (int)System.currentTimeMillis(), intent, PendingIntent.FLAG_MUTABLE);
+//
+//        String channelID = "Sticker_Channel";
+//
+//        Bitmap bm = BitmapFactory.decodeResource(getResources(), stickerID);
+//        Notification noti = new NotificationCompat.Builder(this, channelID)
+//                .setContentTitle("New message" + Integer.toString(notificationGeneration++) )
+//                .setContentText("From" + sentByUser).setSmallIcon(R.drawable.ic_launcher_foreground)
+//                .setTicker("Ticker text")
+//                .setLargeIcon(bm)
+//
+//                .addAction(R.drawable.ic_launcher_foreground, "Read", readIntent)
+//                .setContentIntent(readIntent).build();
+//
+//        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//        noti.flags |= Notification.FLAG_AUTO_CANCEL;
+//        notificationManager.notify(NOTIFICATION_UNIQUE_ID + notificationGeneration, noti);
+//    }
     public void sendNotification(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, NotificationActivity.class);
 
         PendingIntent readIntent = PendingIntent.getActivity(this, (int)System.currentTimeMillis(), intent, PendingIntent.FLAG_MUTABLE);
 
         String channelID = "Sticker_Channel";
 
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_foreground);
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), 2131165306);
         Notification noti = new NotificationCompat.Builder(this, channelID)
                 .setContentTitle("New message" + Integer.toString(notificationGeneration++) )
                 .setContentText("Subject Text").setSmallIcon(R.drawable.ic_launcher_foreground)
