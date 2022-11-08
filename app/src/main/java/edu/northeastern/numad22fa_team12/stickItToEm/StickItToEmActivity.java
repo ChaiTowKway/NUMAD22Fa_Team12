@@ -58,7 +58,6 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     private Button send, userInfoBtn;
     private final static String DEFAULT_VAL = "THIS IS A DEFAULT VAL";
     private String userName;
-
     private String userEmail;
     private String userUID;
     private List<Integer> usedRecord = new StickerHistory().getUsedRecordList();
@@ -74,7 +73,6 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         userRef = database.getReference().child("users");
         stickerRef = database.getReference().child("stickers");
         userUID = userAuth.getUid();
-
         getCurrUserInfo();
 
         stickerList = new ArrayList<>();
@@ -88,47 +86,6 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         stickerList.add(R.drawable.rooster);
 
         createRecycleView();
-
-//        Bundle extras = getIntent().getExtras();
-//        userEmail = extras.getString("userEmail");
-//        Query query = userRef.orderByChild("userEmail").equalTo(userEmail);
-//        query.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot snap: snapshot.getChildren()){
-//                    User usr = snap.getValue(User.class);
-//                    userName = usr.getUserName();
-//                }
-//                createRecycleView();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
-        send = findViewById(R.id.sendBtn);
-        userInfoBtn = findViewById(R.id.userinfoBtn);
-
-    }
-
-    public void retrieveRegistrationToken() {
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            String errorMsg = "Failed to get registration token " + task.getException();
-                            Log.e(TAG, errorMsg);
-                            Toast.makeText(StickItToEmActivity.this, errorMsg, Toast.LENGTH_LONG).show();
-                            return;
-                        }
-                        FCM_REGISTRATION_TOKEN = task.getResult();
-                        String msg = "Registration Token: " + FCM_REGISTRATION_TOKEN;
-                        Log.d(TAG, msg);
-                    }
-                });
     }
 
     @Override
@@ -184,23 +141,6 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         stickerRecyclerView.setLayoutManager(stickerLM);
         stickerAdapter = new StickerAdapter(this, stickerList , this,this.usedRecord);
 
-//            stickerRef.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    for(DataSnapshot d : snapshot.getChildren()) {
-//                        if (d != null) {
-//                            Log.i(TAG, "sticker add: " + d.child("name").getValue().toString());
-////                            stickerList.add(new Sticker(d.getValue().toString(), d.child("use").getValue().toString()));
-//                        }
-//                    }
-//                    stickerAdapter.notifyDataSetChanged();
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//                }
-//            });
-//        }
 //        DatabaseReference opeatingUserRef = userRef.child(userName).child("history");
 //
 //        opeatingUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -301,7 +241,6 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
 
             Toast.makeText(StickItToEmActivity.this, "Sticker Sent!",
                     Toast.LENGTH_LONG).show();
-
     }
 
     @Override
@@ -327,7 +266,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     public void onUserClick(int position) {
         userSelectedUID = userList.get(position).getUserUID();
         userSelected = userList.get(position).getUserName();
-        Log.d(TAG, "onStickerClick: userSelected " + userSelectedUID);
+        Log.d(TAG, "onUserClick: userSelected " + userSelectedUID);
     }
 
     public void getCurrUserInfo() {
@@ -338,8 +277,6 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
                     Log.e("firebase", "Error getting data", task.getException());
                 }
                 else {
-                    Log.d("firebase ", String.valueOf(task.getResult().getValue()));
-                    Log.d("firebase get task", String.valueOf(task.getResult().getValue()));
                     Log.d("firebase userAuth.getUid()", String.valueOf(userAuth.getUid()));
                     User user = task.getResult().getValue(User.class);
                     if (user != null) {
@@ -347,7 +284,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
                         currUser = user.getUserName();
                         FCM_REGISTRATION_TOKEN = user.getUserRegistrationToken();
                     } else {
-                        Log.e(TAG, "onComplete: failed to create new user");
+                        Log.e(TAG, "onComplete: failed to get user");
                     }
                 }
             }
