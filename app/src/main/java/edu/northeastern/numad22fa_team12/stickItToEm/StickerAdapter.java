@@ -55,6 +55,16 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public int getItemCount() {
         return stickersLocations.size();
     }
