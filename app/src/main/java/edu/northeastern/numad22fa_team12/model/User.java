@@ -1,5 +1,7 @@
 package edu.northeastern.numad22fa_team12.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -118,4 +120,9 @@ public class User {
         this.receivedStickerList.add(stickerReceived);
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return userName + "\n" + userUID;
+    }
 }

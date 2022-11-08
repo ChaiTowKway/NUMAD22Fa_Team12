@@ -23,6 +23,8 @@
             android:exported="false"/>
         <activity android:name=".stickItToEm.NotificationActivity"
             android:exported="false"/>
+        <activity android:name=".stickItToEm.StickerDetailsActivity"
+            android:exported="false"/>
         <activity
             android:name=".AboutActivity"
             android:exported="false" />
