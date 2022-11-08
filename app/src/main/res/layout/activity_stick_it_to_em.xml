@@ -12,12 +12,15 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/textViewUserList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:background="@color/purple_500"
             android:gravity="center"
-            android:text="Select friends you want to chat with!"
-            android:textColor="@color/white" />
+            android:text="Select a friend to chat!"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/friendsListRecycleView"
@@ -27,11 +30,13 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
             android:background="@color/purple_500"
             android:gravity="center"
             android:text="Select Stickers you want to send!"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RecycleView_Stickers"

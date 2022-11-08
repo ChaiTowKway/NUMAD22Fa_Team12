@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -283,6 +284,9 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
                         Log.d(TAG, "onComplete: user name" + user.getUserName());
                         currUser = user.getUserName();
                         FCM_REGISTRATION_TOKEN = user.getUserRegistrationToken();
+                        TextView textViewUserList = findViewById(R.id.textViewUserList);
+                        String output = "Hi " + user.getUserName() + "! Select a friend to chat!";
+                        textViewUserList.setText(output);
                     } else {
                         Log.e(TAG, "onComplete: failed to get user");
                     }
