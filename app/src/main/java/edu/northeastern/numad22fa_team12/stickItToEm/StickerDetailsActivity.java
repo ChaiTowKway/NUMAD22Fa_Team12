@@ -1,6 +1,7 @@
 package edu.northeastern.numad22fa_team12.stickItToEm;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.widget.LinearLayout;
 
@@ -39,6 +40,7 @@ public class StickerDetailsActivity extends AppCompatActivity {
     private RecyclerView sentRecyclerView, receivedRecyclerView;
     private StickerDetailAdapter sentAdapter, receiveAdapter;
     private LinearLayoutManager sentLM, receiveLM;
+    private Parcelable sentLMState, receiveLMState;
 
 
     @Override
@@ -130,6 +132,39 @@ public class StickerDetailsActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        sentLMState = sentLM.onSaveInstanceState();
+        receiveLMState = receiveLM.onSaveInstanceState();
+        outState.putParcelable("sent", sentLMState);
+        outState.putParcelable("receive", receiveLMState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        sentLMState = savedInstanceState.getParcelable("sent");
+        receiveLMState = savedInstanceState.getParcelable("receive");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (sentLMState != null) sentLM.onRestoreInstanceState(sentLMState);
+        if (receiveLMState != null) receiveLM.onRestoreInstanceState(receiveLMState);
     }
 
 }

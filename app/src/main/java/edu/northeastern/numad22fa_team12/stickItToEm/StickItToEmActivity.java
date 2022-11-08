@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -74,6 +75,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     private String userName;
     private String userEmail;
     private String userUID;
+    private Parcelable stickerLMState, userLMState;
 
     private final  int NOTIFICATION_UNIQUE_ID = 7;
     private static int notificationGeneration = 1;
@@ -403,5 +405,38 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         noti.flags |= Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(NOTIFICATION_UNIQUE_ID + notificationGeneration, noti);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        stickerLMState = stickerLM.onSaveInstanceState();
+        userLMState = userLM.onSaveInstanceState();
+        outState.putParcelable("stickerLMState", stickerLMState);
+        outState.putParcelable("userLMState", userLMState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        userLMState = savedInstanceState.getParcelable("userLMState");
+        stickerLMState = savedInstanceState.getParcelable("stickerLMState");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (stickerLMState != null) stickerLM.onRestoreInstanceState(stickerLMState);
+        if (userLMState != null) userLM.onRestoreInstanceState(userLMState);
     }
 }
