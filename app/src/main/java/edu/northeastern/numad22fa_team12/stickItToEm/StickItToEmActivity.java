@@ -306,6 +306,8 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
+                    Log.e(TAG, "Error getting data", task.getException());
+
                 }
                 else {
                     Log.d("firebase userAuth.getUid()", String.valueOf(userAuth.getUid()));
