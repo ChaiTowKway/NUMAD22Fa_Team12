@@ -130,26 +130,4 @@ public class StickerDetailsActivity extends AppCompatActivity {
 
     }
 
-//    private void createRecyclerView(List<Sticker> sentList, List<Sticker> receivedList, String userName) {
-//        RecyclerView sentRecyclerView, receivedRecyclerView;
-//        RecyclerView.Adapter sentAdapter, receiveAdapter;
-//        RecyclerView.LayoutManager sentLM, receiveLM;
-//
-//        receivedRecyclerView = findViewById(R.id.stickerReceivedRV);
-//        sentRecyclerView = findViewById(R.id.stickerSentRV);
-//
-//        receiveLM = new LinearLayoutManager(this);
-//        sentLM = new LinearLayoutManager(this);
-//
-//        receiveAdapter = new StickerDetailAdapter(receivedList, this, userName, false);
-//        sentAdapter = new StickerDetailAdapter(sentList, this, userName, true);
-//
-//        receivedRecyclerView.setAdapter(receiveAdapter);
-//        sentRecyclerView.setAdapter(sentAdapter);
-//
-//        receivedRecyclerView.setLayoutManager(receiveLM);
-//        sentRecyclerView.setLayoutManager(sentLM);
-//        Log.i(TAG, "finished create rv");
-//
-//    }
 }
