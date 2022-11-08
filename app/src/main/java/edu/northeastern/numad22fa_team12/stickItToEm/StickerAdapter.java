@@ -3,11 +3,14 @@ package edu.northeastern.numad22fa_team12.stickItToEm;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +28,7 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
     private final List<Integer> stickersLocations;
     private List<Integer> usedRecord;
     private OnStickerListener onStickerListener;
+    private int mCheckedPosition = -1;
 
     public StickerAdapter(Context context, List<Integer> stickersLocations, OnStickerListener onStickerListener, List<Integer> usedRecord) {
         this.context = context;
@@ -47,7 +51,7 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
 //        holder.stickerImage.setImageResource(Integer.parseInt(stickersLocations.get(position).getStickerID()));
         System.out.println("userRecord: "+ usedRecord.toString());
         System.out.println(position);
-//        holder.totalUsed.setText(String.valueOf(usedRecord.get(position)));
+
         holder.stickerImage.setImageResource(stickersLocations.get(position));
     }
 
@@ -62,18 +66,29 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
 
     public class StickerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView stickerImage;
+        public LinearLayout stickerLayout;
 //        public TextView totalUsed;
         OnStickerListener onStickerListener;
         public StickerViewHolder(@NonNull View itemView, OnStickerListener onStickerListener) {
             super(itemView);
             this.stickerImage = itemView.findViewById(R.id.imageView_sticker);
+            this.stickerLayout = itemView.findViewById(R.id.stickerLayout);
 //            this.totalUsed = itemView.findViewById(R.id.textView7);
             this.onStickerListener = onStickerListener;
             itemView.setOnClickListener(this);
         }
         @Override
         public void onClick(View v) {
-            onStickerListener.onStickerClick(getAdapterPosition());
+            int position = getAdapterPosition();
+            if (mCheckedPosition == position) {
+                stickerLayout.setBackgroundColor(Color.WHITE);
+                mCheckedPosition = -1;
+            } else if (mCheckedPosition == -1) {
+                mCheckedPosition = position;
+                stickerLayout.setBackgroundColor(Color.CYAN);
+                onStickerListener.onStickerClick(position);
+                notifyDataSetChanged();
+            }
         }
     }
 }
