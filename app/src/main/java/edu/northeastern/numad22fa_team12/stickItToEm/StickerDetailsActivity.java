@@ -68,7 +68,7 @@ public class StickerDetailsActivity extends AppCompatActivity {
                     if (!task.isSuccessful()) {
                         Log.e(TAG, "Error getting data", task.getException());
                     } else {
-                        Log.d(TAG,"firebase userAuth.getUid()" + String.valueOf(auth.getUid()));
+                        Log.d(TAG, "firebase userAuth.getUid()" + String.valueOf(auth.getUid()));
                         User user = task.getResult().getValue(User.class);
                         if (user != null) {
                             Log.d(TAG, "onComplete: user name" + user.getUserName());
@@ -80,54 +80,56 @@ public class StickerDetailsActivity extends AppCompatActivity {
                 }
             });
 
-            ref.child("sentStickerList").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            receivedRecyclerView.setLayoutManager(receiveLM);
+            sentRecyclerView.setLayoutManager(sentLM);
+            receiveAdapter = new StickerDetailAdapter(stickerReceivedList, this, userName, false);
+            sentAdapter = new StickerDetailAdapter(stickerSentList, this, userName, true);
+
+            receivedRecyclerView.setAdapter(receiveAdapter);
+            sentRecyclerView.setAdapter(sentAdapter);
+
+            Log.i(TAG, "finished create rv");
+
+            ref.child("sentStickerList").addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (!task.isSuccessful()) {
-                        Log.e(TAG, "sentStickerList Error getting data", task.getException());
-                    } else {
-                        for (DataSnapshot d : task.getResult().getChildren()) {
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    stickerSentList.clear();
+                    for (DataSnapshot d : snapshot.getChildren()) {
+                        if (d != null) {
                             Sticker stk = d.getValue(Sticker.class);
                             stickerSentList.add(stk);
                             Log.e(TAG, "sentStickerList sticker added: " + stk.toString());
                         }
                     }
+                    sentAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
                 }
             });
 
-            ref.child("receivedStickerList").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            ref.child("receivedStickerList").addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (!task.isSuccessful()) {
-                        Log.e(TAG, "receivedStickerList Error getting data", task.getException());
-                    } else {
-                        for (DataSnapshot d : task.getResult().getChildren()) {
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    stickerReceivedList.clear();
+                    for (DataSnapshot d : snapshot.getChildren()) {
+                        if (d != null) {
                             Sticker stk = d.getValue(Sticker.class);
                             stickerReceivedList.add(stk);
                             Log.e(TAG, "receivedStickerList sticker added: " + stk.toString());
                         }
                     }
+                    receiveAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
                 }
             });
-
         }
-//        createRecyclerView(stickerSentList, stickerReceivedList, userName);
-        Log.i(TAG, "send to create rv");
-
-
-        receiveAdapter = new StickerDetailAdapter(stickerReceivedList, this, userName, false);
-        sentAdapter = new StickerDetailAdapter(stickerSentList, this, userName, true);
-
-        receiveAdapter.notifyDataSetChanged();
-        sentAdapter.notifyDataSetChanged();
-
-        receivedRecyclerView.setAdapter(receiveAdapter);
-        sentRecyclerView.setAdapter(sentAdapter);
-
-        receivedRecyclerView.setLayoutManager(receiveLM);
-        sentRecyclerView.setLayoutManager(sentLM);
-        Log.i(TAG, "finished create rv");
-
     }
 
 }
