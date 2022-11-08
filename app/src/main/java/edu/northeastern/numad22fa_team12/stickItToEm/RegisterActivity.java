@@ -148,7 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if(task.isSuccessful()) {
                                 // user created
                                 Log.e(TAG, "user created, email: " + email);
-                                User newUser = new User(email, name, FCM_REGISTRATION_TOKEN);
+                                User newUser = new User(email, name, FCM_REGISTRATION_TOKEN, myAuth.getUid());
                                 myRef.child(myAuth.getUid()).setValue(newUser);
                                 Intent intent = new Intent(RegisterActivity.this, StickItToEmActivity.class);
                                 Bundle b = new Bundle();
