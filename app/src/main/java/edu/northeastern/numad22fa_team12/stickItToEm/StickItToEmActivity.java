@@ -111,29 +111,6 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         send = findViewById(R.id.sendBtn);
         userInfoBtn = findViewById(R.id.userinfoBtn);
 
-        userInfoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                userRef.child(Objects.requireNonNull(userAuth.getUid())).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String numberOfStickersSent, numberOfStickersReceived;
-                        numberOfStickersSent = snapshot.child("numberOfStickersSent").getValue().toString();
-                        numberOfStickersReceived = snapshot.child("numberOfStickersReceived").getValue().toString();
-
-                        Toast.makeText(StickItToEmActivity.this,
-                                "Total sent: " + numberOfStickersSent +
-                                "\nTotal received: " + numberOfStickersReceived,
-                                Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-        });
     }
 
     public void retrieveRegistrationToken() {
@@ -334,7 +311,9 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
             case R.id.sendBtn:
                 sendMessage();
                 break;
-
+            case R.id.userinfoBtn:
+                startActivity(new Intent(StickItToEmActivity.this, StickerDetailsActivity.class));
+                break;
         }
     }
 
