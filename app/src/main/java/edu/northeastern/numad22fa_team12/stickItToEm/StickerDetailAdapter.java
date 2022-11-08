@@ -3,6 +3,7 @@ package edu.northeastern.numad22fa_team12.stickItToEm;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class StickerDetailAdapter extends RecyclerView.Adapter<StickerDetailView
     @NonNull
     @Override
     public StickerDetailViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new StickerDetailViewHolder(LayoutInflater.from(context).inflate(R.layout.item_product, parent, false));
+        return new StickerDetailViewHolder(LayoutInflater.from(context).inflate(R.layout.sticker_detail_item, parent, false));
     }
 
     @Override
@@ -50,6 +51,7 @@ public class StickerDetailAdapter extends RecyclerView.Adapter<StickerDetailView
             holder.sentInfo.setText("Sent by " + stickerList.get(position).getSentByUser());
         }
         holder.dateTime.setText(stickerList.get(position).getDateAndTime());
+
     }
 
     @Override

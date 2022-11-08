@@ -1,5 +1,7 @@
 package edu.northeastern.numad22fa_team12.model;
 
+import androidx.annotation.NonNull;
+
 public class Sticker {
 
     private int stickerID;
@@ -38,4 +40,9 @@ public class Sticker {
         return this.dateAndTime;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "id: " + stickerID + " time: " + dateAndTime;
+    }
 }
