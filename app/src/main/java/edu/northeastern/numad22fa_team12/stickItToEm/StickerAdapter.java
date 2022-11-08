@@ -34,7 +34,6 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
         this.context = context;
         this.stickersLocations = stickersLocations;
         this.onStickerListener = onStickerListener;
-
         this.usedRecord = usedRecord;
     }
 
@@ -49,7 +48,8 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
     @Override
     public void onBindViewHolder(@NonNull StickerViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.stickerImage.setImageResource(stickersLocations.get(position));
-
+        String output = "Total sent: " + usedRecord.get(position);
+        holder.totalUsed.setText(output);
     }
 
     @Override
@@ -64,13 +64,13 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
     public class StickerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView stickerImage;
         public LinearLayout stickerLayout;
-//        public TextView totalUsed;
+        public TextView totalUsed;
         OnStickerListener onStickerListener;
         public StickerViewHolder(@NonNull View itemView, OnStickerListener onStickerListener) {
             super(itemView);
             this.stickerImage = itemView.findViewById(R.id.imageView_sticker);
             this.stickerLayout = itemView.findViewById(R.id.stickerLayout);
-//            this.totalUsed = itemView.findViewById(R.id.textView7);
+            this.totalUsed = itemView.findViewById(R.id.textView_numSent);
             this.onStickerListener = onStickerListener;
             itemView.setOnClickListener(this);
         }

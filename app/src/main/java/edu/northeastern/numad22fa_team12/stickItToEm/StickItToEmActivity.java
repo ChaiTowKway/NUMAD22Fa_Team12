@@ -55,6 +55,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     private HashSet<String> userListSet;
     private HashMap<Integer, Integer> stickerListMap;
     private List<Integer> stickerList;
+    private List<Integer> usedRecord;
     private int stickerSelected;
     private String imageSelected, userSelectedUID, userSelected, currUser;
     private Button send, userInfoBtn;
@@ -62,7 +63,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     private String userName;
     private String userEmail;
     private String userUID;
-    private List<Integer> usedRecord = new StickerHistory().getUsedRecordList();
+//    private List<Integer> usedRecord = new StickerHistory().getUsedRecordList();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -76,16 +77,6 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         stickerRef = database.getReference().child("stickers");
         userUID = userAuth.getUid();
         getCurrUserInfo();
-
-        stickerList = new ArrayList<>();
-        stickerList.add(R.drawable.cat);
-        stickerList.add(R.drawable.dog);
-        stickerList.add(R.drawable.duck);
-        stickerList.add(R.drawable.hedgehog);
-        stickerList.add(R.drawable.koala);
-        stickerList.add(R.drawable.pig);
-        stickerList.add(R.drawable.panda);
-        stickerList.add(R.drawable.rooster);
 
         stickerListMap = new HashMap<>();
         stickerListMap.put(R.drawable.cat, 0);
@@ -150,11 +141,15 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
         stickerRecyclerView = findViewById(R.id.RecycleView_Stickers);
         stickerLM = new LinearLayoutManager(this);
         stickerRecyclerView.setLayoutManager(stickerLM);
+        stickerList = new ArrayList<>();
+        usedRecord = new ArrayList<>();
         stickerAdapter = new StickerAdapter(this, stickerList , this,this.usedRecord);
 
         userRef.child(userUID).child("sentHistoryRecord").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                stickerList.clear();
+                usedRecord.clear();
                 for (DataSnapshot d : snapshot.getChildren()) {
                     if (d != null) {
                         String id = d.getKey();
@@ -165,7 +160,9 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
                         }
                         if (stickerListMap.containsKey(Integer.parseInt(id))) {
                             stickerListMap.put(Integer.parseInt(id), num);
-                            Log.i(TAG, "onDataChange: d" + id);
+                            stickerList.add(Integer.parseInt(id));
+                            usedRecord.add(num);
+                            Log.i(TAG, "onDataChange: d " + id + " " + num.toString());
                         }
                     }
                 }
