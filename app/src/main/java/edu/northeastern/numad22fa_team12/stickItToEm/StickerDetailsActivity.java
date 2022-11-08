@@ -50,7 +50,7 @@ public class StickerDetailsActivity extends AppCompatActivity {
         stickerReceivedList = new ArrayList<>();
 
         if (auth.getUid() != null) {
-            ref = database.getReference().child(auth.getUid());
+            ref = database.getReference("users").child(auth.getUid());
             ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
