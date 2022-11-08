@@ -83,7 +83,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 mCheckedPosition = position;
                 userLayout.setBackgroundColor(Color.CYAN);
                 onUserListener.onUserClick(getAdapterPosition());
-                notifyDataSetChanged();
+//                notifyDataSetChanged();
             }
         }
     }

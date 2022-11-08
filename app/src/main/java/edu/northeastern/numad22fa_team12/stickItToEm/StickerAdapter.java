@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +23,14 @@ import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.model.Sticker;
 
 public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerViewHolder> {
+
     private static final String TAG = "StickerAdapter";
     private final Context context;
 //    private final List<Sticker> stickersLocations;
     private final List<Integer> stickersLocations;
     private List<Integer> usedRecord;
     private OnStickerListener onStickerListener;
-    private int mCheckedPosition = -1;
+    private static int mCheckedPosition = -1;
 
     public StickerAdapter(Context context, List<Integer> stickersLocations, OnStickerListener onStickerListener, List<Integer> usedRecord) {
         this.context = context;
@@ -76,6 +78,7 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
         }
         @Override
         public void onClick(View v) {
+            Log.d(TAG, "mCheckedPosition: " + mCheckedPosition);
             int position = getAdapterPosition();
             if (mCheckedPosition == position) {
                 stickerLayout.setBackgroundColor(Color.WHITE);
@@ -83,8 +86,7 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
             } else if (mCheckedPosition == -1) {
                 mCheckedPosition = position;
                 stickerLayout.setBackgroundColor(Color.CYAN);
-                onStickerListener.onStickerClick(position);
-                notifyDataSetChanged();
+                onStickerListener.onStickerClick(getAdapterPosition());
             }
         }
     }
