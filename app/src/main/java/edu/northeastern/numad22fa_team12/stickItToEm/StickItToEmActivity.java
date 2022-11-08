@@ -1,7 +1,15 @@
 package edu.northeastern.numad22fa_team12.stickItToEm;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,6 +74,9 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     private String userName;
     private String userEmail;
     private String userUID;
+
+    private final  int NOTIFICATION_UNIQUE_ID = 7;
+    private static int notificationGeneration = 1;
 //    private List<Integer> usedRecord = new StickerHistory().getUsedRecordList();
 
     @SuppressLint("MissingInflatedId")
@@ -72,6 +84,8 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stick_it_to_em);
+
+        createNotificationChannel();
 
         database = FirebaseDatabase.getInstance();
         userAuth = FirebaseAuth.getInstance();
@@ -114,6 +128,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
                     Log.i(TAG, "sticker received " + addedSticker.getStickerID());
                     String sendByUser = addedSticker.getSentByUser();
                     int stickerId = addedSticker.getStickerID();
+                    sendNotification(stickerId, sendByUser);
                 }
             }
 
@@ -348,5 +363,45 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
                 }
             }
         });
+    }
+
+    public void createNotificationChannel() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Notification Name";
+//            String description = getString(R.string.channel_description);
+            String description = "Description";
+            int importannce = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("Sticker_Channel", name, importannce);
+            channel.setDescription(description);
+            channel.enableLights(true);
+            channel.setLightColor(Color.RED);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    public void sendNotification(Integer stickerID, String sentByUser){
+
+
+        Intent intent = new Intent(this, StickItToEmActivity.class);
+
+        PendingIntent readIntent = PendingIntent.getActivity(this, (int)System.currentTimeMillis(), intent, PendingIntent.FLAG_MUTABLE);
+
+        String channelID = "Sticker_Channel";
+
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), stickerID);
+        Notification noti = new NotificationCompat.Builder(this, channelID)
+                .setContentTitle("New message" + Integer.toString(notificationGeneration++) )
+                .setContentText("From " + sentByUser).setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setTicker("Ticker text")
+                .setLargeIcon(bm)
+
+                .addAction(R.drawable.ic_launcher_foreground, "Read", readIntent)
+                .setContentIntent(readIntent).build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        noti.flags |= Notification.FLAG_AUTO_CANCEL;
+        notificationManager.notify(NOTIFICATION_UNIQUE_ID + notificationGeneration, noti);
     }
 }
