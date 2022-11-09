@@ -76,6 +76,7 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     private String userEmail;
     private String userUID;
     private Parcelable stickerLMState, userLMState;
+    private Sticker lastAddedSticker;
 
     private final  int NOTIFICATION_UNIQUE_ID = 7;
     private static int notificationGeneration = 1;
@@ -132,10 +133,11 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Sticker addedSticker = snapshot.getValue(Sticker.class);
-                if (addedSticker != null) {
+                if (addedSticker != null && addedSticker != lastAddedSticker) {
                     Log.i(TAG, "sticker received " + addedSticker.getStickerID());
                     String sendByUser = addedSticker.getSentByUser();
                     int stickerId = addedSticker.getStickerID();
+                    lastAddedSticker = addedSticker;
                     sendNotification(stickerId, sendByUser);
                 }
             }

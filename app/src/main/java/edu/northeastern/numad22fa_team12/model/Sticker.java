@@ -1,6 +1,7 @@
 package edu.northeastern.numad22fa_team12.model;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class Sticker {
 
@@ -44,5 +45,15 @@ public class Sticker {
     @Override
     public String toString() {
         return "id: " + stickerID + " time: " + dateAndTime;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (!(obj instanceof Sticker)) return false;
+        Sticker other = (Sticker) obj;
+        return other.getStickerID() == this.getStickerID()
+                && other.getSentByUser() == this.getSentByUser()
+                && other.getReceivedByUser() == this.getReceivedByUser()
+                && other.getDateAndTime() == this.getDateAndTime();
     }
 }
