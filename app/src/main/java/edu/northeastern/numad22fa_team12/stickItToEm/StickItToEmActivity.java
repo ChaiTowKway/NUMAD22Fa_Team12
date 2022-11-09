@@ -111,6 +111,12 @@ public class StickItToEmActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         FirebaseUser curUser = userAuth.getCurrentUser();

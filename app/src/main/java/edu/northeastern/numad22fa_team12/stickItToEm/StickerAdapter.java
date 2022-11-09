@@ -31,13 +31,14 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
     private final List<Integer> stickersLocations;
     private List<Integer> usedRecord;
     private OnStickerListener onStickerListener;
-    private static int mCheckedPosition = -1;
+    private int mCheckedPosition;
 
     public StickerAdapter(Context context, List<Integer> stickersLocations, OnStickerListener onStickerListener, List<Integer> usedRecord) {
         this.context = context;
         this.stickersLocations = stickersLocations;
         this.onStickerListener = onStickerListener;
         this.usedRecord = usedRecord;
+        mCheckedPosition = -1;
     }
 
     @NonNull

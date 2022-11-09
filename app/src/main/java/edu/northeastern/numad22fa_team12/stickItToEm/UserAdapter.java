@@ -24,12 +24,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private final Context context;
     private final List<User>  userList;
     OnUserListener onUserListener;
-    private int mCheckedPosition = -1;
+    private int mCheckedPosition;
 
     public UserAdapter(Context context, List<User> userList, OnUserListener onUserListener) {
         this.context = context;
         this.userList = userList;
         this.onUserListener = onUserListener;
+        mCheckedPosition = -1;
     }
 
     @NonNull
