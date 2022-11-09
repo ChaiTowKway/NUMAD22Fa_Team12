@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/userNameTx"
-            android:hint="UserName (letters/numbers, for register only)" />
+            android:hint="UserName (e.g. abc. For register only)" />
 
         <Button
             android:layout_width="match_parent"
@@ -65,7 +65,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Enter email to log in, do not need password!"/>
+            android:text="Enter email to log in, do not need password! \n
+            Only enter UserName when register!\n
+            Do not put UserName for log in!"/>
     </LinearLayout>
 
 

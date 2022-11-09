@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -97,6 +98,8 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.StickerV
                 mCheckedPosition = position;
                 stickerLayout.setBackgroundColor(Color.CYAN);
                 onStickerListener.onStickerClick(getAdapterPosition());
+            } else {
+                Toast.makeText(v.getContext(), "Need to first unselect current choice!", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -84,6 +85,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 userLayout.setBackgroundColor(Color.CYAN);
                 onUserListener.onUserClick(getAdapterPosition());
 //                notifyDataSetChanged();
+            } else {
+                Toast.makeText(v.getContext(), "Need to first unselect current choice!", Toast.LENGTH_SHORT).show();
             }
         }
     }
