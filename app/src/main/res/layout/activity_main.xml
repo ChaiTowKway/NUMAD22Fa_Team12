@@ -14,10 +14,10 @@
         android:text="Web Service"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.44" />
+        app:layout_constraintVertical_bias=".5" />
 
     <TextView
         android:id="@+id/team_name"
@@ -26,11 +26,12 @@
         android:text="Team 12"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button_web_service"
+        app:layout_constraintBottom_toTopOf="@+id/button_OutfitToday"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.864" />
+        app:layout_constraintVertical_bias="0.9" />
 
     <Button
         android:id="@+id/button_StickItToEm"
@@ -42,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_web_service"
-        app:layout_constraintVertical_bias="0.071" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <Button
         android:id="@+id/button_About"
@@ -52,8 +53,20 @@
         android:text="About"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_StickItToEm"
-        app:layout_constraintVertical_bias="0.087" />
+        app:layout_constraintVertical_bias=".09" />
+
+    <Button
+        android:id="@+id/button_OutfitToday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OutfitToday"
+        app:layout_constraintBottom_toTopOf="@+id/button_web_service"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".9" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,14 +17,24 @@
         android:theme="@style/Theme.NUMAD22Fa_Team12"
         tools:targetApi="31">
         <activity
+            android:name=".OutfitToday"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".stickItToEm.StickItToEmActivity"
             android:exported="false" />
-        <activity android:name=".stickItToEm.RegisterActivity"
-            android:exported="false"/>
-        <activity android:name=".stickItToEm.NotificationActivity"
-            android:exported="false"/>
-        <activity android:name=".stickItToEm.StickerDetailsActivity"
-            android:exported="false"/>
+        <activity
+            android:name=".stickItToEm.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".stickItToEm.NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".stickItToEm.StickerDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".AboutActivity"
             android:exported="false" />
