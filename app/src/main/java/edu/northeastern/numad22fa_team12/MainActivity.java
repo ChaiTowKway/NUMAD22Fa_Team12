@@ -8,7 +8,6 @@ import android.view.View;
 
 import edu.northeastern.numad22fa_team12.outfitToday.OutfitToday;
 import edu.northeastern.numad22fa_team12.stickItToEm.RegisterActivity;
-import edu.northeastern.numad22fa_team12.stickItToEm.StickItToEmActivity;
 import edu.northeastern.numad22fa_team12.webservice.WebServiceActivity;
 
 public class  MainActivity extends AppCompatActivity implements View.OnClickListener{

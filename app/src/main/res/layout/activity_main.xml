@@ -62,6 +62,7 @@
         android:id="@+id/button_OutfitToday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClick"
         android:text="OutfitToday"
         app:layout_constraintBottom_toTopOf="@+id/button_web_service"
         app:layout_constraintEnd_toEndOf="parent"
