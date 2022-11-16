@@ -8,11 +8,17 @@ public class UserInfo {
     private String location;
 
     public UserInfo() {
-        this.userName = "Default";
-        this.email = "Default@gmail.com";
+        this.userName = "";
+        this.email = "";
         this.UID = "";
-        this.contactNumber = "1-xxx-xxx-xxx";
+        this.contactNumber = "xxx-xxx-xxx";
         this.location = "";
+    }
+
+    public UserInfo(String userName, String email, String UID) {
+        this.userName = userName;
+        this.email= email;
+        this.UID = UID;
     }
 
     public UserInfo(String userName, String email, String UID, String contactNumber, String location) {

@@ -9,15 +9,15 @@ public class OutfitTodayUser {
     private UserInfo userInfo;
     private CategoryList categoryList;
     private HashMap<String, Item> wardrobe;
-    private HashMap<String, Friend> friends;
+//    private HashMap<String, Friend> friends;
 
     public OutfitTodayUser() {
         this.userInfo = new UserInfo();
         this.categoryList = new CategoryList();
         this.wardrobe = new HashMap<>();
-        this.friends = new HashMap<>();
+//        this.friends = new HashMap<>();
         this.wardrobe.put("url", new Item());
-        this.friends.put("User2", new Friend());
+//        this.friends.put("User2", new Friend());
     }
 
     public UserInfo getUserInfo() {
@@ -32,8 +32,8 @@ public class OutfitTodayUser {
         return this.wardrobe;
     }
 
-    public HashMap<String, Friend> getFriends() {
-        return this.friends;
-    }
+//    public HashMap<String, Friend> getFriends() {
+//        return this.friends;
+//    }
 
 }

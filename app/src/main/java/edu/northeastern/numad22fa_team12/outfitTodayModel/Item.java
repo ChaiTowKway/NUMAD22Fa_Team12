@@ -5,22 +5,19 @@ public class Item {
     private String occasion;
     private String category;
     private String imageUrl;
-    private boolean openForSwap;
 
     public Item() {
         this.season = "winter";
         this.occasion = "work";
         this.category = "tops";
         this.imageUrl = "url";
-        this.openForSwap = false;
     }
 
-    public Item(String season, String occasion, String category, String imageUrl, boolean openForSwap) {
+    public Item(String season, String occasion, String category, String imageUrl) {
         this.season = season;
         this.occasion = occasion;
         this.category = category;
         this.imageUrl = imageUrl;
-        this.openForSwap = openForSwap;
     }
 
     public String getSeason() {
@@ -37,10 +34,6 @@ public class Item {
 
     public String getImageUrl() {
         return this.imageUrl;
-    }
-
-    public boolean getOpenForSway() {
-        return this.openForSwap;
     }
 
 }
