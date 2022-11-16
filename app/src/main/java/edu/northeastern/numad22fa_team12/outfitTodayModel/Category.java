@@ -17,4 +17,12 @@ public class Category {
         return this.occasion;
     }
 
+    public void setSeason(Season season) {
+        this.season = season;
+    }
+
+    public void setOccasion(Occasion occasion) {
+        this.occasion = occasion;
+    }
+
 }
