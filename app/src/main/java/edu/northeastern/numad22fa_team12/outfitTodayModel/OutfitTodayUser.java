@@ -36,4 +36,16 @@ public class OutfitTodayUser {
 //        return this.friends;
 //    }
 
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    public void setCategoryList(CategoryList categoryList) {
+        this.categoryList = categoryList;
+    }
+
+    public void setWardrobe(HashMap<String, Item> wardrobe) {
+        this.wardrobe = wardrobe;
+    }
+
 }
