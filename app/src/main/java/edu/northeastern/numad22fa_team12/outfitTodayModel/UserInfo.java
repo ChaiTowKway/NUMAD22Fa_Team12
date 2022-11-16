@@ -7,6 +7,7 @@ public class UserInfo {
     private String contactNumber;
     private String location;
     private int numOfCheckInDates;
+    private String userProfileImageUrl;
 
     public UserInfo() {
         this.userName = "";
@@ -44,6 +45,18 @@ public class UserInfo {
         this.numOfCheckInDates = 0;
     }
 
+
+    public UserInfo(String userName, String email, String UID, String contactNumber,
+                    String location, String userProfileImageUrl) {
+        this.userName = userName;
+        this.email= email;
+        this.UID = UID;
+        this.contactNumber = contactNumber;
+        this.location = location;
+        this.numOfCheckInDates = 0;
+        this.userProfileImageUrl = userProfileImageUrl;
+    }
+
     public String getUserName() {
         return this.userName;
     }
@@ -68,6 +81,10 @@ public class UserInfo {
         return this.numOfCheckInDates;
     }
 
+    public String getUserProfileImageUrl() {
+        return this.userProfileImageUrl;
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -90,5 +107,9 @@ public class UserInfo {
 
     public void setNumOfCheckInDates(int numOfCheckInDates) {
         this.numOfCheckInDates = numOfCheckInDates;
+    }
+
+    public void setUserProfileImageUrl(String userProfileImageUrl) {
+        this.userProfileImageUrl = userProfileImageUrl;
     }
 }
