@@ -14,12 +14,16 @@ public class UserInfo {
         this.UID = "";
         this.contactNumber = "xxx-xxx-xxx";
         this.location = "";
+        this.numOfCheckInDates = 0;
     }
 
     public UserInfo(String userName, String email, String UID) {
         this.userName = userName;
         this.email= email;
         this.UID = UID;
+        this.contactNumber = "xxx-xxx-xxx";
+        this.location = "";
+        this.numOfCheckInDates = 0;
     }
 
     public UserInfo(String userName, String email, String UID, String contactNumber) {
@@ -27,6 +31,8 @@ public class UserInfo {
         this.email= email;
         this.UID = UID;
         this.contactNumber = contactNumber;
+        this.location = "";
+        this.numOfCheckInDates = 0;
     }
 
     public UserInfo(String userName, String email, String UID, String contactNumber, String location) {
@@ -35,6 +41,7 @@ public class UserInfo {
         this.UID = UID;
         this.contactNumber = contactNumber;
         this.location = location;
+        this.numOfCheckInDates = 0;
     }
 
     public String getUserName() {
