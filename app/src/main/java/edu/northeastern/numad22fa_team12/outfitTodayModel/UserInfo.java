@@ -6,6 +6,7 @@ public class UserInfo {
     private String UID;
     private String contactNumber;
     private String location;
+    private int numOfCheckInDates;
 
     public UserInfo() {
         this.userName = "";
@@ -19,6 +20,13 @@ public class UserInfo {
         this.userName = userName;
         this.email= email;
         this.UID = UID;
+    }
+
+    public UserInfo(String userName, String email, String UID, String contactNumber) {
+        this.userName = userName;
+        this.email= email;
+        this.UID = UID;
+        this.contactNumber = contactNumber;
     }
 
     public UserInfo(String userName, String email, String UID, String contactNumber, String location) {
@@ -49,6 +57,10 @@ public class UserInfo {
         return this.location;
     }
 
+    public int getNumOfCheckInDates() {
+        return this.numOfCheckInDates;
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -67,5 +79,9 @@ public class UserInfo {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public void setNumOfCheckInDates(int numOfCheckInDates) {
+        this.numOfCheckInDates = numOfCheckInDates;
     }
 }
