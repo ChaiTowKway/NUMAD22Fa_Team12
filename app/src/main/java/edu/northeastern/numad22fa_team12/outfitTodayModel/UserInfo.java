@@ -16,6 +16,7 @@ public class UserInfo {
         this.contactNumber = "xxx-xxx-xxx";
         this.location = "";
         this.numOfCheckInDates = 0;
+        this.userProfileImageUrl = "";
     }
 
     public UserInfo(String userName, String email, String UID) {
@@ -25,6 +26,7 @@ public class UserInfo {
         this.contactNumber = "xxx-xxx-xxx";
         this.location = "";
         this.numOfCheckInDates = 0;
+        this.userProfileImageUrl = "";
     }
 
     public UserInfo(String userName, String email, String UID, String contactNumber) {
@@ -34,6 +36,7 @@ public class UserInfo {
         this.contactNumber = contactNumber;
         this.location = "";
         this.numOfCheckInDates = 0;
+        this.userProfileImageUrl = "";
     }
 
     public UserInfo(String userName, String email, String UID, String contactNumber, String location) {
@@ -43,6 +46,7 @@ public class UserInfo {
         this.contactNumber = contactNumber;
         this.location = location;
         this.numOfCheckInDates = 0;
+        this.userProfileImageUrl = "";
     }
 
 
