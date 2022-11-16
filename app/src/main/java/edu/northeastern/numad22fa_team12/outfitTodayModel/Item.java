@@ -36,4 +36,20 @@ public class Item {
         return this.imageUrl;
     }
 
+    public void setSeason(String season) {
+        this.season = season;
+    }
+
+    public void setOccasion(String occasion) {
+        this.occasion = occasion;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
 }
