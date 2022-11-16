@@ -24,4 +24,16 @@ public class CategoryList {
         return this.shoes;
     }
 
+    public void setTops(Category tops) {
+        this.tops = tops;
+    }
+
+    public void setBottoms(Category bottoms) {
+        this.bottoms = bottoms;
+    }
+
+    public void setShoes(Category shoes) {
+        this.shoes = shoes;
+    }
+
 }
