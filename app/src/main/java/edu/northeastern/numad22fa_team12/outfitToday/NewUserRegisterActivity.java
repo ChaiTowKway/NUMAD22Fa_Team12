@@ -43,7 +43,7 @@ public class NewUserRegisterActivity extends AppCompatActivity implements View.O
         registerBtn = findViewById(R.id.button_createNewAccount);
         signinBtn = findViewById(R.id.button_signIn);
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("testing");
+        myRef = database.getReference("OutfitTodayUsers");
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
