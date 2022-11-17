@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-messaging:23.0.2'
     implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-auth'
 
     // retrofit dependencies
     implementation 'com.squareup.retrofit2:retrofit:2.2.0'
