@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,7 +25,7 @@ import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.OutfitTodayUser;
 
 public class NewUserRegisterActivity extends AppCompatActivity implements View.OnClickListener{
-
+    private static final String TAG = "NewUserRegisterActivity";
     private static final String NAME_REGEX = "[a-zA-Z0-9]+",
             EMAIL_REGEX = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+", DEFAULT_PW = "1234567";
     private EditText userEmail, userName;
@@ -44,6 +46,17 @@ public class NewUserRegisterActivity extends AppCompatActivity implements View.O
         myRef = database.getReference("OutfitTodayUsers");
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            // User is signed in
+            Intent i = new Intent(NewUserRegisterActivity.this, OutfitToday.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+        } else {
+            // User is signed out
+            Log.d(TAG, "onAuthStateChanged:signed_out");
+        }
     }
 
     private void createNewAccount() {
@@ -64,6 +77,8 @@ public class NewUserRegisterActivity extends AppCompatActivity implements View.O
                     String reformatedEmail = email.replace(".", "-");
                     OutfitTodayUser newUser = new OutfitTodayUser();
                     myRef.child(reformatedEmail).setValue(newUser);
+                    Toast.makeText(NewUserRegisterActivity.this, "New user created successfully!",
+                            Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(NewUserRegisterActivity.this, OutfitToday.class);
                     Bundle b = new Bundle();
                     b.putString("userEmail",email);
@@ -94,6 +109,7 @@ public class NewUserRegisterActivity extends AppCompatActivity implements View.O
 
     public void signIn() {
         String email = userEmail.getText().toString().trim();
+
         mAuth.signInWithEmailAndPassword(email, DEFAULT_PW).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
