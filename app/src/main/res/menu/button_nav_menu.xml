@@ -9,5 +9,5 @@
         android:id="@+id/add"/>
     <item android:title="Profile"
         android:icon="@drawable/ic_baseline_person_24"
-        android:id="@+id/button_myProfile"/>
+        android:id="@+id/myProfile"/>
 </menu>

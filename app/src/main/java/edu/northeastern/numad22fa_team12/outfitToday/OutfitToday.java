@@ -3,6 +3,7 @@ package edu.northeastern.numad22fa_team12.outfitToday;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -20,18 +21,17 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import edu.northeastern.numad22fa_team12.MainActivity;
 import edu.northeastern.numad22fa_team12.R;
+import edu.northeastern.numad22fa_team12.databinding.ActivityOutfitTodayBinding;
 
 
-public class OutfitToday<ActivityMainBinding> extends AppCompatActivity implements View.OnClickListener{
+public class OutfitToday extends AppCompatActivity implements View.OnClickListener{
     private FirebaseDatabase database;
     private DatabaseReference userRef;
     private FirebaseAuth userAuth;
@@ -39,14 +39,33 @@ public class OutfitToday<ActivityMainBinding> extends AppCompatActivity implemen
     private LocationCallback locationCallback;
     private LocationRequest locationRequest;
     private final static int INTERVAL = 5000;
-
-    ActivityMainBinding binding;
+//    ActivityMainBinding binding;
+    ActivityOutfitTodayBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityOutfitTodayBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+//        binding = ActivityMainBinding.inflate(getLayoutInflater());
+//        setContentView(binding.getRoot());
+        replaceFragment(new HomeFragment());
+
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.myProfile:
+                    replaceFragment(new ProfileFragment());
+                    break;
+                case R.id.add:
+                    replaceFragment(new AddFragment());
+                    break;
+                case R.id.home:
+                    replaceFragment(new HomeFragment());
+                    break;
+            }
+            return true;
+        });
+
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference().child("OutfitTodayUsers");
 
@@ -65,6 +84,8 @@ public class OutfitToday<ActivityMainBinding> extends AppCompatActivity implemen
 
         checkPermission();
 
+
+
     }
 
 //    @Override
@@ -77,15 +98,16 @@ public class OutfitToday<ActivityMainBinding> extends AppCompatActivity implemen
 //        }
 //    }
 
+    private void replaceFragment(Fragment fragment) {}
     @Override
     public void onClick(View v) {
         int buttonID = v.getId();
-        switch (buttonID) {
-            case R.id.button_myProfile:
-                startActivity(new Intent(OutfitToday.this, MyProfile.class));
-                break;
-
-        }
+//        switch (buttonID) {
+//            case R.id.myProfile:
+//                startActivity(new Intent(OutfitToday.this, MyProfile.class));
+//                break;
+//
+//        }
     }
 
     @Override
