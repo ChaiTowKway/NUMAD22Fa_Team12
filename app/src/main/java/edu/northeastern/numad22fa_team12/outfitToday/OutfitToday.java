@@ -29,19 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import edu.northeastern.numad22fa_team12.MainActivity;
 import edu.northeastern.numad22fa_team12.R;
-import edu.northeastern.numad22fa_team12.outfitTodayModel.Friend;
-import edu.northeastern.numad22fa_team12.outfitTodayModel.Item;
-import edu.northeastern.numad22fa_team12.outfitTodayModel.OutfitTodayUser;
-import edu.northeastern.numad22fa_team12.stickItToEm.RegisterActivity;
-import edu.northeastern.numad22fa_team12.stickItToEm.StickItToEmActivity;
-import edu.northeastern.numad22fa_team12.webservice.WebServiceActivity;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 public class OutfitToday extends AppCompatActivity implements View.OnClickListener{
     private FirebaseDatabase database;
