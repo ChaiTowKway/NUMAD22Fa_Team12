@@ -31,7 +31,7 @@ import edu.northeastern.numad22fa_team12.MainActivity;
 import edu.northeastern.numad22fa_team12.R;
 
 
-public class OutfitToday extends AppCompatActivity implements View.OnClickListener{
+public class OutfitToday<ActivityMainBinding> extends AppCompatActivity implements View.OnClickListener{
     private FirebaseDatabase database;
     private DatabaseReference userRef;
     private FirebaseAuth userAuth;
@@ -40,11 +40,13 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
     private LocationRequest locationRequest;
     private final static int INTERVAL = 5000;
 
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_outfit_today);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference().child("OutfitTodayUsers");
 
