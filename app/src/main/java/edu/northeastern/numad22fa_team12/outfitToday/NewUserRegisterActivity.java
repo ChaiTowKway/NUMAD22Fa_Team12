@@ -51,6 +51,7 @@ public class NewUserRegisterActivity extends AppCompatActivity implements View.O
         if (user != null) {
             // User is signed in
             Intent i = new Intent(NewUserRegisterActivity.this, OutfitToday.class);
+            Log.e(TAG, user.getEmail());
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         } else {
