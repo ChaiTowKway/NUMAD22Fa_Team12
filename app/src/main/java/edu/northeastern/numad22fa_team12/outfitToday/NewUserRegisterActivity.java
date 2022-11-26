@@ -80,7 +80,7 @@ public class NewUserRegisterActivity extends AppCompatActivity implements View.O
                     myRef.child(reformatedEmail).setValue(newUser);
                     Toast.makeText(NewUserRegisterActivity.this, "New user created successfully!",
                             Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(NewUserRegisterActivity.this, OutfitToday.class);
+                    Intent intent = new Intent(NewUserRegisterActivity.this, UpdateProfile.class);
                     Bundle b = new Bundle();
                     b.putString("userEmail",email);
                     intent.putExtras(b);
