@@ -10,62 +10,76 @@
         android:id="@+id/textView_Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="User Email:"
+        app:layout_constraintBottom_toTopOf="@+id/textView_Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.181"
+        app:layout_constraintHorizontal_bias="0.205"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="131dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.021" />
 
     <TextView
         android:id="@+id/textView_UserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="32dp"
         android:text="gmail.com"
+        app:layout_constraintBottom_toTopOf="@+id/textView_Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.005"
         app:layout_constraintStart_toEndOf="@+id/textView_Email"
-        tools:layout_editor_absoluteY="131dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.471" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Update Your Profile"
-        app:layout_constraintBottom_toTopOf="@+id/textView_Email"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.073" />
 
     <TextView
         android:id="@+id/textView_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="User Name:"
-        app:layout_constraintBottom_toTopOf="@+id/textView_contact"
+        app:layout_constraintBottom_toTopOf="@+id/textView_Location"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.192"
+        app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_Email" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.382" />
 
     <EditText
         android:id="@+id/editText_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="36dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        app:layout_constraintBottom_toTopOf="@+id/textView_Location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView_Name"
-        tools:layout_editor_absoluteY="177dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.384" />
 
     <TextView
         android:id="@+id/textView_contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Contact Number:"
+        app:layout_constraintBottom_toTopOf="@+id/textView_Location"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintHorizontal_bias="0.177"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="252dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_Name"
+        app:layout_constraintVertical_bias="0.316" />
 
     <EditText
         android:id="@+id/editTextPhone"
@@ -74,9 +88,12 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="phone"
+        app:layout_constraintBottom_toTopOf="@+id/textView_Location"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toEndOf="@+id/textView_contact"
-        tools:layout_editor_absoluteY="242dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_Name"
+        app:layout_constraintVertical_bias="0.287" />
 
     <TextView
         android:id="@+id/textView_Location"
@@ -85,10 +102,10 @@
         android:text="Location:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.186"
+        app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_contact"
-        app:layout_constraintVertical_bias="0.115" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.461" />
 
     <EditText
         android:id="@+id/editText_UserLocation"
@@ -97,28 +114,50 @@
         android:layout_marginStart="20dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Location"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView_Location"
-        tools:layout_editor_absoluteY="314dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.466" />
 
     <Button
         android:id="@+id/button_getLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:onClick="onClick"
         android:text="Get Current Location"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.614"
+        app:layout_constraintHorizontal_bias="0.703"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_Location" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_Location"
+        app:layout_constraintVertical_bias="0.081" />
 
     <Button
         android:id="@+id/button_updateProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClick"
         android:text="Update Profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.537"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_getLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/button_getLocation"
+        app:layout_constraintVertical_bias="0.095" />
+
+    <Button
+        android:id="@+id/button_signOutProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Sign Out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_updateProfile"
+        app:layout_constraintVertical_bias="0.185" />
 </androidx.constraintlayout.widget.ConstraintLayout>

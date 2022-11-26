@@ -7,8 +7,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.model.User;
 
-public class UpdateProfile extends AppCompatActivity {
+public class UpdateProfile extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "UpdateProfile";
     private FirebaseDatabase database;
@@ -40,7 +42,7 @@ public class UpdateProfile extends AppCompatActivity {
         setContentView(R.layout.activity_update_profile);
 
         userEmailTV = findViewById(R.id.textView_UserEmail);
-        userNameTV = findViewById(R.id.editText_username);
+        userNameTV = findViewById(R.id.editText_Name);
         contactNumberTV = findViewById(R.id.editTextPhone);
         locationTV = findViewById(R.id.editText_UserLocation);
         getLocation = findViewById(R.id.button_getLocation);
@@ -48,7 +50,7 @@ public class UpdateProfile extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         userAuth = FirebaseAuth.getInstance();
-        userRef = database.getReference().child("OutfitUsers");
+        userRef = database.getReference().child("OutfitTodayUsers");
         if (userAuth.getCurrentUser() != null && userAuth.getCurrentUser().getEmail() != null) {
             userEmail = userAuth.getCurrentUser().getEmail();
             userEmailKey = userAuth.getCurrentUser().getEmail().replace(".", "-");
@@ -68,9 +70,6 @@ public class UpdateProfile extends AppCompatActivity {
                 }
                 else {
                     userEmailTV.setText(userEmail);
-                    userName = userRef.child(userEmailKey).child("UserInfo").child("userName").get().toString();
-                    userNameTV.setText(userName);
-                    Log.d("firebase email", String.valueOf(userAuth.getCurrentUser().getEmail()));
                 }
             }
         });
@@ -80,19 +79,28 @@ public class UpdateProfile extends AppCompatActivity {
         userName = userNameTV.getText().toString();
         contactNumber = contactNumberTV.getText().toString();
         location = locationTV.getText().toString();
-        userRef.child(userEmailKey).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot == null) {
-                    return;
-                }
-                userRef.child(userEmailKey).child("UserInfo").child("userName").setValue(userName);
-                userRef.child(userEmailKey).child("UserInfo").child("contactNumber").setValue(contactNumber);
-                userRef.child(userEmailKey).child("UserInfo").child("location").setValue(location);
-            }
 
+        userRef.child(userEmailKey).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    if (userName == null) {
+                        userName = "";
+                    }
+                    if (contactNumber == null) {
+                        contactNumber = "";
+                    }
+                    if (location == null) {
+                        location = "";
+                    }
+                    userRef.child(userEmailKey).child("userInfo").child("userName").setValue(userName);
+                    userRef.child(userEmailKey).child("userInfo").child("contactNumber").setValue(contactNumber);
+                    userRef.child(userEmailKey).child("userInfo").child("location").setValue(location);
+                }
             }
         });
     }
@@ -102,5 +110,22 @@ public class UpdateProfile extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(UpdateProfile.this, OutfitToday.class);
         startActivity(intent);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        int buttonID = v.getId();
+        switch (buttonID) {
+            case R.id.button_signOutProfile:
+                userAuth.signOut();
+                Toast.makeText(UpdateProfile.this, "Sign out successfully!",
+                        Toast.LENGTH_LONG).show();
+                startActivity(new Intent(UpdateProfile.this, NewUserRegisterActivity.class));
+                break;
+            case R.id.button_updateProfile:
+                updateCurrentUserInfo();
+                break;
+        }
     }
 }

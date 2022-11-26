@@ -28,7 +28,7 @@ public class NewUserRegisterActivity extends AppCompatActivity implements View.O
     private static final String TAG = "NewUserRegisterActivity";
     private static final String NAME_REGEX = "[a-zA-Z0-9]+",
             EMAIL_REGEX = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+", DEFAULT_PW = "1234567";
-    private EditText userEmail, userName;
+    private EditText userEmail;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private FirebaseAuth mAuth;
@@ -39,7 +39,6 @@ public class NewUserRegisterActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user_register);
         userEmail = findViewById(R.id.editText_email);
-        userName = findViewById(R.id.editText_username);
         registerBtn = findViewById(R.id.button_createNewAccount);
         signinBtn = findViewById(R.id.button_signIn);
         database = FirebaseDatabase.getInstance();
@@ -61,10 +60,10 @@ public class NewUserRegisterActivity extends AppCompatActivity implements View.O
     }
 
     private void createNewAccount() {
-        final String name = userName.getText().toString().trim();
+
         final String email = userEmail.getText().toString().trim();
 
-        if(name.length() < 1 || !name.matches(NAME_REGEX) || !email.matches(EMAIL_REGEX)) {
+        if(!email.matches(EMAIL_REGEX)) {
             Toast.makeText(NewUserRegisterActivity.this, "Invalid email or username provided!",
                     Toast.LENGTH_LONG).show();
         }

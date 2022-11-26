@@ -38,14 +38,6 @@
             android:hint="Email (e.g. abc@email.com)"
             android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/editText_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="User Name (e.g. abc)"
-            android:inputType="textPersonName" />
-
         <Button
             android:id="@+id/button_signIn"
             android:layout_width="match_parent"
