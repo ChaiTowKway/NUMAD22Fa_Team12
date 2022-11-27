@@ -10,25 +10,47 @@
 
     <LinearLayout
         android:layout_width="387dp"
-        android:layout_height="535dp"
-        android:layout_gravity="center"
+        android:layout_height="669dp"
+        android:layout_gravity="center|top"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView_user"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:text="Hi"
-            android:textAlignment="center"
-            android:textSize="20sp" />
+            android:layout_height="21dp" />
 
-        <TextView
-            android:id="@+id/textView_stock"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="67dp"
-            android:text="Wardrobe Stock:"
-            android:textAlignment="center"
-            android:textSize="20sp" />
+            android:layout_height="74dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="276dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:text="Hi"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textView_stock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Wardrobe Stock:"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Setting" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,24 +73,23 @@
 
             <Button
                 android:id="@+id/button_myNotification"
-                android:layout_width="140dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:text="Notification"
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <LinearLayout
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="39dp" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="334dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <Button
@@ -90,18 +111,16 @@
                     android:text="Update My Profile" />
 
                 <Button
-                    android:id="@+id/button_setting"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Setting" />
-
-                <Button
                     android:id="@+id/button_logOut"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Log Out" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp" />
             </LinearLayout>
-        </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
 </FrameLayout>
