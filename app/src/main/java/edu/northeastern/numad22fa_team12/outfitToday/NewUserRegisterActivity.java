@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.OutfitTodayUser;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
 
 public class NewUserRegisterActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "NewUserRegisterActivity";
@@ -75,7 +76,10 @@ public class NewUserRegisterActivity extends AppCompatActivity implements View.O
                     // user created
 //                                Log.e(TAG, "user created, email: " + email);
                     String reformatedEmail = email.replace(".", "-");
+                    UserInfo userInfo = new UserInfo();
+                    userInfo.setEmail(email);
                     OutfitTodayUser newUser = new OutfitTodayUser();
+                    newUser.setUserInfo(userInfo);
                     myRef.child(reformatedEmail).setValue(newUser);
                     Toast.makeText(NewUserRegisterActivity.this, "New user created successfully!",
                             Toast.LENGTH_LONG).show();

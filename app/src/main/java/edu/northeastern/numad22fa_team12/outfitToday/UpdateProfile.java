@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.model.User;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
 
 public class UpdateProfile extends AppCompatActivity implements View.OnClickListener {
 
@@ -80,7 +81,7 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
         contactNumber = contactNumberTV.getText().toString();
         location = locationTV.getText().toString();
 
-        userRef.child(userEmailKey).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        userRef.child(userEmailKey).child("userInfo").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
@@ -88,6 +89,7 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                     Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
+                    UserInfo userInfo = task.getResult().getValue(UserInfo.class);
                     if (userName == null) {
                         userName = "";
                     }
@@ -97,9 +99,11 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                     if (location == null) {
                         location = "";
                     }
-                    userRef.child(userEmailKey).child("userInfo").child("userName").setValue(userName);
-                    userRef.child(userEmailKey).child("userInfo").child("contactNumber").setValue(contactNumber);
-                    userRef.child(userEmailKey).child("userInfo").child("location").setValue(location);
+                    userInfo.setUserName(userName);
+                    userInfo.setContactNumber(contactNumber);
+                    userInfo.setLocation(location);
+                    userRef.child(userEmailKey).child("userInfo").setValue(userInfo);
+
                 }
             }
         });
