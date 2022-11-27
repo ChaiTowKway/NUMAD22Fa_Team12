@@ -4,16 +4,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -25,6 +32,23 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.JsonArray;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import edu.northeastern.numad22fa_team12.MainActivity;
 import edu.northeastern.numad22fa_team12.R;
@@ -32,39 +56,47 @@ import edu.northeastern.numad22fa_team12.databinding.ActivityOutfitTodayBinding;
 
 
 public class OutfitToday extends AppCompatActivity implements View.OnClickListener{
+    private static final String TAG = "OutfitTodayActivity";
     private FirebaseDatabase database;
     private DatabaseReference userRef;
     private FirebaseAuth userAuth;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private LocationCallback locationCallback;
     private LocationRequest locationRequest;
-    private final static int INTERVAL = 5000;
+    private String longitude, latitude;
+    private final static int INTERVAL = 50000;
 //    ActivityMainBinding binding;
-    ActivityOutfitTodayBinding binding;
+    private ActivityOutfitTodayBinding binding;
+    private Handler mHandler = new Handler();
+    private ProgressBar progressBar;
+    private HomeFragment homeFragment;
+    private ProfileFragment profileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityOutfitTodayBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-//        binding = ActivityMainBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
-        replaceFragment(new HomeFragment());
+
+        homeFragment = new HomeFragment();
+        profileFragment = new ProfileFragment();
+        replaceFragment(homeFragment);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.myProfile:
-                    replaceFragment(new ProfileFragment());
+                    replaceFragment(profileFragment);
                     break;
                 case R.id.add:
-                    replaceFragment(new AddFragment());
+//                    replaceFragment(new AddFragment());
                     break;
                 case R.id.home:
-                    replaceFragment(new HomeFragment());
+                    replaceFragment(homeFragment);
                     break;
             }
             return true;
         });
+
 
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference().child("OutfitTodayUsers");
@@ -83,9 +115,6 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         checkPermission();
-
-
-
     }
 
 //    @Override
@@ -98,7 +127,13 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
 //        }
 //    }
 
-    private void replaceFragment(Fragment fragment) {}
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.commit();
+    }
+
     @Override
     public void onClick(View v) {
         int buttonID = v.getId();
@@ -142,6 +177,7 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
                 public void onSuccess(Location location) {
                     if (location != null) {
                         getLocationInfo(location);
+                        new fetchWeatherData().start();
                     } else {
                         startLocationUpdates();
                     }
@@ -161,7 +197,6 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
 
     // get the longitude and latitude and pass to weather api
     private void getLocationInfo(Location location){
-        String longitude, latitude;
         longitude = String.valueOf(location.getLongitude());
         latitude = String.valueOf(location.getLatitude());
     };
@@ -182,6 +217,75 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
                 Toast.makeText(OutfitToday.this,
                         "Location access denied", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    class fetchWeatherData extends Thread{
+        String data = "";
+
+        @SuppressLint("DefaultLocale")
+        @Override
+        public void run() {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar = new ProgressBar(OutfitToday.this);
+                    progressBar.setVisibility(View.VISIBLE);
+                }
+            });
+            if (longitude != null && latitude != null) {
+                String urlBasedOnLocation = String.format("https://api.open-meteo.com/v1/forecast?latitude=%s&longitude=%s&hourly=temperature_2m,rain&temperature_unit=fahrenheit", latitude, longitude);
+                Log.d(TAG, "url is: " + urlBasedOnLocation);
+
+                try {
+                    URL url = new URL(urlBasedOnLocation);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        data += line;
+                    }
+
+                    if (!data.isEmpty()){
+                        JSONObject jsonObject = new JSONObject(data).getJSONObject("hourly");
+                        JSONArray temp;
+                        temp = jsonObject.getJSONArray("temperature_2m");
+
+                        List<Double> tempList = new ArrayList<>();
+
+                        for(int i = 0; i < temp.length(); i++) {
+                            tempList.add(temp.getDouble(i));
+                        }
+
+                        Log.d(TAG, "temp list: " + tempList.toString());
+
+                        double maxTemp = Collections.max(tempList), minTemp = Collections.min(tempList);
+                        double avgTemp = 0;
+                        for (double t : tempList){
+                            avgTemp += t;
+                        }
+                        avgTemp = avgTemp / tempList.size();
+                        Log.d(TAG, String.format("maxT: %f, minT: %f, avgT: %f", maxTemp, minTemp, avgTemp));
+//                        homeFragment.updateMinMaxTv(String.format("Min/Max temperature: %f / %f (°F)", minTemp, maxTemp));
+//                        homeFragment.updateAvgTv(String.format("Average temperature: %f (°F)", avgTemp));
+                    }
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
         }
     }
 

@@ -125,6 +125,8 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.button_updateProfile:
                 updateCurrentUserInfo();
+                Intent intent = new Intent(UpdateProfile.this, OutfitToday.class);
+                startActivity(intent);
                 break;
         }
     }
