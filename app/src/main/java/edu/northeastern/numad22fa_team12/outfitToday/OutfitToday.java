@@ -93,7 +93,7 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
                     replaceFragment(profileFragment);
                     break;
                 case R.id.add:
-//                    replaceFragment(new AddFragment());
+                    startActivity(new Intent(OutfitToday.this, AddNewOutfitActivity.class));
                     break;
                 case R.id.home:
                     replaceFragment(homeFragment);
