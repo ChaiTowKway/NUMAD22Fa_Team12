@@ -13,7 +13,7 @@ public class UserInfo {
         this.userName = "";
         this.email = "";
         this.UID = "";
-        this.contactNumber = "xxx-xxx-xxx";
+        this.contactNumber = "";
         this.location = "";
         this.numOfCheckInDates = 0;
         this.userProfileImageUrl = "";
@@ -23,7 +23,7 @@ public class UserInfo {
         this.userName = userName;
         this.email= email;
         this.UID = UID;
-        this.contactNumber = "xxx-xxx-xxx";
+        this.contactNumber = "";
         this.location = "";
         this.numOfCheckInDates = 0;
         this.userProfileImageUrl = "";

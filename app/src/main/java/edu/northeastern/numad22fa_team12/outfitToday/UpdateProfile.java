@@ -35,7 +35,6 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
     private Button getLocation, updateProfile;
     private String userEmail = "",userEmailKey = "", userName = "", contactNumber = "", location = "";
 
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +55,12 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
             userEmail = userAuth.getCurrentUser().getEmail();
             userEmailKey = userAuth.getCurrentUser().getEmail().replace(".", "-");
         }
-
         getCurrUserInfo();
 
     }
 
     public void getCurrUserInfo() {
-        userRef.child(userEmailKey).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        userRef.child(userEmailKey).child("userInfo").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
@@ -70,7 +68,11 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                     Log.e(TAG, "Error getting data", task.getException());
                 }
                 else {
-                    userEmailTV.setText(userEmail);
+                    UserInfo userInfo = task.getResult().getValue(UserInfo.class);
+                    userEmailTV.setText(userInfo.getEmail());
+                    userNameTV.setText(userInfo.getUserName());
+                    contactNumberTV.setText(userInfo.getContactNumber());
+                    locationTV.setText(userInfo.getLocation());
                 }
             }
         });
@@ -129,6 +131,8 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.button_updateProfile:
                 updateCurrentUserInfo();
+                Toast.makeText(UpdateProfile.this, "Profile updated successfully!",
+                        Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(UpdateProfile.this, OutfitToday.class);
                 startActivity(intent);
                 break;

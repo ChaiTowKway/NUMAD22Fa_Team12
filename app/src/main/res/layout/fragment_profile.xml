@@ -32,7 +32,7 @@
                     android:id="@+id/textView_user"
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
-                    android:text="Hi"
+                    android:text="Hi, xxx"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -40,7 +40,7 @@
                     android:id="@+id/textView_stock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Wardrobe Stock:"
+                    android:text="Wardrobe Stock: ###"
                     android:textAlignment="center"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -49,6 +49,7 @@
                 android:id="@+id/button_setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onClick"
                 android:text="Setting" />
         </LinearLayout>
 
@@ -61,6 +62,7 @@
                 android:id="@+id/button_myWardrobe"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:onClick="onClick"
                 android:text="Wardrobe"
                 android:textSize="12sp" />
 
@@ -68,6 +70,7 @@
                 android:id="@+id/button_myOccasions"
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
+                android:onClick="onClick"
                 android:text="Occasions"
                 android:textSize="12sp" />
 
@@ -75,6 +78,7 @@
                 android:id="@+id/button_myNotification"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
+                android:onClick="onClick"
                 android:text="Notification"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -96,24 +100,28 @@
                     android:id="@+id/button_myOutfitSuggestion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="onClick"
                     android:text="My Outfit Suggestions" />
 
                 <Button
                     android:id="@+id/button_nearbyOutfits"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="onClick"
                     android:text="Nearby Outfits" />
 
                 <Button
                     android:id="@+id/button_updateMyProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="onClick"
                     android:text="Update My Profile" />
 
                 <Button
                     android:id="@+id/button_logOut"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="onClick"
                     android:text="Log Out" />
 
                 <Space

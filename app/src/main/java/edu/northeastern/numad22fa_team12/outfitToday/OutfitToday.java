@@ -28,8 +28,11 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.JsonArray;
@@ -53,6 +56,7 @@ import java.util.List;
 import edu.northeastern.numad22fa_team12.MainActivity;
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.databinding.ActivityOutfitTodayBinding;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
 
 
 public class OutfitToday extends AppCompatActivity implements View.OnClickListener{
@@ -71,6 +75,7 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
     private ProgressBar progressBar;
     private HomeFragment homeFragment;
     private ProfileFragment profileFragment;
+    private String userEmail = "",userEmailKey = "", userName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,9 +102,9 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
             return true;
         });
 
-
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference().child("OutfitTodayUsers");
+        userAuth = FirebaseAuth.getInstance();
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         locationCallback = new LocationCallback() {
@@ -115,6 +120,11 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         checkPermission();
+
+        if (userAuth.getCurrentUser() != null && userAuth.getCurrentUser().getEmail() != null) {
+            userEmail = userAuth.getCurrentUser().getEmail();
+            userEmailKey = userAuth.getCurrentUser().getEmail().replace(".", "-");
+        }
     }
 
 //    @Override
@@ -136,13 +146,33 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        Log.d(TAG, "onClick: click my profile");
         int buttonID = v.getId();
-//        switch (buttonID) {
-//            case R.id.myProfile:
-//                startActivity(new Intent(OutfitToday.this, MyProfile.class));
-//                break;
-//
-//        }
+        switch (buttonID) {
+            case R.id.button_setting:
+                break;
+            case R.id.button_myWardrobe:
+                break;
+            case R.id.button_myOccasions:
+                break;
+            case R.id.button_myNotification:
+                break;
+            case R.id.button_myOutfitSuggestion:
+                break;
+            case R.id.button_nearbyOutfits:
+                break;
+            case R.id.button_updateMyProfile:
+                Log.d(TAG, "onClick: update my profile");
+                Intent intent = new Intent(this, UpdateProfile.class);
+                startActivity(intent);
+                break;
+            case R.id.button_logOut:
+                userAuth.signOut();
+                Toast.makeText(OutfitToday.this, "Sign out successfully!",
+                        Toast.LENGTH_LONG).show();
+                startActivity(new Intent(OutfitToday.this, NewUserRegisterActivity.class));
+                break;
+        }
     }
 
     @Override
@@ -288,6 +318,5 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
             });
         }
     }
-
 
 }
