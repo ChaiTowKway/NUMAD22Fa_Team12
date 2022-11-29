@@ -1,4 +1,6 @@
 package edu.northeastern.numad22fa_team12.outfitTodayModel;
+import androidx.annotation.NonNull;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -149,7 +151,7 @@ public class OccasionsList {
         sunday_Night = sunday_Night;
     }
 
-    public void updateOccasion(String time, String occasion) {
+    public void updateOccasion(@NonNull String time, String occasion) {
         switch (time) {
             case "monday_Daytime":
                 setMonday_Daytime(occasion);
@@ -196,17 +198,17 @@ public class OccasionsList {
         }
     }
 
-    public String getOccasion() {
-        String dateOfWeek = getDateOfWeek();
-        String currentTime = getTime();
+    public String checkOccasion() {
+        String dateOfWeek = checkDateOfWeek();
+        String currentTime = checkTime();
         if (!Objects.equals(dateOfWeek, "") && !currentTime.equals("")) {
             String dateAndTime = dateOfWeek + "_" + currentTime;
-            return getOccasionWithDate(dateAndTime);
+            return checkOccasionWithDate(dateAndTime);
         }
         return "No occasion found!";
     }
 
-    private String getOccasionWithDate(String dateAndTime) {
+    private String checkOccasionWithDate(@NonNull String dateAndTime) {
         String occasion = "";
         switch (dateAndTime) {
             case "monday_Daytime":
@@ -255,13 +257,13 @@ public class OccasionsList {
         return occasion;
     }
 
-    private String getDateOfWeek() {
+    private String checkDateOfWeek() {
         LocalDate today = LocalDate.now();
         DayOfWeek dayOfWeek = today.getDayOfWeek();
         return dayOfWeek.toString().toLowerCase();
     }
 
-    private String getTime() {
+    private String checkTime() {
         String time = "";
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);

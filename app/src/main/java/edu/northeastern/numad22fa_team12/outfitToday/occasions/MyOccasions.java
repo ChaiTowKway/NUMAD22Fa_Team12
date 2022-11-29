@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +28,8 @@ import java.util.List;
 
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.model.User;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.OccasionsList;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
 import edu.northeastern.numad22fa_team12.stickItToEm.StickItToEmActivity;
 import edu.northeastern.numad22fa_team12.stickItToEm.StickerAdapter;
 import edu.northeastern.numad22fa_team12.stickItToEm.UserAdapter;
@@ -71,17 +75,18 @@ public class MyOccasions extends AppCompatActivity implements View.OnClickListen
         occasionLM = new LinearLayoutManager(MyOccasions.this);
         occasionRecycleView.setLayoutManager(occasionLM);
 
-        userRef.child(userEmailKey).child("occasions").addValueEventListener(new ValueEventListener() {
+        userRef.child(userEmailKey).child("occasionsList").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dateOfWeekList.clear();
+                occasionsList.clear();
                 for (DataSnapshot d : snapshot.getChildren()) {
                     if (d != null) {
-                        User user = d.getValue(User.class);
-                        if (user == null) {
-                            Log.i(TAG, "user is null!");
+                        if (d.getValue(String.class).equals("")) {
                             continue;
                         }
-
+                        dateOfWeekList.add(d.getKey());
+                        occasionsList.add(d.getValue(String.class));
                     }
                 }
                 occasionAdapter.notifyDataSetChanged();
@@ -91,21 +96,6 @@ public class MyOccasions extends AppCompatActivity implements View.OnClickListen
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        dateOfWeekList.add("Monday - Daytime");
-        dateOfWeekList.add("Tuesday - Night");
-        dateOfWeekList.add("Wednesday");
-        dateOfWeekList.add("Thursday");
-        dateOfWeekList.add("Friday");
-        dateOfWeekList.add("Saturday");
-        dateOfWeekList.add("Sunday");
-        occasionsList.add("Work");
-        occasionsList.add("Casual");
-        occasionsList.add("Sports");
-        occasionsList.add("Formal");
-        occasionsList.add("Work");
-        occasionsList.add("Casual");
-        occasionsList.add("Formal");
-        occasionAdapter.notifyDataSetChanged();
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
@@ -120,6 +110,7 @@ public class MyOccasions extends AppCompatActivity implements View.OnClickListen
                 int position = viewHolder.getAdapterPosition();
                 dateOfWeekList.remove(viewHolder.getAdapterPosition());
                 occasionsList.remove(viewHolder.getAdapterPosition());
+                userRef.child(userEmailKey).child("occasionsList").child(deletedDate).setValue("");
                 occasionAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
 
                 Snackbar.make(occasionRecycleView, deletedDate + " occasion deleted!", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
@@ -127,6 +118,7 @@ public class MyOccasions extends AppCompatActivity implements View.OnClickListen
                     public void onClick(View v) {
                         dateOfWeekList.add(position, deletedDate);
                         occasionsList.add(position, deletedOccasion);
+                        userRef.child(userEmailKey).child("occasionsList").child(deletedDate).setValue(deletedOccasion);
                         occasionAdapter.notifyItemInserted(position);
                     }
                 }).show();
