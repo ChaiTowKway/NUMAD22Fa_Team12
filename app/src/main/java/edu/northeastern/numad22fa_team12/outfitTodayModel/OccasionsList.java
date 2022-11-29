@@ -95,60 +95,60 @@ public class OccasionsList {
         return sunday_Night;
     }
 
-    public void setMonday_Daytime(String monday_Daytime) {
-        monday_Daytime = monday_Daytime;
+    public void setMonday_Daytime(String occasion) {
+        monday_Daytime = occasion;
     }
 
-    public void setMonday_Night(String monday_Night) {
-        monday_Night = monday_Night;
+    public void setMonday_Night(String occasion) {
+        monday_Night = occasion;
     }
 
-    public void setTuesday_Daytime(String tuesday_Daytime) {
-        tuesday_Daytime = tuesday_Daytime;
+    public void setTuesday_Daytime(String occasion) {
+        tuesday_Daytime = occasion;
     }
 
-    public void setTuesday_Night(String tuesday_Night) {
-        tuesday_Night = tuesday_Night;
+    public void setTuesday_Night(String occasion) {
+        tuesday_Night = occasion;
     }
 
-    public void setWednesday_Daytime(String wednesday_Daytime) {
-        wednesday_Daytime = wednesday_Daytime;
+    public void setWednesday_Daytime(String occasion) {
+        wednesday_Daytime = occasion;
     }
 
-    public void setWednesday_Night(String wednesday_Night) {
-        wednesday_Night = wednesday_Night;
+    public void setWednesday_Night(String occasion) {
+        wednesday_Night = occasion;
     }
 
-    public void setThursday_Daytime(String thursday_Daytime) {
-        thursday_Daytime = thursday_Daytime;
+    public void setThursday_Daytime(String occasion) {
+        thursday_Daytime = occasion;
     }
 
-    public void setThursday_Night(String thursday_Night) {
-        thursday_Night = thursday_Night;
+    public void setThursday_Night(String occasion) {
+        thursday_Night = occasion;
     }
 
-    public void setFriday_Daytime(String friday_Daytime) {
-        friday_Daytime = friday_Daytime;
+    public void setFriday_Daytime(String occasion) {
+        friday_Daytime = occasion;
     }
 
-    public void setFriday_Night(String friday_Night) {
-        friday_Night = friday_Night;
+    public void setFriday_Night(String occasion) {
+        friday_Night = occasion;
     }
 
-    public void setSaturday_Daytime(String saturday_Daytime) {
-        saturday_Daytime = saturday_Daytime;
+    public void setSaturday_Daytime(String occasion) {
+        saturday_Daytime = occasion;
     }
 
-    public void setSaturday_Night(String saturday_Night) {
-        saturday_Night = saturday_Night;
+    public void setSaturday_Night(String occasion) {
+        saturday_Night = occasion;
     }
 
-    public void setSunday_Daytime(String sunday_Daytime) {
-        sunday_Daytime = sunday_Daytime;
+    public void setSunday_Daytime(String occasion) {
+        sunday_Daytime = occasion;
     }
 
-    public void setSunday_Night(String sunday_Night) {
-        sunday_Night = sunday_Night;
+    public void setSunday_Night(String occasion) {
+        sunday_Night = occasion;
     }
 
     public void updateOccasion(@NonNull String time, String occasion) {
@@ -253,6 +253,9 @@ public class OccasionsList {
             case "sunday_Night":
                 occasion = getSunday_Night();
                 break;
+        }
+        if (occasion.length() < 1) {
+            return "No occasion configured";
         }
         return occasion;
     }
