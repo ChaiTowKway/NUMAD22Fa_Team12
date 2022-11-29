@@ -31,14 +31,16 @@ public class OutfitDAO {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                result = new ArrayList<>();
+
                 for(DataSnapshot snap: snapshot.getChildren()){
 
                     Outfit t = snap.getValue(Outfit.class);
                     result.add(t);
+
                 }
-                result.stream().filter(p->p.getSeasonId() == season.value).collect(Collectors.toList());
-                System.out.println(result);
+
+                result =  result.stream().filter(p->p.getSeasonId() == season.value).collect(Collectors.toList());
+
             }
 
             @Override

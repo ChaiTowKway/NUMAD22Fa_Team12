@@ -5,7 +5,8 @@ public enum SeasonEnum {
     summer(1),
     fall(2),
     winter(3);
-
+    int value;
     SeasonEnum(int i) {
+        value = i;
     }
 }
