@@ -7,12 +7,14 @@ import java.util.List;
 public class OutfitTodayUser {
 
     private UserInfo userInfo;
+    private OccasionsList occasionsList;
     private CategoryList categoryList;
     private HashMap<String, Item> wardrobe;
 //    private HashMap<String, Friend> friends;
 
     public OutfitTodayUser() {
         this.userInfo = new UserInfo();
+        this.occasionsList = new OccasionsList();
         this.categoryList = new CategoryList();
         this.wardrobe = new HashMap<>();
 //        this.friends = new HashMap<>();
@@ -22,6 +24,10 @@ public class OutfitTodayUser {
 
     public UserInfo getUserInfo() {
         return this.userInfo;
+    }
+
+    public OccasionsList getOccasionsList() {
+        return occasionsList;
     }
 
     public CategoryList getCategoryList() {
@@ -38,6 +44,10 @@ public class OutfitTodayUser {
 
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
+    }
+
+    public void setOccasionsList(OccasionsList occasionsList) {
+        this.occasionsList = occasionsList;
     }
 
     public void setCategoryList(CategoryList categoryList) {

@@ -20,7 +20,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -28,14 +27,10 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,14 +44,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import edu.northeastern.numad22fa_team12.MainActivity;
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.databinding.ActivityOutfitTodayBinding;
-import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
+import edu.northeastern.numad22fa_team12.outfitToday.occasions.MyOccasions;
 
 
 public class OutfitToday extends AppCompatActivity implements View.OnClickListener{
@@ -154,6 +148,8 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
             case R.id.button_myWardrobe:
                 break;
             case R.id.button_myOccasions:
+                Intent myOccasionsIntent = new Intent(this, MyOccasions.class);
+                startActivity(myOccasionsIntent);
                 break;
             case R.id.button_myNotification:
                 break;
@@ -163,8 +159,8 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.button_updateMyProfile:
                 Log.d(TAG, "onClick: update my profile");
-                Intent intent = new Intent(this, UpdateProfile.class);
-                startActivity(intent);
+                Intent updateProfileIntent = new Intent(this, UpdateProfile.class);
+                startActivity(updateProfileIntent);
                 break;
             case R.id.button_logOut:
                 userAuth.signOut();
