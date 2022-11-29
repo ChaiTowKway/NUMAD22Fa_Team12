@@ -1,9 +1,11 @@
 package edu.northeastern.numad22fa_team12.outfitToday;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +20,11 @@ import edu.northeastern.numad22fa_team12.R;
  */
 public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String TAG = "HomeFragment";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public TextView minMaxTempTv, avgTempTv;
+    public String minTemp, maxTemp, avgTemp;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -59,6 +61,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,6 +69,16 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         minMaxTempTv = (TextView) view.findViewById(R.id.minMaxTemp);
         avgTempTv = (TextView) view.findViewById(R.id.avgTemp);
+
+        if (getArguments() != null && getArguments().getStringArray("tempData") != null) {
+            String[] tempData = getArguments().getStringArray("tempData");
+            minTemp = tempData[0];
+            maxTemp = tempData[1];
+            avgTemp = tempData[2];
+            Log.d(TAG, String.format("maxT: %s, minT: %s, avgT: %s", maxTemp, minTemp, avgTemp));
+            updateMinMaxTv(String.format("L: %s°F / H: %s°F", minTemp, maxTemp));
+            updateAvgTv(String.format("Today's temperature: %.2f°F", Float.valueOf(avgTemp)));
+        }
         return view;
     }
 

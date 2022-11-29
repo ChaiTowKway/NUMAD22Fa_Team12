@@ -67,9 +67,8 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
     private ActivityOutfitTodayBinding binding;
     private Handler mHandler = new Handler();
     private ProgressBar progressBar;
-    private HomeFragment homeFragment;
-    private ProfileFragment profileFragment;
     private String userEmail = "",userEmailKey = "", userName = "";
+    private String[] tempData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,24 +76,7 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
         binding = ActivityOutfitTodayBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        homeFragment = new HomeFragment();
-        profileFragment = new ProfileFragment();
-        replaceFragment(homeFragment);
-
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.myProfile:
-                    replaceFragment(profileFragment);
-                    break;
-                case R.id.add:
-                    startActivity(new Intent(OutfitToday.this, AddNewOutfitActivity.class));
-                    break;
-                case R.id.home:
-                    replaceFragment(homeFragment);
-                    break;
-            }
-            return true;
-        });
+        progressBar = new ProgressBar(OutfitToday.this);
 
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference().child("OutfitTodayUsers");
@@ -115,12 +97,48 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
 
         checkPermission();
 
+        new FetchWeatherData().start();
+
         if (userAuth.getCurrentUser() != null && userAuth.getCurrentUser().getEmail() != null) {
             userEmail = userAuth.getCurrentUser().getEmail();
             userEmailKey = userAuth.getCurrentUser().getEmail().replace(".", "-");
         }
+
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.myProfile:
+                    replaceFragment(new ProfileFragment());
+                    break;
+                case R.id.add:
+                    startActivity(new Intent(OutfitToday.this, AddNewOutfitActivity.class));
+                    break;
+                case R.id.home:
+                    HomeFragment homeFragment2 = new HomeFragment();
+                    putDataToBundle(homeFragment2);
+                    replaceFragment(homeFragment2);
+                    break;
+            }
+            return true;
+        });
+
+
+//        if (savedInstanceState == null) {
+//            // let the user see the home page when they enter
+//            HomeFragment homeFragment = new HomeFragment();
+//            putDataToBundle(homeFragment);
+//            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, homeFragment).commit();
+//            Log.d(TAG, "start the home fragment");
+//        }
     }
 
+    private void putDataToBundle(Fragment fragment) {
+        if (tempData != null) {
+            Bundle bundle = new Bundle();
+            bundle.putStringArray("tempData", tempData);
+            fragment.setArguments(bundle);
+            Log.d(TAG, "put the data to bundle");
+        }
+    }
 //    @Override
 //    protected void onStart() {
 //        super.onStart();
@@ -203,7 +221,7 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
                 public void onSuccess(Location location) {
                     if (location != null) {
                         getLocationInfo(location);
-                        new fetchWeatherData().start();
+                        new FetchWeatherData().start();
                     } else {
                         startLocationUpdates();
                     }
@@ -246,7 +264,7 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-    class fetchWeatherData extends Thread{
+    class FetchWeatherData extends Thread{
         String data = "";
 
         @SuppressLint("DefaultLocale")
@@ -255,7 +273,6 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    progressBar = new ProgressBar(OutfitToday.this);
                     progressBar.setVisibility(View.VISIBLE);
                 }
             });
@@ -293,8 +310,13 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
                         }
                         avgTemp = avgTemp / tempList.size();
                         Log.d(TAG, String.format("maxT: %f, minT: %f, avgT: %f", maxTemp, minTemp, avgTemp));
+                        tempData = new String[]{String.valueOf(minTemp), String.valueOf(maxTemp), String.valueOf(avgTemp)};
 //                        homeFragment.updateMinMaxTv(String.format("Min/Max temperature: %f / %f (°F)", minTemp, maxTemp));
 //                        homeFragment.updateAvgTv(String.format("Average temperature: %f (°F)", avgTemp));
+                        HomeFragment homeFragment = new HomeFragment();
+                        putDataToBundle(homeFragment);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, homeFragment).commit();
+                        Log.d(TAG, "start the home fragment");
                     }
 
                 } catch (MalformedURLException e) {
