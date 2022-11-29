@@ -172,6 +172,8 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
             case R.id.button_myNotification:
                 break;
             case R.id.button_myOutfitSuggestion:
+                Intent myOutfitSuggestionIntent = new Intent(this, OutfitToday.class);
+                startActivity(myOutfitSuggestionIntent);
                 break;
             case R.id.button_nearbyOutfits:
                 break;

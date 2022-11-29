@@ -16,13 +16,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import edu.northeastern.numad22fa_team12.R;
-import edu.northeastern.numad22fa_team12.model.User;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
 
 public class UpdateProfile extends AppCompatActivity implements View.OnClickListener {
@@ -123,19 +120,17 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         int buttonID = v.getId();
         switch (buttonID) {
-            case R.id.button_signOutProfile:
-                userAuth.signOut();
-                Toast.makeText(UpdateProfile.this, "Sign out successfully!",
+            case R.id.button_cancel:
+                Toast.makeText(UpdateProfile.this, "Profile update cancelled!",
                         Toast.LENGTH_LONG).show();
-                startActivity(new Intent(UpdateProfile.this, NewUserRegisterActivity.class));
                 break;
             case R.id.button_updateProfile:
                 updateCurrentUserInfo();
                 Toast.makeText(UpdateProfile.this, "Profile updated successfully!",
                         Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(UpdateProfile.this, OutfitToday.class);
-                startActivity(intent);
                 break;
         }
+        Intent intent = new Intent(UpdateProfile.this, OutfitToday.class);
+        startActivity(intent);
     }
 }
