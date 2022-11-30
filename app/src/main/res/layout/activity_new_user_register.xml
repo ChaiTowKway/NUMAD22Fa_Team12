@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Welcome To OutfitToday"
-            android:textColor="@color/purple_200"
+            android:textColor="#F3C0DB"
             android:textSize="30dp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="16dp"
@@ -36,12 +36,14 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Email (e.g. abc@email.com)"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="#020202" />
 
         <Button
             android:id="@+id/button_signIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#F3C0DB"
             android:onClick="onClick"
             android:text="SIGN IN" />
 
@@ -49,6 +51,7 @@
             android:id="@+id/button_createNewAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#F3C0DB"
             android:onClick="onClick"
             android:text="CREATE NEW ACCOUNT" />
 
