@@ -70,7 +70,7 @@
         android:id="@+id/button_addOccasion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#F3C0DB"
+        android:backgroundTint="#EDBEBE"
         android:onClick="onClick"
         android:text="Add"
         android:textStyle="bold"
