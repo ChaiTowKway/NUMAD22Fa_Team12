@@ -12,10 +12,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.*;
 public class GetNearbyOutfits  {
-    private Map<String, Map>  allUserLocation;
+    private Map<String, Map>  allUserLocation = new HashMap<>();
+    private Map<String, Map> allInfo;
 
     //  public Map<String, Map> getAllUserLocation()
-    public void getAllUserLocation(){
+    public Map<String, Map> getAllUserLocation(){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
         DatabaseReference usersRef = ref.child("OutfitTodayUsers");
@@ -28,12 +29,23 @@ public class GetNearbyOutfits  {
                     Log.e("RETRIEVE", "Error getting data", task.getException());
                 }
                 else {
-                    Log.d("RETRIEVE", String.valueOf(task.getResult().getValue()));
+                    Log.d("RETRIEVE1", String.valueOf(task.getResult().getValue()));
+//                    Log.d("RETRIEVE", String.valueOf(task.getResult().getValue().getClass()));
+                    allInfo = (Map) task.getResult().getValue();
+                    for(String userId : allInfo.keySet()) {
+                        Log.d("RETRIEVE2", userId);
+                        Map<String, Map> details = (Map) allInfo.get(userId).get("userInfo");
+                        Log.d("RETRIEVE3", String.valueOf(details));
+                        if(details.get("location") != null) {
+                            Log.d("RETRIEVE4", String.valueOf(details.get("location")));
+                            allUserLocation.put(userId, details.get("location"));
+                        }
+                    }
                 }
             }
         });
-
-
+        Log.d("RETRIEVE5", String.valueOf(allUserLocation));
+    return allUserLocation;
     }
 
 //    //get closest 3 friends
