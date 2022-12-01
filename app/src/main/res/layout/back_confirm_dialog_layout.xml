@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Are you sure you want to exit? \nData will not be saved!"
+        android:textColor="#555252"
         android:textSize="20sp"
         android:textStyle="bold" />
     <LinearLayout
@@ -21,12 +22,13 @@
 
         <Button
             android:id="@+id/terminateCancelBtn"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginEnd="10sp"
+            android:layout_weight="1"
             android:text="cancel"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:textColor="#BCBFA2" />
 
         <Button
             android:id="@+id/terminateOkBtn"
@@ -36,7 +38,7 @@
             android:layout_marginStart="10sp"
             android:layout_weight="1"
             android:text="Yes, exit"
-            android:textColor="@android:color/holo_red_dark" />
+            android:textColor="#EDBEBE" />
 
     </LinearLayout>
 
