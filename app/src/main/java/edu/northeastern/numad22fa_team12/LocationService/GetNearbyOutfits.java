@@ -15,7 +15,8 @@ public class GetNearbyOutfits  {
     private Map<String, Map>  allUserLocation = new HashMap<>();
     private Map<String, Map> allInfo;
 
-    //  public Map<String, Map> getAllUserLocation()
+    //  get all user location info from DB
+    // store user location info in a hashmap
     public Map<String, Map> getAllUserLocation(){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
