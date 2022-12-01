@@ -11,12 +11,13 @@
     <LinearLayout
         android:id="@+id/loginLinearLayout"
         android:layout_width="369dp"
-        android:layout_height="274dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="76dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:layout_constraintVertical_bias="0.833">
 
         <TextView
@@ -24,7 +25,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Welcome To OutfitToday"
-            android:textColor="@color/purple_200"
+            android:textColor="#EDBEBE"
             android:textSize="30dp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="16dp"
@@ -36,12 +37,14 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Email (e.g. abc@email.com)"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="#020202" />
 
         <Button
             android:id="@+id/button_signIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#EDBEBE"
             android:onClick="onClick"
             android:text="SIGN IN" />
 
@@ -49,9 +52,24 @@
             android:id="@+id/button_createNewAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#EDBEBE"
             android:onClick="onClick"
             android:text="CREATE NEW ACCOUNT" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="74dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/loginLinearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
