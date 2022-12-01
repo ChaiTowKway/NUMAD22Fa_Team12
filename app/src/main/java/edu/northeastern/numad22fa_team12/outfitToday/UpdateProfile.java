@@ -1,20 +1,24 @@
 package edu.northeastern.numad22fa_team12.outfitToday;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,22 +27,26 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import edu.northeastern.numad22fa_team12.R;
-import edu.northeastern.numad22fa_team12.model.Sticker;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
-import edu.northeastern.numad22fa_team12.stickItToEm.StickItToEmActivity;
 
 public class UpdateProfile extends AppCompatActivity implements View.OnClickListener {
 
@@ -46,12 +54,22 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
     private FirebaseDatabase database;
     private FirebaseAuth userAuth;
     private DatabaseReference userRef;
-    private TextView userEmailTV, userNameTV, contactNumberTV, locationTV;
+    private TextView userEmailTV, userNameTV, contactNumberTV;
     private Button getLocation, updateProfile;
     private String userEmail = "",userEmailKey = "", userName = "", contactNumber = "", location = "";
 
     private final  int NOTIFICATION_UNIQUE_ID = 6;
     private static int notificationGeneration = 1;
+
+    public LocationRequest mLocationRequest;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private LocationCallback mLocationCallback;
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 60000;
+    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 50000;
+    private double latitude;
+    private double longitude;
+    private Location mLocation;
+    private TextView latitudeTV, longitudeTV;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -62,7 +80,6 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
         userEmailTV = findViewById(R.id.textView_UserEmail);
         userNameTV = findViewById(R.id.editText_Name);
         contactNumberTV = findViewById(R.id.editTextPhone);
-        locationTV = findViewById(R.id.editText_UserLocation);
         getLocation = findViewById(R.id.button_getLocation);
         getLocation = findViewById(R.id.button_updateProfile);
 
@@ -75,6 +92,29 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
         }
         getCurrUserInfo();
         getNotificationInfo();
+
+        checkPermission();
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        createLocationRequest();
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    try {
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+                        updateCurrentUserInfo();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        latitudeTV = findViewById(R.id.text_latitude);
+        longitudeTV = findViewById(R.id.text_logitude);
     }
 
     public void getCurrUserInfo() {
@@ -90,7 +130,14 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                     userEmailTV.setText(userInfo.getEmail());
                     userNameTV.setText(userInfo.getUserName());
                     contactNumberTV.setText(userInfo.getContactNumber());
-                    locationTV.setText(userInfo.getLocation());
+
+                    if (userInfo.getLocation().get("latitude") != null) {
+                        latitudeTV.setText(userInfo.getLocation().get("latitude").toString());
+                    }
+                    if (userInfo.getLocation().get("longitude") != null) {
+                        longitudeTV.setText(userInfo.getLocation().get("longitude").toString());
+                    }
+                    Log.d(TAG, "onComplete: lat" + userInfo.getLocation().get("latitude"));
                 }
             }
         });
@@ -99,7 +146,12 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
     public void updateCurrentUserInfo() {
         userName = userNameTV.getText().toString();
         contactNumber = contactNumberTV.getText().toString();
-        location = locationTV.getText().toString();
+//        try {
+//            latitude = Double.parseDouble(latitudeTV.getText().toString());
+//            longitude = Double.parseDouble(longitudeTV.getText().toString());
+//        } catch (Exception e) {
+//            Log.d(TAG, "updateCurrentUserInfo: no valid location");
+//        }
 
         userRef.child(userEmailKey).child("userInfo").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -116,11 +168,12 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                     if (contactNumber == null) {
                         contactNumber = "";
                     }
-                    if (location == null) {
-                        location = "";
-                    }
+
                     userInfo.setUserName(userName);
                     userInfo.setContactNumber(contactNumber);
+                    HashMap<String, Double> location = new HashMap<>();
+                    location.put("latitude", latitude);
+                    location.put("longitude", longitude);
                     userInfo.setLocation(location);
                     userRef.child(userEmailKey).child("userInfo").setValue(userInfo);
                 }
@@ -143,15 +196,27 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
             case R.id.button_cancel:
                 Toast.makeText(UpdateProfile.this, "Profile update cancelled!",
                         Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(UpdateProfile.this, OutfitToday.class);
+                startActivity(intent);
                 break;
             case R.id.button_updateProfile:
                 updateCurrentUserInfo();
                 Toast.makeText(UpdateProfile.this, "Profile updated successfully!",
                         Toast.LENGTH_LONG).show();
+                Intent backIntent = new Intent(UpdateProfile.this, OutfitToday.class);
+                startActivity(backIntent);
+                break;
+            case R.id.button_getLocation:
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(UpdateProfile.this, "No location granted!",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    getLastLocation();
+                    Toast.makeText(UpdateProfile.this, "Current location updated!",
+                            Toast.LENGTH_LONG).show();
+                }
                 break;
         }
-        Intent intent = new Intent(UpdateProfile.this, OutfitToday.class);
-        startActivity(intent);
     }
 
     public void createNotificationChannel() {
@@ -174,7 +239,7 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
         PendingIntent readIntent = PendingIntent.getActivity(this, (int)System.currentTimeMillis(), intent, PendingIntent.FLAG_MUTABLE);
 
         String channelID = "OutfitTodayChannel";
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.outfit_profile);
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.register);
         Notification noti = new NotificationCompat.Builder(this, channelID)
                 .setContentTitle("OutfitToday")
                 .setContentText(wardrobeViewBy + " is viewing your wardrobe now!")
@@ -203,5 +268,43 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+    }
+
+    private void createLocationRequest() {
+        LocationRequest.Builder lrb = new LocationRequest.Builder(UPDATE_INTERVAL_IN_MILLISECONDS);
+        lrb.setMinUpdateIntervalMillis(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
+        lrb.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest = lrb.build();
+    }
+
+    private void getLastLocation() {
+        try {
+            mFusedLocationClient.getLastLocation()
+                    .addOnCompleteListener(new OnCompleteListener<Location>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Location> task) {
+                            if (task.isSuccessful() && task.getResult() != null) {
+                                mLocation = task.getResult();
+                                latitude = mLocation.getLatitude();
+                                longitude = mLocation.getLongitude();
+                                latitudeTV.setText(String.valueOf(latitude));
+                                longitudeTV.setText(String.valueOf(longitude));
+                            } else {
+                                Log.w(TAG, "Failed to get location.");
+                            }
+                        }
+                    });
+        } catch (SecurityException unlikely) {
+            Log.e(TAG, "Lost location permission." + unlikely);
+        }
+    }
+
+
+    private void checkPermission() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(UpdateProfile.this, new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION}, 100);
+            return;
+        }
     }
 }

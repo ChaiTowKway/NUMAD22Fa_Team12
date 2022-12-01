@@ -25,7 +25,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:editable="false"
         android:text="gmail.com"
+        android:textColor="#5B5959"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/textView_Name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,29 +112,48 @@
         android:id="@+id/textView_Location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Location:"
+        android:text="Latitute:\nLongtidue:"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintHorizontal_bias="0.146"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="0.411" />
+        app:layout_constraintVertical_bias="0.423" />
 
-    <EditText
-        android:id="@+id/editText_UserLocation"
+    <TextView
+        android:id="@+id/text_latitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textColor="@color/black"
+        android:text="0.0"
+        android:textColor="#5B5959"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toEndOf="@+id/textView_Location"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="0.396" />
+        app:layout_constraintVertical_bias="0.41" />
+
+    <TextView
+        android:id="@+id/text_logitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:editable="false"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="0.0"
+        android:textColor="#5B5959"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintStart_toEndOf="@+id/textView_Location"
+        app:layout_constraintTop_toBottomOf="@+id/text_latitude" />
 
     <Button
         android:id="@+id/button_getLocation"
@@ -145,10 +166,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_Location"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.069" />
 
     <Button
         android:id="@+id/button_updateProfile"
@@ -194,5 +215,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/outfit_profile" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 

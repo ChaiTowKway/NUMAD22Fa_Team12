@@ -1,64 +1,21 @@
 package edu.northeastern.numad22fa_team12.outfitTodayModel;
 
+import java.util.HashMap;
+
 public class UserInfo {
     private String userName;
     private String email;
-    private String UID;
     private String contactNumber;
-    private String location;
-    private int numOfCheckInDates;
-    private String userProfileImageUrl;
+    private HashMap<String, Double> location;
+
 
     public UserInfo() {
         this.userName = "";
         this.email = "";
-        this.UID = "";
         this.contactNumber = "";
-        this.location = "";
-        this.numOfCheckInDates = 0;
-        this.userProfileImageUrl = "";
-    }
-
-    public UserInfo(String userName, String email, String UID) {
-        this.userName = userName;
-        this.email= email;
-        this.UID = UID;
-        this.contactNumber = "";
-        this.location = "";
-        this.numOfCheckInDates = 0;
-        this.userProfileImageUrl = "";
-    }
-
-    public UserInfo(String userName, String email, String UID, String contactNumber) {
-        this.userName = userName;
-        this.email= email;
-        this.UID = UID;
-        this.contactNumber = contactNumber;
-        this.location = "";
-        this.numOfCheckInDates = 0;
-        this.userProfileImageUrl = "";
-    }
-
-    public UserInfo(String userName, String email, String UID, String contactNumber, String location) {
-        this.userName = userName;
-        this.email= email;
-        this.UID = UID;
-        this.contactNumber = contactNumber;
-        this.location = location;
-        this.numOfCheckInDates = 0;
-        this.userProfileImageUrl = "";
-    }
-
-
-    public UserInfo(String userName, String email, String UID, String contactNumber,
-                    String location, String userProfileImageUrl) {
-        this.userName = userName;
-        this.email= email;
-        this.UID = UID;
-        this.contactNumber = contactNumber;
-        this.location = location;
-        this.numOfCheckInDates = 0;
-        this.userProfileImageUrl = userProfileImageUrl;
+        this.location = new HashMap<>();
+        this.location.put("latitude", 0.0);
+        this.location.put("longitude", 0.0);
     }
 
     public String getUserName() {
@@ -69,24 +26,12 @@ public class UserInfo {
         return this.email;
     }
 
-    public String getUID() {
-        return this.UID;
-    }
-
     public String getContactNumber() {
         return this.contactNumber;
     }
 
-    public String getLocation() {
+    public HashMap<String, Double> getLocation() {
         return this.location;
-    }
-
-    public int getNumOfCheckInDates() {
-        return this.numOfCheckInDates;
-    }
-
-    public String getUserProfileImageUrl() {
-        return this.userProfileImageUrl;
     }
 
     public void setUserName(String userName) {
@@ -97,23 +42,12 @@ public class UserInfo {
         this.email = email;
     }
 
-    public void setUID(String UID) {
-        this.UID = UID;
-    }
-
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(HashMap<String, Double> location) {
         this.location = location;
     }
 
-    public void setNumOfCheckInDates(int numOfCheckInDates) {
-        this.numOfCheckInDates = numOfCheckInDates;
-    }
-
-    public void setUserProfileImageUrl(String userProfileImageUrl) {
-        this.userProfileImageUrl = userProfileImageUrl;
-    }
 }
