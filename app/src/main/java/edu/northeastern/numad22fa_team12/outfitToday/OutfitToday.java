@@ -27,8 +27,11 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -45,12 +48,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import edu.northeastern.numad22fa_team12.MainActivity;
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.databinding.ActivityOutfitTodayBinding;
 import edu.northeastern.numad22fa_team12.outfitToday.occasions.MyOccasions;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
 
 
 public class OutfitToday extends AppCompatActivity implements View.OnClickListener{
@@ -62,8 +67,7 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
     private LocationCallback locationCallback;
     private LocationRequest locationRequest;
     private String longitude, latitude;
-    private final static int INTERVAL = 50000;
-//    ActivityMainBinding binding;
+    private final static int INTERVAL = 60000 * 20;
     private ActivityOutfitTodayBinding binding;
     private Handler mHandler = new Handler();
     private ProgressBar progressBar;
@@ -91,6 +95,7 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
                 }
             }
         };
+
         locationRequest = new LocationRequest();
         locationRequest.setInterval(INTERVAL);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -120,15 +125,6 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
             }
             return true;
         });
-
-
-//        if (savedInstanceState == null) {
-//            // let the user see the home page when they enter
-//            HomeFragment homeFragment = new HomeFragment();
-//            putDataToBundle(homeFragment);
-//            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, homeFragment).commit();
-//            Log.d(TAG, "start the home fragment");
-//        }
     }
 
     private void putDataToBundle(Fragment fragment) {
@@ -139,15 +135,6 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
             Log.d(TAG, "put the data to bundle");
         }
     }
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        FirebaseUser curUser = userAuth.getCurrentUser();
-//        if (curUser == null) {
-//            // if user not register, take user to register page
-//            startActivity(new Intent(OutfitToday.this, NewUserRegisterActivity.class));
-//        }
-//    }
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -239,9 +226,27 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
 
     // get the longitude and latitude and pass to weather api
     private void getLocationInfo(Location location){
-        longitude = String.valueOf(location.getLongitude());
-        latitude = String.valueOf(location.getLatitude());
+        double newLongitude = location.getLongitude(), newLatitude = location.getLatitude();
+        longitude = String.valueOf(newLongitude);
+        latitude = String.valueOf(newLatitude);
+        updateLocation(newLongitude, newLatitude);
     };
+
+    private void updateLocation(double newLongitude, double newLatitude) {
+        userRef.child(userEmailKey).child("userInfo").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Update location fail: ", task.getException());
+                }
+                else {
+                    Log.d(TAG, "Update location successfully: ");
+                    userRef.child(userEmailKey).child("userInfo").child("location").child("latitude").setValue(newLatitude);
+                    userRef.child(userEmailKey).child("userInfo").child("location").child("longitude").setValue(newLongitude);
+                }
+            }
+        });
+    }
 
     private void requestPermission() {
         ActivityCompat.requestPermissions(this,
@@ -309,8 +314,6 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
                         avgTemp = avgTemp / tempList.size();
                         Log.d(TAG, String.format("maxT: %f, minT: %f, avgT: %f", maxTemp, minTemp, avgTemp));
                         tempData = new String[]{String.valueOf(minTemp), String.valueOf(maxTemp), String.valueOf(avgTemp)};
-//                        homeFragment.updateMinMaxTv(String.format("Min/Max temperature: %f / %f (°F)", minTemp, maxTemp));
-//                        homeFragment.updateAvgTv(String.format("Average temperature: %f (°F)", avgTemp));
                         HomeFragment homeFragment = new HomeFragment();
                         putDataToBundle(homeFragment);
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, homeFragment).commit();
