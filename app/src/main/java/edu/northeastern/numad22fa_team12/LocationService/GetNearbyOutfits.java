@@ -1,5 +1,6 @@
 package edu.northeastern.numad22fa_team12.LocationService;
 
+import android.location.Location;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -54,8 +55,13 @@ public class GetNearbyOutfits  {
 //
 //    }
 //
-//    public double getDist(double Dist1, double Dist2){
-//
-//    }
+
+
+    // helper function to calculate the distance betweent 2 location
+    public float getDist(Map loc1, Map loc2){
+        float[] result = new float[1];
+        Location.distanceBetween((double)loc1.get("latitude"), (double)loc1.get("longtitude"), (double)loc2.get("latitude"), (double)loc2.get("longtitude"), result);
+        return result[0];
+    }
 
 }
