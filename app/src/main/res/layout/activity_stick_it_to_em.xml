@@ -15,7 +15,7 @@
             android:id="@+id/textViewUserList"
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:background="@color/purple_500"
+            android:background="#EDBEBE"
             android:gravity="center"
             android:text="Select a friend to chat!"
             android:textColor="@color/white"
@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="32dp"
-            android:background="@color/purple_500"
+            android:background="#EDBEBE"
             android:gravity="center"
             android:text="Select Stickers you want to send!"
             android:textColor="@color/white"
@@ -48,15 +48,17 @@
             android:id="@+id/sendBtn"
             android:layout_width="match_parent"
             android:layout_height="44dp"
+            android:backgroundTint="#EDBEBE"
             android:onClick="onClick"
             android:text="Send" />
 
         <Button
+            android:id="@+id/userinfoBtn"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:id="@+id/userinfoBtn"
+            android:backgroundTint="#EDBEBE"
             android:onClick="onClick"
-            android:text="My Stickers Received/Sent"/>
+            android:text="My Stickers Received/Sent" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
