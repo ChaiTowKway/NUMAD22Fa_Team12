@@ -63,7 +63,8 @@
                 android:backgroundTint="@color/mainColor"
                 android:onClick="onClick"
                 android:text="Wardrobe"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/button_myOccasions"
@@ -72,7 +73,8 @@
                 android:backgroundTint="@color/mainColor"
                 android:onClick="onClick"
                 android:text="Occasions"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -96,7 +98,8 @@
                     android:backgroundTint="#FFFFFF"
                     android:onClick="onClick"
                     android:text="My Outfit Suggestions"
-                    android:textColor="@color/mainColor" />
+                    android:textColor="@color/mainColor"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/button_nearbyOutfits"
@@ -105,7 +108,8 @@
                     android:backgroundTint="#FFFFFF"
                     android:onClick="onClick"
                     android:text="Nearby Outfits"
-                    android:textColor="@color/mainColor" />
+                    android:textColor="@color/mainColor"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/button_updateMyProfile"
@@ -114,7 +118,8 @@
                     android:backgroundTint="#FBFBFB"
                     android:onClick="onClick"
                     android:text="Update My Profile"
-                    android:textColor="@color/mainColor" />
+                    android:textColor="@color/mainColor"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/button_logOut"
@@ -123,7 +128,8 @@
                     android:backgroundTint="#FFFFFF"
                     android:onClick="onClick"
                     android:text="Log Out"
-                    android:textColor="@color/warningColor" />
+                    android:textColor="@color/warningColor"
+                    android:textStyle="bold" />
 
                 <Space
                     android:layout_width="match_parent"
