@@ -34,7 +34,7 @@
                     android:layout_height="38dp"
                     android:text="Hi, xxx"
                     android:textAlignment="center"
-                    android:textColor="#EDBEBE"
+                    android:textColor="@color/mainColor"
                     android:textSize="20sp"
                     android:textStyle="bold|italic" />
 
@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:text="Wardrobe Stock: ###"
                     android:textAlignment="center"
-                    android:textColor="#EDBEBE"
+                    android:textColor="@color/mainColor"
                     android:textSize="20sp"
                     android:textStyle="bold|italic" />
             </LinearLayout>
@@ -60,7 +60,7 @@
                 android:id="@+id/button_myWardrobe"
                 android:layout_width="176dp"
                 android:layout_height="match_parent"
-                android:backgroundTint="#EDBEBE"
+                android:backgroundTint="@color/mainColor"
                 android:onClick="onClick"
                 android:text="Wardrobe"
                 android:textSize="14sp" />
@@ -69,7 +69,7 @@
                 android:id="@+id/button_myOccasions"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="#EDBEBE"
+                android:backgroundTint="@color/mainColor"
                 android:onClick="onClick"
                 android:text="Occasions"
                 android:textSize="14sp" />
@@ -96,7 +96,7 @@
                     android:backgroundTint="#FFFFFF"
                     android:onClick="onClick"
                     android:text="My Outfit Suggestions"
-                    android:textColor="#EDBEBE" />
+                    android:textColor="@color/mainColor" />
 
                 <Button
                     android:id="@+id/button_nearbyOutfits"
@@ -105,7 +105,7 @@
                     android:backgroundTint="#FFFFFF"
                     android:onClick="onClick"
                     android:text="Nearby Outfits"
-                    android:textColor="#EDBEBE" />
+                    android:textColor="@color/mainColor" />
 
                 <Button
                     android:id="@+id/button_updateMyProfile"
@@ -114,7 +114,7 @@
                     android:backgroundTint="#FBFBFB"
                     android:onClick="onClick"
                     android:text="Update My Profile"
-                    android:textColor="#EDBEBE" />
+                    android:textColor="@color/mainColor" />
 
                 <Button
                     android:id="@+id/button_logOut"
@@ -123,7 +123,7 @@
                     android:backgroundTint="#FFFFFF"
                     android:onClick="onClick"
                     android:text="Log Out"
-                    android:textColor="#BCBFA2" />
+                    android:textColor="@color/warningColor" />
 
                 <Space
                     android:layout_width="match_parent"

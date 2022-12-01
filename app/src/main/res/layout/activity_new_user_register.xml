@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Welcome To OutfitToday"
-            android:textColor="#EDBEBE"
+            android:textColor="@color/mainColor"
             android:textSize="30dp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="16dp"
@@ -44,7 +44,7 @@
             android:id="@+id/button_signIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#EDBEBE"
+            android:backgroundTint="@color/mainColor"
             android:onClick="onClick"
             android:text="SIGN IN" />
 
@@ -52,7 +52,7 @@
             android:id="@+id/button_createNewAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#EDBEBE"
+            android:backgroundTint="@color/mainColor"
             android:onClick="onClick"
             android:text="CREATE NEW ACCOUNT" />
 
