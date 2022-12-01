@@ -161,15 +161,11 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
         Log.d(TAG, "onClick: click my profile");
         int buttonID = v.getId();
         switch (buttonID) {
-            case R.id.button_setting:
-                break;
             case R.id.button_myWardrobe:
                 break;
             case R.id.button_myOccasions:
                 Intent myOccasionsIntent = new Intent(this, MyOccasions.class);
                 startActivity(myOccasionsIntent);
-                break;
-            case R.id.button_myNotification:
                 break;
             case R.id.button_myOutfitSuggestion:
                 Intent myOutfitSuggestionIntent = new Intent(this, OutfitToday.class);
