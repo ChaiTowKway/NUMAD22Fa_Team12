@@ -37,7 +37,7 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference userRef;
     private FirebaseAuth userAuth;
     private String userEmail = "",userEmailKey = "", userName = "", helloMsg = "";
-    private TextView userNameTV;
+    private TextView userNameTV, wardrobeTV;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -93,12 +93,14 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View inflatedview = inflater.inflate(R.layout.fragment_profile, container, false);
         userNameTV = (TextView) inflatedview.findViewById(R.id.textView_user);
+        wardrobeTV = (TextView) inflatedview.findViewById(R.id.textView_stock);
         getCurrUserInfo();
         return inflatedview;
     }
 
     public void getCurrUserInfo() {
         userRef.child(userEmailKey).child("userInfo").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @SuppressLint("DefaultLocale")
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
@@ -111,8 +113,15 @@ public class ProfileFragment extends Fragment {
                     if (userNameTV != null) {
                         userNameTV.setText(helloMsg);
                     }
+                    DataSnapshot snapshot = task.getResult().child("wardrobe");
+                    long wadrobeCount = snapshot.getChildrenCount();
+                    Log.d(TAG, "wardobe count: " + wadrobeCount);
+                    if (wardrobeTV != null) {
+                        wardrobeTV.setText(String.format("Wardrobe Stock: %d", wadrobeCount));
+                    }
                 }
             }
         });
     }
+
 }
