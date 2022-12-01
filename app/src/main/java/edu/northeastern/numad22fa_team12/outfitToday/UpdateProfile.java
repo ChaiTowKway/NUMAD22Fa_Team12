@@ -106,7 +106,6 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                     try {
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
-                        updateCurrentUserInfo();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
