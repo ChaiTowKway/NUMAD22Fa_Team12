@@ -12,7 +12,7 @@
         android:layout_height="49dp"
         android:text="Here are your nearby friends!"
         android:textAlignment="center"
-        android:textColor="#@color/mainColor"
+        android:textColor="@color/mainColor"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
