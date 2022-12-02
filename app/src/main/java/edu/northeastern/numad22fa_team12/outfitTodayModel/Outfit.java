@@ -8,6 +8,15 @@ public class Outfit {
     private int seasonId;
     private int occasionId;
 
+    public Outfit(int categoryId, String url, String itemId, String userId, int seasonId, int occasionId) {
+        this.categoryId = categoryId;
+        this.url = url;
+        this.itemId = itemId;
+        this.userId = userId;
+        this.seasonId = seasonId;
+        this.occasionId = occasionId;
+    }
+
 
     public int getCategoryId() {
         return categoryId;

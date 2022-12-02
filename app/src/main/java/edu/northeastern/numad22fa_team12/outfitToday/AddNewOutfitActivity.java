@@ -21,10 +21,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
 import edu.northeastern.numad22fa_team12.R;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.Outfit;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.OutfitDAO;
+
 public class AddNewOutfitActivity extends AppCompatActivity {
     Button imageAddButton;
     ImageView outfitImageView;
@@ -38,10 +40,14 @@ public class AddNewOutfitActivity extends AppCompatActivity {
     int occasionId = 0;
     int seasonId = 0;
     int categoryId = 0;
+    OutfitDAO dao;
+    String userId = "1";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_outfit);
+        dao = new OutfitDAO();
         imageAddButton = findViewById(R.id.image_edit_button);
         outfitImageView = findViewById(R.id.outfit_image_view);
         imageAddButton.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +64,15 @@ public class AddNewOutfitActivity extends AppCompatActivity {
                 }else{
                     openCamera();
                 }
+            }
+        });
+        submitButton = findViewById(R.id.outfitAddSubmitButton1);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String id = String.valueOf(UUID.randomUUID());
+                Outfit outfit = new Outfit(categoryId,image_uri.toString(),id,userId ,seasonId,occasionId );
+
             }
         });
 

@@ -5,7 +5,8 @@ public enum OccasionEnum {
     formal(1),
     sports(2),
     work(3);
-
+    int value;
     OccasionEnum(int i) {
+        value = i;
     }
 }
