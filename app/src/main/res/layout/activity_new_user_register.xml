@@ -26,8 +26,9 @@
             android:gravity="center"
             android:text="Welcome To OutfitToday"
             android:textColor="@color/mainColor"
-            android:textSize="30dp"
+            android:textSize="28sp"
             android:textStyle="bold"
+            android:typeface="serif"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="453dp" />
 
