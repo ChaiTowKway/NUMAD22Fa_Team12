@@ -94,7 +94,7 @@ public class EditOutfitActivity extends AppCompatActivity {
                 Outfit newOutfit = new Outfit(categoryId,web_uri,id,userId ,seasonId,occasionId );
                 database = FirebaseDatabase.getInstance();
                 db = database.getReference("outfit").child(id);
-                db.setValue(outfit);
+                db.setValue(newOutfit);
 
                 finish();
 
