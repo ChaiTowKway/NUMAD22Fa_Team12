@@ -21,6 +21,11 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.northeastern.numad22fa_team12.R;
 
@@ -29,6 +34,7 @@ public class SearchByLocation extends AppCompatActivity {
     FusedLocationProviderClient fusedLocationClient;
     private static final int PERMISSION_CODE = 99;
     private static final String TAG = "GPS";
+//    Double[] latiLoti = new Double[2];
     LocationRequest locationRequest;
     LocationCallback locationCallback;
 
@@ -48,6 +54,18 @@ public class SearchByLocation extends AppCompatActivity {
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest);
 
+//        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference ref = database.getReference();
+////                    DatabaseReference usersRef = ref.child("OutfitTodayUsers").child("testing2@gmail-com").child("userInfo");
+//
+////                    String[] latiLongti = {String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude())};
+//        Map<String, String> userLocation = new HashMap<>();
+//        userLocation.put("latitude", "1");
+//        userLocation.put("longtitude", "2");
+//
+////                    usersRef.child("location").setValue(userLocation);
+//        ref.setValue(userLocation);
+
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
@@ -55,7 +73,35 @@ public class SearchByLocation extends AppCompatActivity {
                     if (location == null) continue;
                     // Update UI with location data
                     // ...
-                    Log.i(TAG, "update" + location.getLatitude() + " : " + location.getLongitude());
+                    //final version
+//                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//                    DatabaseReference ref = database.getReference();
+//                    DatabaseReference usersRef = ref.child("OutfitTodayUsers").child("testing2@gmail-com").child("userInfo");
+//
+//                    Map<String, Double> userLocation = new HashMap<>();
+//                    userLocation.put("latitude", location.getLatitude());
+//                    userLocation.put("longtitude", location.getLongitude());
+//
+//                    usersRef.child("location").setValue(userLocation);
+//                    ref.setValue(userLocation);
+
+
+//                            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference ref = database.getReference();
+//                    DatabaseReference usersRef = ref.child("OutfitTodayUsers").child("testing2@gmail-com").child("userInfo");
+
+//                    String[] latiLongti = {String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude())};
+//        Map<String, Double> userLocation = new HashMap<>();
+//        userLocation.put("latitude", 3.12);
+//        userLocation.put("longtitude", 4.55);
+//
+////                    usersRef.child("location").setValue(userLocation);
+//        ref.setValue(userLocation);
+
+
+//                    Log.i(TAG, "child " + ref);
+//                    Log.i(TAG, "userlocation" + userLocation.get("latitude"));
+//                    Log.i(TAG, "update" + location.getLatitude() + " : " + location.getLongitude());
                 }
             }
         };
@@ -83,8 +129,17 @@ public class SearchByLocation extends AppCompatActivity {
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
         });
+        Log.i(TAG, "check before");
         updateGPS();
-        startLocationUpdates();
+
+        for(int i=0; i < 5;i++){
+            Log.i(TAG, "Test" + i);
+            updateGPS();
+        }
+
+
+
+//        startLocationUpdates();
     }
 
     public void startLocationUpdates() {
@@ -96,6 +151,7 @@ public class SearchByLocation extends AppCompatActivity {
         }
         // call get latest location function       how to call        call
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+
     }
 
     //just make sure location is not null and user has given GPS permission
@@ -112,6 +168,22 @@ public class SearchByLocation extends AppCompatActivity {
                             // Got last known location. In some rare situations this can be null.
                             if (location != null) {
                                 // Logic to handle location object
+//                                latiLoti[0] = location.getLatitude();
+//                                latiLoti[1] = location.getLongitude();
+
+//                                Log.i(TAG, "location1 is " + latiLoti[0] + " : " + latiLoti[1]);
+                                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference ref = database.getReference();
+                                DatabaseReference usersRef = ref.child("OutfitTodayUsers").child("test1@gmail-com").child("userInfo");
+
+                                Map<String, Double> userLocation = new HashMap<>();
+                                userLocation.put("latitude", location.getLatitude());
+                                userLocation.put("longtitude", location.getLongitude());
+
+                                usersRef.child("location").setValue(userLocation);
+//                                Log.i(TAG, "child " + ref);
+//                                Log.i(TAG, "userlocation" + userLocation.get("latitude"));
+//                                Log.i(TAG, "final location is " + latiLoti[0] + " : " + latiLoti[1]);
                                 Log.i(TAG, "location:" + location.getProvider());
                             }
                         }

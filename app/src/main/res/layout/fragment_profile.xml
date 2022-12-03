@@ -9,8 +9,8 @@
     <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
-        android:layout_width="387dp"
-        android:layout_height="669dp"
+        android:layout_width="341dp"
+        android:layout_height="630dp"
         android:layout_gravity="center|top"
         android:orientation="vertical">
 
@@ -24,7 +24,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="276dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
@@ -34,7 +34,9 @@
                     android:layout_height="38dp"
                     android:text="Hi, xxx"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textColor="@color/mainColor"
+                    android:textSize="20sp"
+                    android:textStyle="bold|italic" />
 
                 <TextView
                     android:id="@+id/textView_stock"
@@ -42,15 +44,11 @@
                     android:layout_height="wrap_content"
                     android:text="Wardrobe Stock: ###"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textColor="@color/mainColor"
+                    android:textSize="20sp"
+                    android:textStyle="bold|italic" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/button_setting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onClick"
-                android:text="Setting" />
         </LinearLayout>
 
         <LinearLayout
@@ -60,27 +58,24 @@
 
             <Button
                 android:id="@+id/button_myWardrobe"
-                android:layout_width="wrap_content"
+                android:layout_width="176dp"
                 android:layout_height="match_parent"
+                android:backgroundTint="@color/mainColor"
                 android:onClick="onClick"
                 android:text="Wardrobe"
-                android:textSize="12sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/button_myOccasions"
-                android:layout_width="130dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:backgroundTint="@color/mainColor"
                 android:onClick="onClick"
                 android:text="Occasions"
-                android:textSize="12sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/button_myNotification"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:onClick="onClick"
-                android:text="Notification"
-                android:textSize="12sp" />
         </LinearLayout>
 
         <Space
@@ -100,29 +95,41 @@
                     android:id="@+id/button_myOutfitSuggestion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
                     android:onClick="onClick"
-                    android:text="My Outfit Suggestions" />
+                    android:text="My Outfit Suggestions"
+                    android:textColor="@color/mainColor"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/button_nearbyOutfits"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
                     android:onClick="onClick"
-                    android:text="Nearby Outfits" />
+                    android:text="Nearby Outfits"
+                    android:textColor="@color/mainColor"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/button_updateMyProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#FBFBFB"
                     android:onClick="onClick"
-                    android:text="Update My Profile" />
+                    android:text="Update My Profile"
+                    android:textColor="@color/mainColor"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/button_logOut"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
                     android:onClick="onClick"
-                    android:text="Log Out" />
+                    android:text="Log Out"
+                    android:textColor="@color/warningColor"
+                    android:textStyle="bold" />
 
                 <Space
                     android:layout_width="match_parent"

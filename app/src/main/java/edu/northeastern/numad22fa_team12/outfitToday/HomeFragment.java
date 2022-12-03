@@ -1,15 +1,28 @@
 package edu.northeastern.numad22fa_team12.outfitToday;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import edu.northeastern.numad22fa_team12.R;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.CategoryList;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.OccasionsList;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,11 +31,16 @@ import edu.northeastern.numad22fa_team12.R;
  */
 public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String TAG = "HomeFragment";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public TextView minMaxTempTv, avgTempTv;
+    public String minTemp, maxTemp, avgTemp;
+    private FirebaseDatabase database;
+    private DatabaseReference userRef;
+    private FirebaseAuth userAuth;
+    private String userEmail = "",userEmailKey = "";
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -57,6 +75,14 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        database = FirebaseDatabase.getInstance();
+        userRef = database.getReference().child("OutfitTodayUsers");
+        userAuth = FirebaseAuth.getInstance();
+        if (userAuth.getCurrentUser() != null && userAuth.getCurrentUser().getEmail() != null) {
+            userEmail = userAuth.getCurrentUser().getEmail();
+            userEmailKey = userAuth.getCurrentUser().getEmail().replace(".", "-");
+        }
+        getCurrUserInfo();
     }
 
     @Override
@@ -66,14 +92,42 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         minMaxTempTv = (TextView) view.findViewById(R.id.minMaxTemp);
         avgTempTv = (TextView) view.findViewById(R.id.avgTemp);
+        setHomePageTextView();
         return view;
     }
 
-    public void updateMinMaxTv(String s) {
-        minMaxTempTv.setText(s);
+    @SuppressLint("DefaultLocale")
+    public void setHomePageTextView() {
+        if (getArguments() != null && getArguments().getStringArray("tempData") != null) {
+            String[] tempData = getArguments().getStringArray("tempData");
+            minTemp = tempData[0];
+            maxTemp = tempData[1];
+            avgTemp = tempData[2];
+            Log.d(TAG, String.format("maxT: %s, minT: %s, avgT: %s", maxTemp, minTemp, avgTemp));
+            if (minMaxTempTv != null && avgTempTv != null) {
+                minMaxTempTv.setText(String.format("L: %s°F / H: %s°F", minTemp, maxTemp));
+                avgTempTv.setText(String.format("Today's temperature: %.2f°F", Float.valueOf(avgTemp)));
+            }
+        }
     }
 
-    public void updateAvgTv(String s) {
-        avgTempTv.setText(s);
+    public void getCurrUserInfo() {
+        userRef.child(userEmailKey).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    OccasionsList occasionsList = task.getResult().child("occasionsList").getValue(OccasionsList.class);
+                    // TODO: The categoryList has to be generated manually
+//                    CategoryList categoryList = task.getResult().child("categoryList").getValue(CategoryList.class);
+                    Log.d(TAG, "data get successfully");
+
+                }
+            }
+        });
     }
+
 }
