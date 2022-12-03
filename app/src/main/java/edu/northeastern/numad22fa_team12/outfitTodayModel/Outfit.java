@@ -1,6 +1,8 @@
 package edu.northeastern.numad22fa_team12.outfitTodayModel;
 
-public class Outfit {
+import java.io.Serializable;
+
+public class Outfit implements Serializable {
     private int categoryId;
     private String url;
     private String itemId;
