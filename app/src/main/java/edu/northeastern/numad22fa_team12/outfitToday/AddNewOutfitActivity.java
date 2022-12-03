@@ -21,8 +21,13 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.UUID;
 
@@ -35,6 +40,8 @@ public class AddNewOutfitActivity extends AppCompatActivity {
     ImageView outfitImageView;
     Button submitButton;
     Uri image_uri;
+    String web_uri;
+    private StorageReference ref = FirebaseStorage.getInstance().getReference();
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
     Spinner occasionSpinner;
@@ -47,13 +54,21 @@ public class AddNewOutfitActivity extends AppCompatActivity {
     String userId = "1";
     public FirebaseDatabase database;
     public DatabaseReference db;
+    Outfit outfit = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_outfit);
+        if(getIntent().getExtras() != null){
+            outfit = getIntent().getExtras().getParcelable("outfit");
+        }
+
         dao = new OutfitDAO();
         imageAddButton = findViewById(R.id.image_edit_button);
         outfitImageView = findViewById(R.id.outfit_image_view);
+
+
+
         imageAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +90,7 @@ public class AddNewOutfitActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String id = String.valueOf(UUID.randomUUID());
-                Outfit outfit = new Outfit(categoryId,image_uri.toString(),id,userId ,seasonId,occasionId );
+                Outfit outfit = new Outfit(categoryId,web_uri,id,userId ,seasonId,occasionId );
                 database = FirebaseDatabase.getInstance();
                 db = database.getReference("outfit").child(id);
                 db.setValue(outfit);
@@ -84,6 +99,7 @@ public class AddNewOutfitActivity extends AppCompatActivity {
 
             }
         });
+        submitButton.setEnabled(false);
 
         occasionSpinner = findViewById(R.id.occasion_spinner);
         seasonSpinner = findViewById(R.id.season_spinner);
@@ -109,6 +125,15 @@ public class AddNewOutfitActivity extends AppCompatActivity {
         seasonSpinner.setAdapter(seasonAdapter);
         occasionSpinner.setAdapter(occasionAdapter);
         categorySpinner.setAdapter(categoryAdapter);
+        if(outfit != null){
+            Picasso.get().load(outfit.getUrl()).into(outfitImageView);
+            seasonSpinner.setSelection(outfit.getSeasonId());
+            occasionSpinner.setSelection(outfit.getOccasionId());
+            categorySpinner.setSelection(outfit.getCategoryId());
+            seasonId = outfit.getSeasonId();
+            occasionId = outfit.getOccasionId();
+            categoryId = outfit.getOccasionId();
+        }
 
         seasonSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -180,6 +205,20 @@ public class AddNewOutfitActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == IMAGE_CAPTURE_CODE){
+            final StorageReference reff = ref.child(System.currentTimeMillis()+"."+String.valueOf(image_uri));
+
+            reff.putFile(image_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    reff.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            web_uri = String.valueOf(uri);
+                            submitButton.setEnabled(true);
+                        }
+                    });
+                }
+            });
             outfitImageView.setImageURI(image_uri);
         }
     }

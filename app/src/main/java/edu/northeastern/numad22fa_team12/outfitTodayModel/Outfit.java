@@ -13,6 +13,21 @@ public class Outfit implements Serializable , Parcelable {
     private int seasonId;
     private int occasionId;
 
+    @Override
+    public String toString() {
+        return "Outfit{" +
+                "categoryId=" + categoryId +
+                ", url='" + url + '\'' +
+                ", itemId='" + itemId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", seasonId=" + seasonId +
+                ", occasionId=" + occasionId +
+                '}';
+    }
+
+    public Outfit(){
+
+    }
     public Outfit(int categoryId, String url, String itemId, String userId, int seasonId, int occasionId) {
         this.categoryId = categoryId;
         this.url = url;

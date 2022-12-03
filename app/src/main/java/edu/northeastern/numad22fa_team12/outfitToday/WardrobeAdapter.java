@@ -37,7 +37,7 @@ public class WardrobeAdapter extends RecyclerView.Adapter<WardrobeAdapter.Wardro
     @NonNull
     @Override
     public WardrobeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(context).inflate(R.layout.sticker_item_for_recycleview, parent,false);
+       View view = LayoutInflater.from(context).inflate(R.layout.wardrobe_item_layout, parent,false);
        return new WardrobeHolder(view);
     }
 
@@ -69,6 +69,7 @@ public class WardrobeAdapter extends RecyclerView.Adapter<WardrobeAdapter.Wardro
             String occasion = OccasionEnum.values()[outfit.getOccasionId()].toString();
             String category = CategoryEnum.values()[outfit.getCategoryId()].toString();
             String season = SeasonEnum.values()[outfit.getSeasonId()].toString();
+            System.out.println(outfit.toString());
             Picasso.get().load(outfit.getUrl()).into(imageView);
             description = category+" "+season+" "+occasion;
             textView.setText(description);

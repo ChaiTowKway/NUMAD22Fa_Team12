@@ -24,7 +24,7 @@ import edu.northeastern.numad22fa_team12.outfitTodayModel.Outfit;
 
 public class WardrodeActivity extends AppCompatActivity {
     ArrayList<Outfit> outfits = new ArrayList<>();
-    String id = "";
+    String id = "1";
     RecyclerView wardrobeRecycler;
     private WardrobeAdapter wardrobeAdapter;
     public FirebaseDatabase database;
@@ -55,12 +55,12 @@ public class WardrodeActivity extends AppCompatActivity {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                outfits = new ArrayList<>();
+                outfits.clear();
                 for(DataSnapshot snap: snapshot.getChildren()){
 
                     Outfit t = snap.getValue(Outfit.class);
                     outfits.add(t);
-
+                    System.out.println(1);
                 }
 
                wardrobeAdapter.notifyDataSetChanged();
@@ -91,5 +91,7 @@ public class WardrodeActivity extends AppCompatActivity {
 
 
     }
+
+
 
 }
