@@ -21,6 +21,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.UUID;
 
 import edu.northeastern.numad22fa_team12.R;
@@ -42,7 +45,8 @@ public class AddNewOutfitActivity extends AppCompatActivity {
     int categoryId = 0;
     OutfitDAO dao;
     String userId = "1";
-
+    public FirebaseDatabase database;
+    public DatabaseReference db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +76,11 @@ public class AddNewOutfitActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String id = String.valueOf(UUID.randomUUID());
                 Outfit outfit = new Outfit(categoryId,image_uri.toString(),id,userId ,seasonId,occasionId );
+                database = FirebaseDatabase.getInstance();
+                db = database.getReference("outfit").child(id);
+                db.setValue(outfit);
+
+                finish();
 
             }
         });
