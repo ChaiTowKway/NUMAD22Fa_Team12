@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import edu.northeastern.numad22fa_team12.outfitToday.AddNewOutfitActivity;
 import edu.northeastern.numad22fa_team12.outfitToday.NewUserRegisterActivity;
 import edu.northeastern.numad22fa_team12.outfitToday.OutfitToday;
+import edu.northeastern.numad22fa_team12.outfitToday.WardrodeActivity;
 import edu.northeastern.numad22fa_team12.stickItToEm.RegisterActivity;
 import edu.northeastern.numad22fa_team12.webservice.WebServiceActivity;
 

@@ -4,7 +4,8 @@ public enum CategoryEnum {
     buttoms(0),
     shoes(1),
     tops(2);
-
+    int value;
     CategoryEnum(int i) {
+        value = i;
     }
 }
