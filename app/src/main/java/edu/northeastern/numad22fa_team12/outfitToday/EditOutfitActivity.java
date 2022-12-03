@@ -35,13 +35,14 @@ import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.Outfit;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.OutfitDAO;
 
-public class AddNewOutfitActivity extends AppCompatActivity {
+public class EditOutfitActivity extends AppCompatActivity {
+
+
+
     Button imageAddButton;
     ImageView outfitImageView;
     Button submitButton;
     Uri image_uri;
-    String web_uri;
-    private StorageReference ref = FirebaseStorage.getInstance().getReference();
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
     Spinner occasionSpinner;
@@ -52,29 +53,27 @@ public class AddNewOutfitActivity extends AppCompatActivity {
     int categoryId = 0;
     OutfitDAO dao;
     String userId = "1";
+    Outfit outfit;
+    String web_uri;
     public FirebaseDatabase database;
     public DatabaseReference db;
-    Outfit outfit = null;
+    private StorageReference ref = FirebaseStorage.getInstance().getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_outfit);
+        setContentView(R.layout.activity_edit_outfit);
         if(getIntent().getExtras() != null){
             outfit = getIntent().getExtras().getParcelable("outfit");
         }
-
         dao = new OutfitDAO();
         imageAddButton = findViewById(R.id.image_edit_button);
         outfitImageView = findViewById(R.id.outfit_image_view);
-
-
-
         imageAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     if(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED ||
-                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+                            checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
                         String[] permission = {Manifest.permission.CAMERA , Manifest.permission.WRITE_EXTERNAL_STORAGE};
                         requestPermissions(permission, PERMISSION_CODE);
                     }else{
@@ -85,15 +84,17 @@ public class AddNewOutfitActivity extends AppCompatActivity {
                 }
             }
         });
+
         submitButton = findViewById(R.id.outfitAddSubmitButton1);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String id = String.valueOf(UUID.randomUUID());
-                Outfit outfit = new Outfit(categoryId,web_uri,id,userId ,seasonId,occasionId );
+                String id = outfit.getItemId();
+                String userId = outfit.getUserId();
+                Outfit newOutfit = new Outfit(categoryId,web_uri,id,userId ,seasonId,occasionId );
                 database = FirebaseDatabase.getInstance();
                 db = database.getReference("outfit").child(id);
-                db.setValue(outfit);
+                db.setValue(newOutfit);
 
                 finish();
 
@@ -104,16 +105,16 @@ public class AddNewOutfitActivity extends AppCompatActivity {
         occasionSpinner = findViewById(R.id.occasion_spinner);
         seasonSpinner = findViewById(R.id.season_spinner);
         categorySpinner = findViewById(R.id.category_spinner);
-      String[] seasonList = {"spring","summer","fall","winter"};
-      String[] occasionList = {"casual",
-              "formal",
-              "sports",
-              "work"};
-      String[] categoryList = { "buttoms",
-              "shoes",
-              "tops"};
+        String[] seasonList = {"spring","summer","fall","winter"};
+        String[] occasionList = {"casual",
+                "formal",
+                "sports",
+                "work"};
+        String[] categoryList = { "buttoms",
+                "shoes",
+                "tops"};
         ArrayAdapter seasonAdapter = new ArrayAdapter(this,
-               R.layout.spinner_layout,seasonList);
+                R.layout.spinner_layout,seasonList);
         ArrayAdapter occasionAdapter = new ArrayAdapter(this,
                 R.layout.spinner_layout,occasionList);
         ArrayAdapter categoryAdapter = new ArrayAdapter(this,
@@ -121,7 +122,7 @@ public class AddNewOutfitActivity extends AppCompatActivity {
 
         seasonAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         occasionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-       categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         seasonSpinner.setAdapter(seasonAdapter);
         occasionSpinner.setAdapter(occasionAdapter);
         categorySpinner.setAdapter(categoryAdapter);
@@ -134,12 +135,11 @@ public class AddNewOutfitActivity extends AppCompatActivity {
             occasionId = outfit.getOccasionId();
             categoryId = outfit.getOccasionId();
         }
-
         seasonSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    seasonId = i;
-                    System.out.println(seasonId);
+                seasonId = i;
+                System.out.println(seasonId);
             }
 
             @Override
