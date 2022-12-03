@@ -35,7 +35,7 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(MainActivity.this, AboutActivity.class));
                 break;
             case R.id.button_OutfitToday:
-                startActivity(new Intent(MainActivity.this, WardrodeActivity.class));
+                startActivity(new Intent(MainActivity.this, NewUserRegisterActivity.class));
                 break;
         }
     }
