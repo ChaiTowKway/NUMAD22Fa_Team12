@@ -2,6 +2,7 @@ package edu.northeastern.numad22fa_team12.outfitToday;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,7 +77,7 @@ public class WardrobeAdapter extends RecyclerView.Adapter<WardrobeAdapter.Wardro
                 public void onClick(View view) {
                     Context context = view.getContext();
                     Intent i = new Intent(context , EditOutfitActivity.class);
-                    i.putExtra("outfit" ,outfit);
+                    i.putExtra("outfit" , (Parcelable) outfit);
                     context.startActivity(i);
 
                 }

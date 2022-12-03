@@ -1,8 +1,11 @@
 package edu.northeastern.numad22fa_team12.outfitTodayModel;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
-public class Outfit implements Serializable {
+public class Outfit implements Serializable , Parcelable {
     private int categoryId;
     private String url;
     private String itemId;
@@ -19,6 +22,27 @@ public class Outfit implements Serializable {
         this.occasionId = occasionId;
     }
 
+
+    protected Outfit(Parcel in) {
+        categoryId = in.readInt();
+        url = in.readString();
+        itemId = in.readString();
+        userId = in.readString();
+        seasonId = in.readInt();
+        occasionId = in.readInt();
+    }
+
+    public static final Creator<Outfit> CREATOR = new Creator<Outfit>() {
+        @Override
+        public Outfit createFromParcel(Parcel in) {
+            return new Outfit(in);
+        }
+
+        @Override
+        public Outfit[] newArray(int size) {
+            return new Outfit[size];
+        }
+    };
 
     public int getCategoryId() {
         return categoryId;
@@ -66,5 +90,20 @@ public class Outfit implements Serializable {
 
     public void setOccasionId(int occasionId) {
         this.occasionId = occasionId;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(categoryId);
+        parcel.writeString(url);
+        parcel.writeString(itemId);
+        parcel.writeString(userId);
+        parcel.writeInt(seasonId);
+        parcel.writeInt(occasionId);
     }
 }
