@@ -73,14 +73,14 @@
         android:layout_width="169dp"
         android:layout_height="55dp"
         android:backgroundTint="@color/mainColor"
-        android:text="check wardrobe"
+        android:text="check wardrobe1"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toEndOf="@+id/textViewUser1"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
-        app:layout_constraintVertical_bias="0.222" />
+        app:layout_constraintVertical_bias="0.158" />
 
     <Button
         android:id="@+id/check2Btn"
@@ -88,7 +88,7 @@
         android:layout_height="55dp"
         android:layout_marginTop="37dp"
         android:backgroundTint="@color/mainColor"
-        android:text="check wardrobe"
+        android:text="check wardrobe2"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +102,7 @@
         android:layout_width="169dp"
         android:layout_height="55dp"
         android:backgroundTint="@color/mainColor"
-        android:text="check wardrobe"
+        android:text="check wardrobe3"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
