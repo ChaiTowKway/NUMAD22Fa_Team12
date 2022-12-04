@@ -277,6 +277,12 @@ public class SearchByLocation extends AppCompatActivity {
                     else{
                         Log.d("friends12", "text " + String.valueOf(threeFriends[0][1]));
                         user1.setText(threeFriends[0][1]);
+                        user1Buttonn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        });
 
                     }
 
@@ -291,6 +297,12 @@ public class SearchByLocation extends AppCompatActivity {
                     else{
                         Log.d("friends12", "text " + String.valueOf(threeFriends[1][1]));
                         user2.setText(threeFriends[1][1]);
+                        user2Buttonn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        });
                     }
 
                     TextView user3 = (TextView)findViewById(R.id.textViewUser3);
@@ -303,6 +315,12 @@ public class SearchByLocation extends AppCompatActivity {
                     }else {
                         Log.d("friends12", "text " + String.valueOf(threeFriends[2][1]));
                         user3.setText(threeFriends[2][1]);
+                        user3Buttonn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        });
 
                     }
 
