@@ -23,6 +23,7 @@ public class GetNearbyOutfits  {
     private Map<String, Map> allInfo;
     private double dist;
     private boolean completed = false;
+    private String[][] threeFriends;
 
     //  get all user location info from DB
     // store user location info in a hashmap
@@ -53,7 +54,7 @@ public class GetNearbyOutfits  {
                         }
                     }
 //                    Log.d("RETRIEVE6", "final is " + String.valueOf(allUserLocation));
-                    getNearby("sc@email-com", allUserLocation);
+                    threeFriends = getNearby("sc@email-com", allUserLocation);
                     //mark the test, need to modify the center user ID
                 }
                 completed = true;
@@ -123,6 +124,16 @@ public class GetNearbyOutfits  {
         Location.distanceBetween((double)loc1.get("latitude"), (double)loc1.get("longitude"), (double)loc2.get("latitude"), (double)loc2.get("longitude"), result);
         Log.d("friends7", String.valueOf(result[0]));
         return result[0];
+    }
+
+    public String[][] getThreeFriends(){
+//        Log.d("friends8", "getThreeFriends " + String.valueOf(threeFriends[0][0]));
+//        Log.d("friends9", "getThreeFriends " + String.valueOf(threeFriends[0][1]));
+//        Log.d("friends8", "getThreeFriends " + String.valueOf(threeFriends[1][0]));
+//        Log.d("friends9", "getThreeFriends " + String.valueOf(threeFriends[1][1]));
+//        Log.d("friends8", "getThreeFriends " + String.valueOf(threeFriends[2][0]));
+//        Log.d("friends9", "getThreeFriends " + String.valueOf(threeFriends[2][1]));
+        return threeFriends;
     }
 
 }
