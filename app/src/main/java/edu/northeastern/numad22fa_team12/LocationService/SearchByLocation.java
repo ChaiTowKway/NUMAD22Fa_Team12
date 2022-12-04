@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -28,6 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.northeastern.numad22fa_team12.R;
+import edu.northeastern.numad22fa_team12.outfitToday.WardrodeActivity;
 
 import android.location.Location;
 import android.util.Log;
@@ -280,7 +282,12 @@ public class SearchByLocation extends AppCompatActivity {
                         user1Buttonn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
+//                                //get the first close userId
+//                                String ID = threeFriends[0][0];
+//                                //apply intent
+//                                Intent i = new Intent(getApplicationContext(), WardrodeActivity.class);
+//                                i.putExtra("userId", ID);
+//                                startActivity(i);
                             }
                         });
 
@@ -300,6 +307,12 @@ public class SearchByLocation extends AppCompatActivity {
                         user2Buttonn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+//                                //get the second close userId
+//                                String ID = threeFriends[1][0];
+//                                //apply intent
+//                                Intent i = new Intent(getApplicationContext(), WardrodeActivity.class);
+//                                i.putExtra("userId", ID);
+//                                startActivity(i);
 
                             }
                         });
@@ -318,6 +331,12 @@ public class SearchByLocation extends AppCompatActivity {
                         user3Buttonn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+//                                //get the third close userId
+//                                String ID = threeFriends[2][0];
+//                                //apply intent
+//                                Intent i = new Intent(getApplicationContext(), WardrodeActivity.class);
+//                                i.putExtra("userId", ID);
+//                                startActivity(i);
 
                             }
                         });
