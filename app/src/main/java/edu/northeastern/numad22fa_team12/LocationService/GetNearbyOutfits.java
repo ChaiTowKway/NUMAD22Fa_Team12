@@ -23,11 +23,12 @@ public class GetNearbyOutfits  {
     private Map<String, Map> allInfo;
     private double dist;
     private boolean completed = false;
-    private String[][] threeFriends;
+    public String[][] threeFriends;
 
     //  get all user location info from DB
     // store user location info in a hashmap
-    public Map<String, Map> getAllUserLocation(){
+    //public Map<String, Map> getAllUserLocation(){
+    public String[][] getAllUserLocation(){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
         DatabaseReference usersRef = ref.child("OutfitTodayUsers");
@@ -55,7 +56,12 @@ public class GetNearbyOutfits  {
                     }
 //                    Log.d("RETRIEVE6", "final is " + String.valueOf(allUserLocation));
                     getNearby("sc@email-com", allUserLocation);
-//                    Log.d("friends10", "getThreeFriends " + String.valueOf(threeFriends[0][0]));
+                    Log.d("friends8", "final res " + String.valueOf(threeFriends[0][0]));
+                    Log.d("friends9", "final res " + String.valueOf(threeFriends[0][1]));
+                    Log.d("friends8", "final res " + String.valueOf(threeFriends[1][0]));
+                    Log.d("friends9", "final res " + String.valueOf(threeFriends[1][1]));
+                    Log.d("friends8", "final res " + String.valueOf(threeFriends[2][0]));
+                    Log.d("friends9", "final res " + String.valueOf(threeFriends[2][1]));
 
                     //mark the test, need to modify the center user ID
                 }
@@ -73,7 +79,7 @@ public class GetNearbyOutfits  {
 //        Log.d("RETRIEVE6", String.valueOf(count));
 //        completed = false;
 //        Log.d("RETRIEVE7", String.valueOf(allUserLocation));
-        return allUserLocation;
+        return threeFriends;
     }
 
     //get closest 3 friends
@@ -104,12 +110,12 @@ public class GetNearbyOutfits  {
             threeFriends[i][0] = resUserId;
             threeFriends[i][1] = resUserName;
         }
-        Log.d("friends8", "final res " + String.valueOf(threeFriends[0][0]));
-        Log.d("friends9", "final res " + String.valueOf(threeFriends[0][1]));
-        Log.d("friends8", "final res " + String.valueOf(threeFriends[1][0]));
-        Log.d("friends9", "final res " + String.valueOf(threeFriends[1][1]));
-        Log.d("friends8", "final res " + String.valueOf(threeFriends[2][0]));
-        Log.d("friends9", "final res " + String.valueOf(threeFriends[2][1]));
+//        Log.d("friends8", "final res " + String.valueOf(threeFriends[0][0]));
+//        Log.d("friends9", "final res " + String.valueOf(threeFriends[0][1]));
+//        Log.d("friends8", "final res " + String.valueOf(threeFriends[1][0]));
+//        Log.d("friends9", "final res " + String.valueOf(threeFriends[1][1]));
+//        Log.d("friends8", "final res " + String.valueOf(threeFriends[2][0]));
+//        Log.d("friends9", "final res " + String.valueOf(threeFriends[2][1]));
         return threeFriends;
 
 
@@ -128,14 +134,14 @@ public class GetNearbyOutfits  {
         return result[0];
     }
 
-    public String[][] getThreeFriends(){
-//        Log.d("friends8", "getThreeFriends " + String.valueOf(threeFriends[0][0]));
-//        Log.d("friends9", "getThreeFriends " + String.valueOf(threeFriends[0][1]));
-//        Log.d("friends8", "getThreeFriends " + String.valueOf(threeFriends[1][0]));
-//        Log.d("friends9", "getThreeFriends " + String.valueOf(threeFriends[1][1]));
-//        Log.d("friends8", "getThreeFriends " + String.valueOf(threeFriends[2][0]));
-//        Log.d("friends9", "getThreeFriends " + String.valueOf(threeFriends[2][1]));
-        return threeFriends;
-    }
+//    public String[][] getThreeFriends(){
+////        Log.d("friends8", "getThreeFriends " + String.valueOf(threeFriends[0][0]));
+////        Log.d("friends9", "getThreeFriends " + String.valueOf(threeFriends[0][1]));
+////        Log.d("friends8", "getThreeFriends " + String.valueOf(threeFriends[1][0]));
+////        Log.d("friends9", "getThreeFriends " + String.valueOf(threeFriends[1][1]));
+////        Log.d("friends8", "getThreeFriends " + String.valueOf(threeFriends[2][0]));
+////        Log.d("friends9", "getThreeFriends " + String.valueOf(threeFriends[2][1]));
+//        return threeFriends;
+//    }
 
 }
