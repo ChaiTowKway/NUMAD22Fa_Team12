@@ -15,12 +15,12 @@
         android:textColor="@color/mainColor"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/check1Btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.155" />
+        app:layout_constraintVertical_bias="0.497" />
 
     <TextView
         android:id="@+id/textViewUser1"
@@ -31,12 +31,12 @@
         android:textColor="@color/mainColor"
         android:textSize="20sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
         app:layout_constraintEnd_toStartOf="@+id/check1Btn"
-        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintHorizontal_bias="0.247"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412" />
+        app:layout_constraintVertical_bias="0.832" />
 
     <TextView
         android:id="@+id/textViewUser2"
@@ -47,12 +47,28 @@
         android:textColor="@color/mainColor"
         android:textSize="20sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
         app:layout_constraintEnd_toStartOf="@+id/check2Btn"
-        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintHorizontal_bias="0.243"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.549" />
+        app:layout_constraintVertical_bias="0.88" />
+
+    <TextView
+        android:id="@+id/textViewUser3"
+        android:layout_width="115dp"
+        android:layout_height="47dp"
+        android:text="User3"
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+        app:layout_constraintHorizontal_bias="0.324"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.692" />
 
     <Button
         android:id="@+id/check1Btn"
@@ -81,5 +97,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.556" />
+
+    <Button
+        android:id="@+id/check3Btn"
+        android:layout_width="169dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/mainColor"
+        android:text="check wardrobe"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.802"
+        app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+        app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+        app:layout_constraintVertical_bias="0.142" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
