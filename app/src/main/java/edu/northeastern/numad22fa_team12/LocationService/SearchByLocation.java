@@ -266,13 +266,16 @@ public class SearchByLocation extends AppCompatActivity {
 
                     // display 3 neaby friends to UI
                     TextView user1 = (TextView)findViewById(R.id.textViewUser1);
+                    Log.d("friends12", "text " + String.valueOf(threeFriends[0][1]));
                     user1.setText(threeFriends[0][1]);
 
                     TextView user2 = (TextView)findViewById(R.id.textViewUser2);
-                    user1.setText(threeFriends[0][1]);
+                    Log.d("friends12", "text " + String.valueOf(threeFriends[1][1]));
+                    user2.setText(threeFriends[1][1]);
 
                     TextView user3 = (TextView)findViewById(R.id.textViewUser3);
-                    user1.setText(threeFriends[0][1]);
+                    Log.d("friends12", "text " + String.valueOf(threeFriends[2][1]));
+                    user3.setText(threeFriends[2][1]);
 
                 }
                 completed = true;
@@ -319,6 +322,8 @@ public class SearchByLocation extends AppCompatActivity {
             resUserName = String.valueOf(resUserInfo.get("userName"));
             threeFriends[i][0] = resUserId;
             threeFriends[i][1] = resUserName;
+            Log.d("friends11", "userID " + String.valueOf(resUserId));
+            Log.d("friends11", "distance " + String.valueOf(res.second));
         }
 //        Log.d("friends8", "final res " + String.valueOf(threeFriends[0][0]));
 //        Log.d("friends9", "final res " + String.valueOf(threeFriends[0][1]));
