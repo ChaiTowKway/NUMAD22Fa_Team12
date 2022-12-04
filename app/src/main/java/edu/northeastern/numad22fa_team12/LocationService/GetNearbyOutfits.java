@@ -13,6 +13,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.*;
+// this class get closes 3 nearby users
+// this class has 3 fun
+//1 getAllUserLocation
+//2 getNearby
+//3 getDist(Map loc1, Map loc2)
 public class GetNearbyOutfits  {
     private Map<String, Map>  allUserLocation = new HashMap<>();
     private Map<String, Map> allInfo;
