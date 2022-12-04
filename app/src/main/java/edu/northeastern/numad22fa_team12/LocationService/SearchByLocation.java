@@ -268,6 +268,12 @@ public class SearchByLocation extends AppCompatActivity {
                     TextView user1 = (TextView)findViewById(R.id.textViewUser1);
                     user1.setText(threeFriends[0][1]);
 
+                    TextView user2 = (TextView)findViewById(R.id.textViewUser2);
+                    user1.setText(threeFriends[0][1]);
+
+                    TextView user3 = (TextView)findViewById(R.id.textViewUser3);
+                    user1.setText(threeFriends[0][1]);
+
                 }
                 completed = true;
 
