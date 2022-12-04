@@ -32,6 +32,7 @@ import edu.northeastern.numad22fa_team12.R;
 import android.location.Location;
 import android.util.Log;
 import android.util.Pair;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -164,9 +165,9 @@ public class SearchByLocation extends AppCompatActivity {
 
 
 //        startLocationUpdates();
+        getAllUserLocation();
 
-//        GetNearbyOutfits test = new GetNearbyOutfits();
-//        test.getAllUserLocation();
+
 
 
 
@@ -208,11 +209,11 @@ public class SearchByLocation extends AppCompatActivity {
 //                                Log.i(TAG, "location1 is " + latiLoti[0] + " : " + latiLoti[1]);
                                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference ref = database.getReference();
-                                DatabaseReference usersRef = ref.child("OutfitTodayUsers").child("test1@gmail-com").child("userInfo");
+                                DatabaseReference usersRef = ref.child("OutfitTodayUsers").child("testa1@gmail-com").child("userInfo");
 
                                 Map<String, Double> userLocation = new HashMap<>();
                                 userLocation.put("latitude", location.getLatitude());
-                                userLocation.put("longtitude", location.getLongitude());
+                                userLocation.put("longitude", location.getLongitude());
 
                                 usersRef.child("location").setValue(userLocation);
 //                                Log.i(TAG, "child " + ref);
@@ -262,6 +263,11 @@ public class SearchByLocation extends AppCompatActivity {
                     Log.d("friends9", "final res " + String.valueOf(threeFriends[2][1]));
 
                     //mark the test, need to modify the center user ID
+
+                    // display 3 neaby friends to UI
+                    TextView user1 = (TextView)findViewById(R.id.textViewUser1);
+                    user1.setText(threeFriends[0][1]);
+
                 }
                 completed = true;
 
