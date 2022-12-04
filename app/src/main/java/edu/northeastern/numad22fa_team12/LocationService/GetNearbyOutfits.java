@@ -74,7 +74,8 @@ public class GetNearbyOutfits  {
         Log.d("friends4", String.valueOf(allInfo.keySet()));
         PriorityQueue<Pair<String, Double>> pQueue = new PriorityQueue<>((a, b) -> (int)(a.second - b.second));
         for (String userId : allInfo.keySet()){
-            if(userId != centerUserId) {
+            if(!userId.equals(centerUserId)) {
+                Log.d("friends check", String.valueOf(userId) + String.valueOf(centerUserId));
                 dist = getDist(allUserLocations.get(centerUserId), allUserLocations.get(userId));
                 Log.d("friends2", String.valueOf(dist));
                 Pair<String, Double> next = new Pair<>(userId, dist);
