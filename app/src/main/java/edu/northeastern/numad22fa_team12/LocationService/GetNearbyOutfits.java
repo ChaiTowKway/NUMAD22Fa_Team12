@@ -134,6 +134,7 @@ public class GetNearbyOutfits  {
         return result[0];
     }
 
+//helper fundtion to get private instance variable
 //    public String[][] getThreeFriends(){
 ////        Log.d("friends8", "getThreeFriends " + String.valueOf(threeFriends[0][0]));
 ////        Log.d("friends9", "getThreeFriends " + String.valueOf(threeFriends[0][1]));
