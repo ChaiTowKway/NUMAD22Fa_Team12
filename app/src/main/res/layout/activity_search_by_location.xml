@@ -10,7 +10,7 @@
         android:id="@+id/textViewTitle"
         android:layout_width="264dp"
         android:layout_height="49dp"
-        android:text="Here are your nearby friends!"
+        android:text="Here are your 3 nearby friends!"
         android:textAlignment="center"
         android:textColor="@color/mainColor"
         android:textSize="20sp"
