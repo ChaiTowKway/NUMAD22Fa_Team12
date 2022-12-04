@@ -74,11 +74,13 @@ public class GetNearbyOutfits  {
         Log.d("friends4", String.valueOf(allInfo.keySet()));
         PriorityQueue<Pair<String, Double>> pQueue = new PriorityQueue<>((a, b) -> (int)(a.second - b.second));
         for (String userId : allInfo.keySet()){
-            dist = getDist(allUserLocations.get(centerUserId), allUserLocations.get(userId));
-            Log.d("friends2", String.valueOf(dist));
-            Pair<String, Double> next = new Pair<>(userId, dist);
-            Log.d("friends3", String.valueOf(next));
-            pQueue.add(next);
+            if(userId != centerUserId) {
+                dist = getDist(allUserLocations.get(centerUserId), allUserLocations.get(userId));
+                Log.d("friends2", String.valueOf(dist));
+                Pair<String, Double> next = new Pair<>(userId, dist);
+                Log.d("friends3", String.valueOf(next));
+                pQueue.add(next);
+            }
         }
 
         String[][] result = new String[3][2];
@@ -94,7 +96,7 @@ public class GetNearbyOutfits  {
         }
         Log.d("friends8", "final res " + String.valueOf(result[0][0]));
         Log.d("friends9", "final res " + String.valueOf(result[0][1]));
-        Log.d("friends8", "final res " + String.valueOf(result[1][0]) );
+        Log.d("friends8", "final res " + String.valueOf(result[1][0]));
         Log.d("friends9", "final res " + String.valueOf(result[1][1]));
         Log.d("friends8", "final res " + String.valueOf(result[2][0]));
         Log.d("friends9", "final res " + String.valueOf(result[2][1]));
