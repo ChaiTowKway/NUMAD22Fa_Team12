@@ -32,6 +32,8 @@ import edu.northeastern.numad22fa_team12.R;
 import android.location.Location;
 import android.util.Log;
 import android.util.Pair;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -266,29 +268,42 @@ public class SearchByLocation extends AppCompatActivity {
 
                     // display 3 neaby friends to UI
                     TextView user1 = (TextView)findViewById(R.id.textViewUser1);
-                    if(threeFriends[0][1] == null){
+                    Button user1Buttonn = findViewById(R.id.check1Btn);
+                    if(threeFriends[0][1] == null || threeFriends[0][1].equals("")){
                         user1.setText("");
+                        Log.d("friends12", "text " + String.valueOf(threeFriends[0][1]));
+                        user1Buttonn.setVisibility(View.INVISIBLE);
                     }
                     else{
-                    Log.d("friends12", "text " + String.valueOf(threeFriends[0][1]));
-                    user1.setText(threeFriends[0][1]);
+                        Log.d("friends12", "text " + String.valueOf(threeFriends[0][1]));
+                        user1.setText(threeFriends[0][1]);
+
                     }
 
                     TextView user2 = (TextView)findViewById(R.id.textViewUser2);
-                    if(threeFriends[1][1] == null){
+                    Button user2Buttonn = findViewById(R.id.check2Btn);
+                    Log.d("friends111", "IS NULL?? " + String.valueOf(threeFriends[1][1]));
+                    if(threeFriends[1][1] == null || threeFriends[1][1].equals("")){
+                        Log.d("friends111", "IS NULL?? " + String.valueOf(threeFriends[1][1]));
                         user2.setText("");
+                        user2Buttonn.setVisibility(View.INVISIBLE);
                     }
                     else{
-                    Log.d("friends12", "text " + String.valueOf(threeFriends[1][1]));
-                    user2.setText(threeFriends[1][1]);
+                        Log.d("friends12", "text " + String.valueOf(threeFriends[1][1]));
+                        user2.setText(threeFriends[1][1]);
                     }
 
                     TextView user3 = (TextView)findViewById(R.id.textViewUser3);
-                    if(threeFriends[0][1] == null){
+                    Button user3Buttonn = findViewById(R.id.check3Btn);
+                    if(threeFriends[2][1] == null || threeFriends[2][1].equals("")){
                         user3.setText("");
+                        Log.d("friends12", "text " + String.valueOf(threeFriends[2][1]));
+                        user3Buttonn.setVisibility(View.INVISIBLE);
+
                     }else {
                         Log.d("friends12", "text " + String.valueOf(threeFriends[2][1]));
                         user3.setText(threeFriends[2][1]);
+
                     }
 
                 }
