@@ -54,6 +54,7 @@ public class GetNearbyOutfits  {
                     }
 //                    Log.d("RETRIEVE6", "final is " + String.valueOf(allUserLocation));
                     getNearby("sc@email-com", allUserLocation);
+                    //mark the test, need to modify the center user ID
                 }
                 completed = true;
 
