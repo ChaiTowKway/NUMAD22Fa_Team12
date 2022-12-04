@@ -146,3 +146,3041 @@ public class GetNearbyOutfits  {
 //    }
 
 }
+
+
+
+//
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
+//
+//    <?xml version="1.0" encoding="utf-8"?>
+//<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:app="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context=".LocationService.SearchByLocation">
+//
+//<TextView
+//        android:id="@+id/textViewTitle"
+//                android:layout_width="264dp"
+//                android:layout_height="49dp"
+//                android:text="Here are your 3 nearby friends!"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold"
+//                app:layout_constraintBottom_toTopOf="@+id/check1Btn"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.496"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.497" />
+//
+//<TextView
+//        android:id="@+id/textViewUser1"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User1"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser2"
+//                app:layout_constraintEnd_toStartOf="@+id/check1Btn"
+//                app:layout_constraintHorizontal_bias="0.247"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.832" />
+//
+//<TextView
+//        android:id="@+id/textViewUser2"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User2"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toTopOf="@+id/textViewUser3"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.243"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.88" />
+//
+//<TextView
+//        android:id="@+id/textViewUser3"
+//                android:layout_width="115dp"
+//                android:layout_height="47dp"
+//                android:text="User3"
+//                android:textAlignment="center"
+//                android:textColor="@color/mainColor"
+//                android:textSize="20sp"
+//                android:textStyle="bold|italic"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toStartOf="@+id/check2Btn"
+//                app:layout_constraintHorizontal_bias="0.324"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.692" />
+//
+//<Button
+//        android:id="@+id/check1Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.926"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.405" />
+//
+//<Button
+//        android:id="@+id/check2Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.933"
+//                app:layout_constraintStart_toStartOf="parent"
+//                app:layout_constraintTop_toTopOf="parent"
+//                app:layout_constraintVertical_bias="0.556" />
+//
+//<Button
+//        android:id="@+id/check3Btn"
+//                android:layout_width="169dp"
+//                android:layout_height="55dp"
+//                android:backgroundTint="@color/mainColor"
+//                android:text="check wardrobe"
+//                android:textSize="15sp"
+//                app:layout_constraintBottom_toBottomOf="parent"
+//                app:layout_constraintEnd_toEndOf="parent"
+//                app:layout_constraintHorizontal_bias="0.802"
+//                app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+//                app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+//                app:layout_constraintVertical_bias="0.142" />
+//
+//</androidx.constraintlayout.widget.ConstraintLayout>
