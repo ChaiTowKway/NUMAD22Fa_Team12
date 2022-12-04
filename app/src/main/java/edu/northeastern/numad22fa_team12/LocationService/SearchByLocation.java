@@ -38,7 +38,11 @@ public class SearchByLocation extends AppCompatActivity {
     LocationRequest locationRequest;
     LocationCallback locationCallback;
 
-
+//This activity get the current location of user
+    // and update the location into the firebase
+    // the location is in the format of map
+    // key is laltitue
+    //value is longitude
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
