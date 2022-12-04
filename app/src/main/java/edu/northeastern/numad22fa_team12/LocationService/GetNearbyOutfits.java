@@ -54,7 +54,9 @@ public class GetNearbyOutfits  {
                         }
                     }
 //                    Log.d("RETRIEVE6", "final is " + String.valueOf(allUserLocation));
-                    threeFriends = getNearby("sc@email-com", allUserLocation);
+                    getNearby("sc@email-com", allUserLocation);
+//                    Log.d("friends10", "getThreeFriends " + String.valueOf(threeFriends[0][0]));
+
                     //mark the test, need to modify the center user ID
                 }
                 completed = true;
@@ -91,7 +93,7 @@ public class GetNearbyOutfits  {
             }
         }
 
-        String[][] result = new String[3][2];
+        threeFriends = new String[3][2];
         String resUserId;
         String resUserName;
         for(int i = 0; i < 3; i++){
@@ -99,16 +101,16 @@ public class GetNearbyOutfits  {
             resUserId = res.first;
             Map<String, Map> resUserInfo = (Map)allInfo.get(resUserId).get("userInfo");
             resUserName = String.valueOf(resUserInfo.get("userName"));
-            result[i][0] = resUserId;
-            result[i][1] = resUserName;
+            threeFriends[i][0] = resUserId;
+            threeFriends[i][1] = resUserName;
         }
-        Log.d("friends8", "final res " + String.valueOf(result[0][0]));
-        Log.d("friends9", "final res " + String.valueOf(result[0][1]));
-        Log.d("friends8", "final res " + String.valueOf(result[1][0]));
-        Log.d("friends9", "final res " + String.valueOf(result[1][1]));
-        Log.d("friends8", "final res " + String.valueOf(result[2][0]));
-        Log.d("friends9", "final res " + String.valueOf(result[2][1]));
-        return result;
+        Log.d("friends8", "final res " + String.valueOf(threeFriends[0][0]));
+        Log.d("friends9", "final res " + String.valueOf(threeFriends[0][1]));
+        Log.d("friends8", "final res " + String.valueOf(threeFriends[1][0]));
+        Log.d("friends9", "final res " + String.valueOf(threeFriends[1][1]));
+        Log.d("friends8", "final res " + String.valueOf(threeFriends[2][0]));
+        Log.d("friends9", "final res " + String.valueOf(threeFriends[2][1]));
+        return threeFriends;
 
 
     }
