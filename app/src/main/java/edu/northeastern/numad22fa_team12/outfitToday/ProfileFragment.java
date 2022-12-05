@@ -19,8 +19,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
@@ -123,22 +125,19 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        userRef.child(userEmailKey).child("wardrobe").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        userRef.child(userEmailKey).child("wardrobe").addValueEventListener(new ValueEventListener() {
             @SuppressLint("DefaultLocale")
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                    Log.e(TAG, "Error getting data", task.getException());
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long wardrobeCount = snapshot.getChildrenCount();
+                Log.d(TAG, "wardobe count: " + wardrobeCount);
+                if (wardrobeTV != null) {
+                    wardrobeTV.setText(String.format("Wardrobe Stock: %d", wardrobeCount));
                 }
-                else {
-                    DataSnapshot snapshot = task.getResult();
-                    long wardrobeCount = snapshot.getChildrenCount();
-                    Log.d(TAG, "wardobe count: " + wardrobeCount);
-                    if (wardrobeTV != null) {
-                        wardrobeTV.setText(String.format("Wardrobe Stock: %d", wardrobeCount));
-                    }
-                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

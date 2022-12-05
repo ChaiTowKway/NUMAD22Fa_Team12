@@ -59,7 +59,6 @@ public class EditOutfitActivity extends AppCompatActivity {
     Outfit outfit;
     String web_uri;
     public FirebaseDatabase database;
-    public DatabaseReference db;
     private DatabaseReference userRef;
     private FirebaseAuth userAuth;
     private StorageReference ref = FirebaseStorage.getInstance().getReference();
@@ -90,6 +89,8 @@ public class EditOutfitActivity extends AppCompatActivity {
             }
         });
 
+        database = FirebaseDatabase.getInstance();
+
         userRef = database.getReference().child("OutfitTodayUsers");
         userAuth = FirebaseAuth.getInstance();
         if (userAuth.getCurrentUser() != null && userAuth.getCurrentUser().getEmail() != null) {
@@ -103,7 +104,6 @@ public class EditOutfitActivity extends AppCompatActivity {
                 String id = outfit.getItemId();
                 String userId = outfit.getUserId();
                 Outfit newOutfit = new Outfit(categoryId,web_uri,id,userId ,seasonId,occasionId );
-                database = FirebaseDatabase.getInstance();
                 database.getReference("outfit").child(id).setValue(newOutfit);
 
                 String occasion = OccasionEnum.values()[outfit.getOccasionId()].toString();
@@ -112,8 +112,8 @@ public class EditOutfitActivity extends AppCompatActivity {
 
                 Item item = new Item(seasonId, occasionId, categoryId, web_uri);
                 userRef.child(userId).child("wardrobe").child(id).setValue(item);
-                userRef.child(userId).child(category).child("occasion").child(occasion).child(id).setValue(web_uri);
-                userRef.child(userId).child(category).child("season").child(season).child(id).setValue(web_uri);
+                userRef.child(userId).child("categoryList").child(category).child("occasion").child(occasion).child(id).setValue(web_uri);
+                userRef.child(userId).child("categoryList").child(category).child("season").child(season).child(id).setValue(web_uri);
 
                 finish();
 

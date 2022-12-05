@@ -183,9 +183,9 @@ public class AddNewOutfitActivity extends AppCompatActivity {
 
                 Item item = new Item(seasonId, occasionId, categoryId, web_uri);
                 userRef.child(userId).child("wardrobe").child(imageId).setValue(item);
-                userRef.child(userId).child(category).child("occasion").child(occasion).child(imageId).setValue(web_uri);
-                userRef.child(userId).child(category).child("season").child(season).child(imageId).setValue(web_uri);
-
+                userRef.child(userId).child("categoryList").child(category).child("occasion").child(occasion).child(imageId).setValue(web_uri);
+                userRef.child(userId).child("categoryList").child(category).child("season").child(season).child(imageId).setValue(web_uri);
+                userRef.child(userId).child("categoryList").child(category).child("season").child("all").child(imageId).setValue(web_uri);
                 finish();
 
             }
