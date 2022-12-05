@@ -54,7 +54,7 @@ public class SearchByLocation extends AppCompatActivity {
     private static final int PERMISSION_CODE = 99;
     private static final String TAG = "GPS";
 //    Double[] latiLoti = new Double[2];
-    LocationRequest locationRequest;
+//    LocationRequest locationRequest;
     LocationCallback locationCallback;
 
     private Map<String, Map>  allUserLocation = new HashMap<>();
@@ -76,12 +76,12 @@ public class SearchByLocation extends AppCompatActivity {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        locationRequest = new LocationRequest();
-        locationRequest.setInterval(10000);
-        locationRequest.setFastestInterval(5000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest);
+//        locationRequest = new LocationRequest();
+//        locationRequest.setInterval(10000);
+//        locationRequest.setFastestInterval(5000);
+//        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+//        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+//                .addLocationRequest(locationRequest);
 
 //        final FirebaseDatabase database = FirebaseDatabase.getInstance();
 //        DatabaseReference ref = database.getReference();
@@ -166,32 +166,25 @@ public class SearchByLocation extends AppCompatActivity {
             updateGPS();
         }
 
-
-
 //        startLocationUpdates();
-        getAllUserLocation();
-
-
-
-
-
+//        getAllUserLocation();
 
 
     }
 
 
 
-    public void startLocationUpdates() {
-        Log.i(TAG, "an update");
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            Log.i(TAG, "need both approval");
-//            ActivityCompat.requestPermissions(GPSActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_CODE);
-            return;
-        }
-        // call get latest location function       how to call        call
-        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
-
-    }
+//    public void startLocationUpdates() {
+//        Log.i(TAG, "an update");
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+////            Log.i(TAG, "need both approval");
+////            ActivityCompat.requestPermissions(GPSActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_CODE);
+//            return;
+//        }
+//        // call get latest location function       how to call        call
+//        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+//
+//    }
 
     //just make sure location is not null and user has given GPS permission
     public void updateGPS() {
@@ -199,11 +192,11 @@ public class SearchByLocation extends AppCompatActivity {
             Log.i(TAG, "need both approval");
             ActivityCompat.requestPermissions(SearchByLocation.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_CODE);
         }else {
-            fusedLocationClient.getLastLocation()
+            fusedLocationClient.getCurrentLocation(100,null)
                     .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                         @Override
                         public void onSuccess(Location location) {
-                            Log.i(TAG, "success got location");
+                            Log.i("GPS44", "success got location");
                             // Got last known location. In some rare situations this can be null.
                             if (location != null) {
                                 // Logic to handle location object
@@ -211,9 +204,12 @@ public class SearchByLocation extends AppCompatActivity {
 //                                latiLoti[1] = location.getLongitude();
 
 //                                Log.i(TAG, "location1 is " + latiLoti[0] + " : " + latiLoti[1]);
+                                Log.i("GPS55", "11111");
+                                Log.i("GPS444", "userlocation" + String.valueOf(location.getLatitude()));
+                                Log.i("GPS444", "userlocation" + String.valueOf(location.getLongitude()));
                                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference ref = database.getReference();
-                                DatabaseReference usersRef = ref.child("OutfitTodayUsers").child("testa1@gmail-com").child("userInfo");
+                                DatabaseReference usersRef = ref.child("OutfitTodayUsers").child("sc@email-com").child("userInfo");
 
                                 Map<String, Double> userLocation = new HashMap<>();
                                 userLocation.put("latitude", location.getLatitude());
@@ -371,6 +367,8 @@ public class SearchByLocation extends AppCompatActivity {
             if(!userId.equals(centerUserId)) {
                 Log.d("friends check", String.valueOf(userId) + String.valueOf(centerUserId));
                 dist = getDist(allUserLocations.get(centerUserId), allUserLocations.get(userId));
+                Log.d("friends33", String.valueOf(allUserLocations.get(centerUserId)));
+                Log.d("friends3", String.valueOf( allUserLocations.get(userId)));
                 Log.d("friends2", String.valueOf(dist));
                 Pair<String, Double> next = new Pair<>(userId, dist);
                 Log.d("friends3", String.valueOf(next));
