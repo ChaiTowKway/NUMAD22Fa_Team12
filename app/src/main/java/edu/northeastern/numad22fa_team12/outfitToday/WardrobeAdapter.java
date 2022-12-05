@@ -28,11 +28,12 @@ import edu.northeastern.numad22fa_team12.outfitTodayModel.SeasonEnum;
 public class WardrobeAdapter extends RecyclerView.Adapter<WardrobeAdapter.WardrobeHolder> {
     private Context context;
     private List<Outfit> outfit;
+    private boolean viewMyWardrobe;
 
-    public WardrobeAdapter(Context  context , List<Outfit> outfit){
+    public WardrobeAdapter(Context  context , List<Outfit> outfit, boolean viewMyWardrobe){
         this.context = context;
         this.outfit = outfit;
-
+        this.viewMyWardrobe = viewMyWardrobe;
     }
     @NonNull
     @Override
@@ -60,7 +61,8 @@ public class WardrobeAdapter extends RecyclerView.Adapter<WardrobeAdapter.Wardro
             imageView = itemView.findViewById(R.id.outfit_item_image_view);
             textView = itemView.findViewById(R.id.outfit_description_text);
             editButton = itemView.findViewById(R.id.outfit_item_edit_button);
-
+            // if viewing other's wardrobe, won't have the edit button
+            if (!viewMyWardrobe) editButton.setVisibility(View.GONE);
         }
 
 

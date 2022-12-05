@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -32,12 +33,14 @@ import com.squareup.picasso.Picasso;
 import java.util.UUID;
 
 import edu.northeastern.numad22fa_team12.R;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.CategoryEnum;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.Item;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.OccasionEnum;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.Outfit;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.OutfitDAO;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.SeasonEnum;
 
 public class EditOutfitActivity extends AppCompatActivity {
-
-
 
     Button imageAddButton;
     ImageView outfitImageView;
@@ -57,6 +60,8 @@ public class EditOutfitActivity extends AppCompatActivity {
     String web_uri;
     public FirebaseDatabase database;
     public DatabaseReference db;
+    private DatabaseReference userRef;
+    private FirebaseAuth userAuth;
     private StorageReference ref = FirebaseStorage.getInstance().getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +90,12 @@ public class EditOutfitActivity extends AppCompatActivity {
             }
         });
 
+        userRef = database.getReference().child("OutfitTodayUsers");
+        userAuth = FirebaseAuth.getInstance();
+        if (userAuth.getCurrentUser() != null && userAuth.getCurrentUser().getEmail() != null) {
+            userId = userAuth.getCurrentUser().getEmail().replace(".", "-");
+        }
+
         submitButton = findViewById(R.id.outfitAddSubmitButton1);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,8 +104,16 @@ public class EditOutfitActivity extends AppCompatActivity {
                 String userId = outfit.getUserId();
                 Outfit newOutfit = new Outfit(categoryId,web_uri,id,userId ,seasonId,occasionId );
                 database = FirebaseDatabase.getInstance();
-                db = database.getReference("outfit").child(id);
-                db.setValue(newOutfit);
+                database.getReference("outfit").child(id).setValue(newOutfit);
+
+                String occasion = OccasionEnum.values()[outfit.getOccasionId()].toString();
+                String category = CategoryEnum.values()[outfit.getCategoryId()].toString();
+                String season = SeasonEnum.values()[outfit.getSeasonId()].toString();
+
+                Item item = new Item(seasonId, occasionId, categoryId, web_uri);
+                userRef.child(userId).child("wardrobe").child(id).setValue(item);
+                userRef.child(userId).child(category).child("occasion").child(occasion).child(id).setValue(web_uri);
+                userRef.child(userId).child(category).child("season").child(season).child(id).setValue(web_uri);
 
                 finish();
 
