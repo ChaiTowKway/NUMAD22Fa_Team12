@@ -62,6 +62,7 @@ public class SearchByLocation extends AppCompatActivity {
     private double dist;
     private boolean completed = false;
     public String[][] threeFriends;
+    public String centerUserId;
 
 //This activity get the current location of user
     // and update the location into the firebase
@@ -73,7 +74,8 @@ public class SearchByLocation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_by_location);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-
+        Intent nearbyIntent = getIntent();
+        centerUserId = nearbyIntent.getStringExtra("centerUserId");
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
 //        locationRequest = new LocationRequest();
@@ -209,7 +211,7 @@ public class SearchByLocation extends AppCompatActivity {
                                 Log.i("GPS444", "userlocation" + String.valueOf(location.getLongitude()));
                                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference ref = database.getReference();
-                                DatabaseReference usersRef = ref.child("OutfitTodayUsers").child("sc@email-com").child("userInfo");
+                                DatabaseReference usersRef = ref.child("OutfitTodayUsers").child(centerUserId).child("userInfo");
 
                                 Map<String, Double> userLocation = new HashMap<>();
                                 userLocation.put("latitude", location.getLatitude());
@@ -254,7 +256,7 @@ public class SearchByLocation extends AppCompatActivity {
                         }
                     }
 //                    Log.d("RETRIEVE6", "final is " + String.valueOf(allUserLocation));
-                    getNearby("sc@email-com", allUserLocation);
+                    getNearby(centerUserId, allUserLocation);
                     Log.d("friends8", "final res " + String.valueOf(threeFriends[0][0]));
                     Log.d("friends9", "final res " + String.valueOf(threeFriends[0][1]));
                     Log.d("friends8", "final res " + String.valueOf(threeFriends[1][0]));
