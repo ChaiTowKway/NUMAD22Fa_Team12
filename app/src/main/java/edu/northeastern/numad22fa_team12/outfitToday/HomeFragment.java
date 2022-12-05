@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,9 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import edu.northeastern.numad22fa_team12.R;
-import edu.northeastern.numad22fa_team12.outfitTodayModel.CategoryList;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.OccasionsList;
-import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,15 +33,13 @@ public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public TextView minMaxTempTv, avgTempTv;
+    public TextView minMaxTempTv, avgTempTv, occasionTv, warmthTv;
+    public ImageView warmthImage, topImage, bottomImage, shoeImage;
     public String minTemp, maxTemp, avgTemp;
     private FirebaseDatabase database;
     private DatabaseReference userRef;
     private FirebaseAuth userAuth;
     private String userEmail = "",userEmailKey = "";
-
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -50,15 +47,6 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -85,6 +73,7 @@ public class HomeFragment extends Fragment {
         getCurrUserInfo();
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -92,12 +81,19 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         minMaxTempTv = (TextView) view.findViewById(R.id.minMaxTemp);
         avgTempTv = (TextView) view.findViewById(R.id.avgTemp);
-        setHomePageTextView();
+        occasionTv = (TextView) view.findViewById(R.id.curOccasion);
+
+        warmthTv = (TextView) view.findViewById(R.id.todayWarmth);
+        warmthImage = (ImageView) view.findViewById(R.id.warmthImage);
+        topImage = (ImageView) view.findViewById(R.id.topImage);
+        bottomImage = (ImageView) view.findViewById(R.id.bottomImage);
+        shoeImage = (ImageView) view.findViewById(R.id.shoeImage);
+        setWeatherTextViewImageView();
         return view;
     }
 
     @SuppressLint("DefaultLocale")
-    public void setHomePageTextView() {
+    public void setWeatherTextViewImageView() {
         if (getArguments() != null && getArguments().getStringArray("tempData") != null) {
             String[] tempData = getArguments().getStringArray("tempData");
             minTemp = tempData[0];
@@ -108,9 +104,28 @@ public class HomeFragment extends Fragment {
                 minMaxTempTv.setText(String.format("L: %s°F / H: %s°F", minTemp, maxTemp));
                 avgTempTv.setText(String.format("Today's temperature: %.2f°F", Float.valueOf(avgTemp)));
             }
+            if (warmthTv != null && warmthImage != null) {
+                // set the warmthTV and image based on the current temperature
+                int tempInInt = Math.round(Float.parseFloat(avgTemp));
+                if (tempInInt <= 50) {
+                    warmthTv.setText("Today is cold!");
+                    warmthImage.setImageResource(R.drawable.cold);
+                } else if (tempInInt > 90) {
+                    warmthTv.setText("Today is hot!");
+                    warmthImage.setImageResource(R.drawable.hot);
+                } else {
+                    warmthTv.setText("Today is warm!");
+                    warmthImage.setImageResource(R.drawable.warm);
+                }
+            }
         }
     }
 
+    public void setOccasionTextView(String curOccasion) {
+        if (occasionTv != null) {
+            occasionTv.setText(curOccasion);
+        }
+    }
     public void getCurrUserInfo() {
         userRef.child(userEmailKey).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @SuppressLint("DefaultLocale")
@@ -121,9 +136,16 @@ public class HomeFragment extends Fragment {
                 }
                 else {
                     OccasionsList occasionsList = task.getResult().child("occasionsList").getValue(OccasionsList.class);
+                    if (occasionsList != null && occasionsList.checkOccasion() != "No occasion configured") {
+                        String curOccasion = occasionsList.checkOccasion();
+                        Log.d(TAG, "current occasion: " + curOccasion);
+                        setOccasionTextView("Occasion based on your setting: " + curOccasion);
+                    } else {
+                        Log.d(TAG, "No occasion found!");
+                        setOccasionTextView("No occasion found, add occasions for better suggestion!");
+                    }
                     // TODO: The categoryList has to be generated manually
 //                    CategoryList categoryList = task.getResult().child("categoryList").getValue(CategoryList.class);
-                    Log.d(TAG, "data get successfully");
 
                 }
             }

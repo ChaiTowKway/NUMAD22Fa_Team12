@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="mainColor">#F5BC7C8A</color>
     <color name="warningColor">#4A779E</color>
+    <color name="cardViewColor">#D9E4EC</color>
+    <color name="fragmentBackgroundColor">#EBEFF1</color>
 </resources>
