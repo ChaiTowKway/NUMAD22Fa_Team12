@@ -24,6 +24,7 @@ import java.time.LocalDate;
 
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.OccasionsList;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.SeasonEnum;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -156,19 +157,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         Log.d(TAG, "No occasion found!");
                         setOccasionTextView("No occasion found, add occasions for better suggestion!");
                     }
-                    // TODO: The categoryList has to be generated manually
-//                    CategoryList categoryList = task.getResult().child("categoryList").getValue(CategoryList.class);
 
                 }
             }
         });
     }
 
-    private int checkCurSeason() {
+    private String checkCurSeason() {
         LocalDate currentDate = LocalDate.now();
         int currentMonth = currentDate.getMonthValue();
-        // return the seasonEnum ID
-        return (currentMonth - 1) / 3;
+        return SeasonEnum.values()[(currentMonth - 1) / 3].toString();
     }
 
 }
