@@ -167,7 +167,7 @@ public class SearchByLocation extends AppCompatActivity {
         }
 
 //        startLocationUpdates();
-//        getAllUserLocation();
+        getAllUserLocation();
 
 
     }
