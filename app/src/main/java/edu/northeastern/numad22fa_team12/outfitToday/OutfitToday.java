@@ -149,6 +149,7 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
         int buttonID = v.getId();
         switch (buttonID) {
             case R.id.button_myWardrobe:
+                startActivity(new Intent(this, WardrodeActivity.class));
                 break;
             case R.id.button_myOccasions:
                 Intent myOccasionsIntent = new Intent(this, MyOccasions.class);
