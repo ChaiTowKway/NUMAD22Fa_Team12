@@ -51,6 +51,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.northeastern.numad22fa_team12.LocationService.SearchByLocation;
 import edu.northeastern.numad22fa_team12.MainActivity;
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.databinding.ActivityOutfitTodayBinding;
@@ -160,6 +161,9 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
                 startActivity(myOutfitSuggestionIntent);
                 break;
             case R.id.button_nearbyOutfits:
+                Intent nearbyIntent = new Intent(getApplicationContext(), SearchByLocation.class);
+                nearbyIntent.putExtra("centerUserId", userEmailKey);
+                startActivity(nearbyIntent);
                 break;
             case R.id.button_updateMyProfile:
                 Log.d(TAG, "onClick: update my profile");
