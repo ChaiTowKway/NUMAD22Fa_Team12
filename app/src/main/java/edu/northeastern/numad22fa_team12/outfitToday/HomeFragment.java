@@ -20,6 +20,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalDate;
+
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.OccasionsList;
 
@@ -28,12 +30,13 @@ import edu.northeastern.numad22fa_team12.outfitTodayModel.OccasionsList;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "HomeFragment";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public TextView minMaxTempTv, avgTempTv, occasionTv, warmthTv;
+    public TextView topPre, topNxt, bottomPre, bottomNxt, shoePre, shoeNxt;
     public ImageView warmthImage, topImage, bottomImage, shoeImage;
     public String minTemp, maxTemp, avgTemp;
     private FirebaseDatabase database;
@@ -88,11 +91,19 @@ public class HomeFragment extends Fragment {
         topImage = (ImageView) view.findViewById(R.id.topImage);
         bottomImage = (ImageView) view.findViewById(R.id.bottomImage);
         shoeImage = (ImageView) view.findViewById(R.id.shoeImage);
+
+
+
         setWeatherTextViewImageView();
         return view;
     }
 
-    @SuppressLint("DefaultLocale")
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     public void setWeatherTextViewImageView() {
         if (getArguments() != null && getArguments().getStringArray("tempData") != null) {
             String[] tempData = getArguments().getStringArray("tempData");
@@ -101,8 +112,8 @@ public class HomeFragment extends Fragment {
             avgTemp = tempData[2];
             Log.d(TAG, String.format("maxT: %s, minT: %s, avgT: %s", maxTemp, minTemp, avgTemp));
             if (minMaxTempTv != null && avgTempTv != null) {
-                minMaxTempTv.setText(String.format("L: %s°F / H: %s°F", minTemp, maxTemp));
-                avgTempTv.setText(String.format("Today's temperature: %.2f°F", Float.valueOf(avgTemp)));
+                minMaxTempTv.setText(String.format("Low: %s°F / High: %s°F", minTemp, maxTemp));
+                avgTempTv.setText(String.format("Average: %.2f°F", Float.valueOf(avgTemp)));
             }
             if (warmthTv != null && warmthImage != null) {
                 // set the warmthTV and image based on the current temperature
@@ -126,6 +137,7 @@ public class HomeFragment extends Fragment {
             occasionTv.setText(curOccasion);
         }
     }
+
     public void getCurrUserInfo() {
         userRef.child(userEmailKey).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @SuppressLint("DefaultLocale")
@@ -150,6 +162,13 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private int checkCurSeason() {
+        LocalDate currentDate = LocalDate.now();
+        int currentMonth = currentDate.getMonthValue();
+        // return the seasonEnum ID
+        return (currentMonth - 1) / 3;
     }
 
 }

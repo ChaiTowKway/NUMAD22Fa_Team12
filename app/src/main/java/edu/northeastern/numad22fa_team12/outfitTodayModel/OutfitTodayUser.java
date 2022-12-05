@@ -15,7 +15,6 @@ public class OutfitTodayUser {
         this.occasionsList = new OccasionsList();
         this.categoryList = new CategoryList();
         this.wardrobe = new HashMap<>();
-        this.wardrobe.put("url", new Item());
         this.wardrobeViewBy = "";
     }
 

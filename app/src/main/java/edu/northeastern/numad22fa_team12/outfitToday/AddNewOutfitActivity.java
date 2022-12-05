@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -32,8 +33,12 @@ import com.squareup.picasso.Picasso;
 import java.util.UUID;
 
 import edu.northeastern.numad22fa_team12.R;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.CategoryEnum;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.OccasionEnum;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.Outfit;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.OutfitDAO;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.SeasonEnum;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.Item;
 
 public class AddNewOutfitActivity extends AppCompatActivity {
     Button imageAddButton;
@@ -54,7 +59,10 @@ public class AddNewOutfitActivity extends AppCompatActivity {
     String userId = "1";
     public FirebaseDatabase database;
     public DatabaseReference db;
+    private DatabaseReference userRef;
+    private FirebaseAuth userAuth;
     Outfit outfit = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +74,6 @@ public class AddNewOutfitActivity extends AppCompatActivity {
         dao = new OutfitDAO();
         imageAddButton = findViewById(R.id.image_edit_button);
         outfitImageView = findViewById(R.id.outfit_image_view);
-
-
 
         imageAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,21 +91,14 @@ public class AddNewOutfitActivity extends AppCompatActivity {
                 }
             }
         });
-        submitButton = findViewById(R.id.outfitAddSubmitButton1);
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String id = String.valueOf(UUID.randomUUID());
-                Outfit outfit = new Outfit(categoryId,web_uri,id,userId ,seasonId,occasionId );
-                database = FirebaseDatabase.getInstance();
-                db = database.getReference("outfit").child(id);
-                db.setValue(outfit);
 
-                finish();
+        database = FirebaseDatabase.getInstance();
 
-            }
-        });
-        submitButton.setEnabled(false);
+        userRef = database.getReference().child("OutfitTodayUsers");
+        userAuth = FirebaseAuth.getInstance();
+        if (userAuth.getCurrentUser() != null && userAuth.getCurrentUser().getEmail() != null) {
+            userId = userAuth.getCurrentUser().getEmail().replace(".", "-");
+        }
 
         occasionSpinner = findViewById(R.id.occasion_spinner);
         seasonSpinner = findViewById(R.id.season_spinner);
@@ -170,7 +169,28 @@ public class AddNewOutfitActivity extends AppCompatActivity {
             }
         });
 
+        submitButton = findViewById(R.id.outfitAddSubmitButton1);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String imageId = String.valueOf(UUID.randomUUID());
+                Outfit outfit = new Outfit(categoryId,web_uri,imageId,userId ,seasonId,occasionId );
+                database.getReference("outfit").child(imageId).setValue(outfit);
 
+                String occasion = OccasionEnum.values()[outfit.getOccasionId()].toString();
+                String category = CategoryEnum.values()[outfit.getCategoryId()].toString();
+                String season = SeasonEnum.values()[outfit.getSeasonId()].toString();
+
+                Item item = new Item(seasonId, occasionId, categoryId, web_uri);
+                userRef.child(userId).child("wardrobe").child(imageId).setValue(item);
+                userRef.child(userId).child(category).child("occasion").child(occasion).child(imageId).setValue(web_uri);
+                userRef.child(userId).child(category).child("season").child(season).child(imageId).setValue(web_uri);
+
+                finish();
+
+            }
+        });
+        submitButton.setEnabled(false);
 
     }
 
