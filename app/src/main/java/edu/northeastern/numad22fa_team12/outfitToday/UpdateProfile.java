@@ -47,49 +47,14 @@ import java.util.Objects;
 import edu.northeastern.numad22fa_team12.LocationService.SearchByLocation;
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.os.Bundle;
-import android.os.Looper;
-import android.util.Log;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import edu.northeastern.numad22fa_team12.R;
-import edu.northeastern.numad22fa_team12.outfitToday.WardrodeActivity;
 
-import android.location.Location;
-import android.util.Log;
-import android.util.Pair;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
 
 public class UpdateProfile extends AppCompatActivity implements View.OnClickListener {
 
@@ -115,14 +80,10 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
     private TextView latitudeTV, longitudeTV;
     FusedLocationProviderClient fusedLocationClient;
     private static final int PERMISSION_CODE = 99;
-    //    Double[] latiLoti = new Double[2];
     LocationRequest locationRequest;
     LocationCallback locationCallback;
 
-    private Map<String, Map>  allUserLocation = new HashMap<>();
-    private Map<String, Map> allInfo;
-    private double dist;
-    private boolean completed = false;
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -314,7 +275,7 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                         Log.i(TAG, "Test" + i);
                         updateGPS();
                     }
-//                    getLastLocation();
+
                     Toast.makeText(UpdateProfile.this, "Current location updated!",
                             Toast.LENGTH_LONG).show();
                 }
@@ -393,8 +354,6 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                             // Got last known location. In some rare situations this can be null.
                             if (loc != null) {
                                 // Logic to handle location object
-//                                latiLoti[0] = location.getLatitude();
-//                                latiLoti[1] = location.getLongitude();
 
 //                                Log.i(TAG, "location1 is " + latiLoti[0] + " : " + latiLoti[1]);
                                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
