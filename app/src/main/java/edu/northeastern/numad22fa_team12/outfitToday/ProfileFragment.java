@@ -114,10 +114,29 @@ public class ProfileFragment extends Fragment {
                         userNameTV.setText(helloMsg);
                     }
                     DataSnapshot snapshot = task.getResult().child("wardrobe");
-                    long wadrobeCount = snapshot.getChildrenCount();
-                    Log.d(TAG, "wardobe count: " + wadrobeCount);
+                    long wardrobeCount = snapshot.getChildrenCount();
+                    Log.d(TAG, "wardobe count: " + wardrobeCount);
                     if (wardrobeTV != null) {
-                        wardrobeTV.setText(String.format("Wardrobe Stock: %d", wadrobeCount));
+                        wardrobeTV.setText(String.format("Wardrobe Stock: %d", wardrobeCount));
+                    }
+                }
+            }
+        });
+
+        userRef.child(userEmailKey).child("wardrobe").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                    Log.e(TAG, "Error getting data", task.getException());
+                }
+                else {
+                    DataSnapshot snapshot = task.getResult();
+                    long wardrobeCount = snapshot.getChildrenCount();
+                    Log.d(TAG, "wardobe count: " + wardrobeCount);
+                    if (wardrobeTV != null) {
+                        wardrobeTV.setText(String.format("Wardrobe Stock: %d", wardrobeCount));
                     }
                 }
             }
