@@ -32,7 +32,6 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,8 +44,52 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Objects;
 
+import edu.northeastern.numad22fa_team12.LocationService.SearchByLocation;
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.os.Bundle;
+import android.os.Looper;
+import android.util.Log;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import edu.northeastern.numad22fa_team12.R;
+import edu.northeastern.numad22fa_team12.outfitToday.WardrodeActivity;
+
+import android.location.Location;
+import android.util.Log;
+import android.util.Pair;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 
 public class UpdateProfile extends AppCompatActivity implements View.OnClickListener {
 
@@ -70,6 +113,17 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
     private double longitude;
     private Location mLocation;
     private TextView latitudeTV, longitudeTV;
+    FusedLocationProviderClient fusedLocationClient;
+    private static final int PERMISSION_CODE = 99;
+    //    Double[] latiLoti = new Double[2];
+    LocationRequest locationRequest;
+    LocationCallback locationCallback;
+
+    private Map<String, Map>  allUserLocation = new HashMap<>();
+    private Map<String, Map> allInfo;
+    private double dist;
+    private boolean completed = false;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -89,29 +143,71 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
         if (userAuth.getCurrentUser() != null && userAuth.getCurrentUser().getEmail() != null) {
             userEmail = userAuth.getCurrentUser().getEmail();
             userEmailKey = userAuth.getCurrentUser().getEmail().replace(".", "-");
+            Log.e("userId", userEmailKey);
+
         }
         getCurrUserInfo();
         getNotificationInfo();
 
-        checkPermission();
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        createLocationRequest();
-        mLocationCallback = new LocationCallback() {
+//        checkPermission();
+//        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+//        createLocationRequest();
+//        mLocationCallback = new LocationCallback() {
+//            @Override
+//            public void onLocationResult(LocationResult locationResult) {
+//                if (locationResult == null) {
+//                    return;
+//                }
+//                for (Location location : locationResult.getLocations()) {
+//                    try {
+//                        latitude = location.getLatitude();
+//                        longitude = location.getLongitude();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        };
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        locationRequest = new LocationRequest();
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest);
+        locationCallback = new LocationCallback() {
             @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (locationResult == null) {
-                    return;
-                }
+            public void onLocationResult(@NonNull LocationResult locationResult) {
                 for (Location location : locationResult.getLocations()) {
-                    try {
-                        latitude = location.getLatitude();
-                        longitude = location.getLongitude();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    if (location == null) continue;
                 }
             }
         };
+                    // to make sure user give permission to access GPS ; Otherwise, ask user for that permission
+        ActivityResultLauncher<String[]> locationPermissionRequest =
+                registerForActivityResult(new ActivityResultContracts
+                                .RequestMultiplePermissions(), result -> {
+                            Boolean fineLocationGranted = result.getOrDefault(
+                                    Manifest.permission.ACCESS_FINE_LOCATION, false);
+                            Boolean coarseLocationGranted = result.getOrDefault(
+                                    Manifest.permission.ACCESS_COARSE_LOCATION,false);
+                            if (fineLocationGranted != null && fineLocationGranted) {
+                                // Precise location access granted.
+                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
+                                // Only approximate location access granted.
+                            } else {
+                                // No location access granted.
+                                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_CODE);
+                            }
+                        }
+                );
+
+                    // call locationPermissionRequest
+                    locationPermissionRequest.launch(new String[] {
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                    });
         latitudeTV = findViewById(R.id.text_latitude);
         longitudeTV = findViewById(R.id.text_logitude);
     }
@@ -210,7 +306,15 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(UpdateProfile.this, "No location granted!",
                             Toast.LENGTH_LONG).show();
                 } else {
-                    getLastLocation();
+
+                    Log.i(TAG, "check before");
+                    updateGPS();
+
+                    for(int i=0; i < 5;i++){
+                        Log.i(TAG, "Test" + i);
+                        updateGPS();
+                    }
+//                    getLastLocation();
                     Toast.makeText(UpdateProfile.this, "Current location updated!",
                             Toast.LENGTH_LONG).show();
                 }
@@ -269,16 +373,58 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    private void createLocationRequest() {
-        LocationRequest.Builder lrb = new LocationRequest.Builder(UPDATE_INTERVAL_IN_MILLISECONDS);
-        lrb.setMinUpdateIntervalMillis(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
-        lrb.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest = lrb.build();
+//    private void createLocationRequest() {
+//        LocationRequest.Builder lrb = new LocationRequest.Builder(UPDATE_INTERVAL_IN_MILLISECONDS);
+//        lrb.setMinUpdateIntervalMillis(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
+//        lrb.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
+//        mLocationRequest = lrb.build();
+//    }
+
+    public void updateGPS() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.i(TAG, "need both approval");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_CODE);
+        }else {
+            fusedLocationClient.getCurrentLocation(100,null)
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location loc) {
+                            Log.i(TAG, "success got location");
+                            // Got last known location. In some rare situations this can be null.
+                            if (loc != null) {
+                                // Logic to handle location object
+//                                latiLoti[0] = location.getLatitude();
+//                                latiLoti[1] = location.getLongitude();
+
+//                                Log.i(TAG, "location1 is " + latiLoti[0] + " : " + latiLoti[1]);
+                                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference ref = database.getReference();
+                                DatabaseReference usersRef = ref.child("OutfitTodayUsers").child(userEmailKey).child("userInfo");
+
+                                Map<String, Double> userLocation = new HashMap<>();
+                                userLocation.put("latitude", loc.getLatitude());
+                                userLocation.put("longitude", loc.getLongitude());
+                                Log.i("GPS444", "userlocation" + String.valueOf(loc.getLatitude()));
+                                Log.i("GPS444", "userlocation" + String.valueOf(loc.getLongitude()));
+
+                                usersRef.child("location").setValue(userLocation);
+                                Log.i("GPS555", "child " + usersRef);
+//                                Log.i("GPS555", "userlocation" + userLocation.get("latitude"));
+//                                Log.i("GPS555", "userlocation" + userLocation.get("longitude"));
+//                                Log.i(TAG, "final location is " + latiLoti[0] + " : " + latiLoti[1]);
+                                Log.i("GPS555", "location:" + loc.getProvider());
+//                                getLastLocation();
+                                latitudeTV.setText(String.valueOf(loc.getLatitude()));
+                                longitudeTV.setText(String.valueOf(loc.getLongitude()));
+                            }
+                        }
+                    });
+        }
     }
 
     private void getLastLocation() {
         try {
-            mFusedLocationClient.getLastLocation()
+            fusedLocationClient.getLastLocation()
                     .addOnCompleteListener(new OnCompleteListener<Location>() {
                         @Override
                         public void onComplete(@NonNull Task<Location> task) {
