@@ -55,13 +55,6 @@
             android:name=".LocationService.SearchByLocation"
             android:exported="false" />
         <activity
-            android:name=".outfitToday.MyProfile"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".outfitToday.NewUserRegisterActivity"
             android:exported="false">
             <meta-data
