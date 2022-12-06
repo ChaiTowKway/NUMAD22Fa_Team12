@@ -108,7 +108,7 @@ public class AddNewOutfitActivity extends AppCompatActivity {
               "formal",
               "sports",
               "work"};
-      String[] categoryList = { "buttoms",
+      String[] categoryList = { "bottoms",
               "shoes",
               "tops"};
         ArrayAdapter seasonAdapter = new ArrayAdapter(this,

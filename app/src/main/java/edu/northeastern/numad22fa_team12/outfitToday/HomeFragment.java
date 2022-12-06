@@ -17,12 +17,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.OccasionsList;
@@ -46,9 +51,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private DatabaseReference userRef;
     private FirebaseAuth userAuth;
     private String userEmailKey = "";
-    private List<String> topUrls, bottomUrls, shoeUrls;
+    private String curOccasion;
+    private Set<String> topUrls, bottomUrls, shoeUrls;
     private String mParam1;
     private String mParam2;
+//    List<String> seasonListTop = new ArrayList<>(), seasonListBottom = new ArrayList<>(), seasonListShoe = new ArrayList<>();
+//    List<String> occasionListTop = new ArrayList<>(), occasionListBottom = new ArrayList<>(), occasionListShoe = new ArrayList<>();
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -76,12 +85,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (userAuth.getCurrentUser() != null && userAuth.getCurrentUser().getEmail() != null) {
             userEmailKey = userAuth.getCurrentUser().getEmail().replace(".", "-");
         }
-        topUrls = new ArrayList<>();
-        bottomUrls = new ArrayList<>();
-        shoeUrls = new ArrayList<>();
+        topUrls = new HashSet<>();
+        bottomUrls = new HashSet<>();
+        shoeUrls = new HashSet<>();
 
         getCurrUserInfo();
         getOutfitList();
+
     }
 
     @SuppressLint("MissingInflatedId")
@@ -188,7 +198,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     OccasionsList occasionsList = task.getResult().child("occasionsList").getValue(OccasionsList.class);
                     if (occasionsList != null) {
                         if (occasionsList.checkOccasion() != "No occasion configured") {
-                            String curOccasion = occasionsList.checkOccasion();
+                            curOccasion = occasionsList.checkOccasion();
                             Log.d(TAG, "current occasion: " + curOccasion);
                             setOccasionTextView("Occasion based on your setting: " + curOccasion);
                         } else {
@@ -202,8 +212,174 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void getOutfitList() {
+        String curSeason = checkCurSeason();
 
+        // season for top
+        userRef.child(userEmailKey).child("categoryList").child("tops").child("season").child(curSeason).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot d : snapshot.getChildren()) {
+                        String itemUrl = Objects.requireNonNull(d.getValue()).toString();
+                        if (!itemUrl.isEmpty()) {
+                            Log.d(TAG, "curSeason: " + curSeason);
+                            Log.d(TAG, "top season URL: " + itemUrl);
+                            topUrls.add(itemUrl);
+                        }
+                    }
+                    Log.d(TAG, "season Top: " + topUrls);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        // season for bottoms
+        userRef.child(userEmailKey).child("categoryList").child("bottoms").child("season").child(curSeason).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot d : snapshot.getChildren()) {
+                        String itemUrl = Objects.requireNonNull(d.getValue()).toString();
+                        if (!itemUrl.isEmpty()) {
+                            Log.d(TAG, "curSeason: " + curSeason);
+                            Log.d(TAG, "bottom season URL: " + itemUrl);
+                            bottomUrls.add(itemUrl);
+                        }
+                    }
+                    Log.d(TAG, "season bottom: " + bottomUrls);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        // season for shoes
+        userRef.child(userEmailKey).child("categoryList").child("shoes").child("season").child(curSeason).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot d : snapshot.getChildren()) {
+                        String itemUrl = Objects.requireNonNull(d.getValue()).toString();
+                        if (!itemUrl.isEmpty()) {
+                            Log.d(TAG, "curSeason: " + curSeason);
+                            Log.d(TAG, "shoe season URL: " + itemUrl);
+                            shoeUrls.add(itemUrl);
+                        }
+                    }
+                    Log.d(TAG, "season shoe: " + shoeUrls);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        if (curOccasion != null) {
+            Log.d(TAG, "current occasion: " + curOccasion);
+
+            // occasion for top
+            userRef.child(userEmailKey).child("categoryList").child("tops").child("occasion").child(curOccasion).addValueEventListener(new ValueEventListener() {
+                @SuppressLint("DefaultLocale")
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot d : snapshot.getChildren()) {
+                            String itemUrl = Objects.requireNonNull(d.getValue()).toString();
+                            if (!itemUrl.isEmpty()) {
+                                Log.d(TAG, "occasion top URL: " + itemUrl);
+                                topUrls.add(itemUrl);
+                            }
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            // occasion for bottoms
+            userRef.child(userEmailKey).child("categoryList").child("bottoms").child("occasion").child(curOccasion).addValueEventListener(new ValueEventListener() {
+                @SuppressLint("DefaultLocale")
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot d : snapshot.getChildren()) {
+                            String itemUrl = Objects.requireNonNull(d.getValue()).toString();
+                            if (!itemUrl.isEmpty()) {
+                                Log.d(TAG, "occasion bottom URL: " + itemUrl);
+                                bottomUrls.add(itemUrl);
+                            }
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            // occasion for shoes
+            userRef.child(userEmailKey).child("categoryList").child("shoes").child("occasion").child(curOccasion).addValueEventListener(new ValueEventListener() {
+                @SuppressLint("DefaultLocale")
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot d : snapshot.getChildren()) {
+                            String itemUrl = Objects.requireNonNull(d.getValue()).toString();
+                            if (!itemUrl.isEmpty()) {
+                                Log.d(TAG, "occasion shoe URL: " + itemUrl);
+                                shoeUrls.add(itemUrl);
+                            }
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+//        checkIntersectionAddData();
     }
+
+//    private void checkIntersectionAddData() {
+//        // find the intersection of two list and if occasion or intersection is empty, use the season list
+//        List<String> interListTop = new ArrayList<>(seasonListTop), interListBottom = new ArrayList<>(seasonListBottom), interListShoe = new ArrayList<>(seasonListShoe);
+//        interListTop.retainAll(occasionListTop);
+//        interListBottom.retainAll(occasionListBottom);
+//        interListShoe.retainAll(occasionListShoe);
+//        Log.d(TAG, "interTop: " + interListTop);
+//        Log.d(TAG, "interBottom: " + interListBottom);
+//        Log.d(TAG, "interShoe: " + interListShoe);
+//
+//        if (interListTop.isEmpty()) {
+//            topUrls.addAll(seasonListTop);
+//        } else {
+//            topUrls.addAll(interListTop);
+//        }
+//
+//        if (interListBottom.isEmpty()) {
+//            bottomUrls.addAll(seasonListTop);
+//        } else {
+//            bottomUrls.addAll(interListTop);
+//        }
+//
+//        if (interListShoe.isEmpty()) {
+//            shoeUrls.addAll(seasonListTop);
+//        } else {
+//            shoeUrls.addAll(interListTop);
+//        }
+//    }
 
     private String checkCurSeason() {
         LocalDate currentDate = LocalDate.now();
