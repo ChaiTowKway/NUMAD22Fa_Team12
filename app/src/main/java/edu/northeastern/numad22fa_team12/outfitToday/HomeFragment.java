@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -43,18 +44,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "HomeFragment";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public TextView minMaxTempTv, avgTempTv, occasionTv, warmthTv;
-    public TextView topPre, topNxt, bottomPre, bottomNxt, shoePre, shoeNxt;
-    public ImageView warmthImage, topImage, bottomImage, shoeImage;
-    public String minTemp, maxTemp, avgTemp;
+    private TextView minMaxTempTv, avgTempTv, occasionTv, warmthTv;
+    private TextView topPre, topNxt, bottomPre, bottomNxt, shoePre, shoeNxt;
+    private ImageView warmthImage, topImage, bottomImage, shoeImage;
+    private int topIdx, bottomIdx, shoeIdx;
+    private String minTemp, maxTemp, avgTemp;
     private FirebaseDatabase database;
     private DatabaseReference userRef;
     private FirebaseAuth userAuth;
     private String userEmailKey = "";
     private String curOccasion;
-    private Set<String> topUrls, bottomUrls, shoeUrls;
+    private List<String> topUrls, bottomUrls, shoeUrls;
     private String mParam1;
     private String mParam2;
+
 //    List<String> seasonListTop = new ArrayList<>(), seasonListBottom = new ArrayList<>(), seasonListShoe = new ArrayList<>();
 //    List<String> occasionListTop = new ArrayList<>(), occasionListBottom = new ArrayList<>(), occasionListShoe = new ArrayList<>();
 
@@ -85,12 +88,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (userAuth.getCurrentUser() != null && userAuth.getCurrentUser().getEmail() != null) {
             userEmailKey = userAuth.getCurrentUser().getEmail().replace(".", "-");
         }
-        topUrls = new HashSet<>();
-        bottomUrls = new HashSet<>();
-        shoeUrls = new HashSet<>();
+        topUrls = new ArrayList<>();
+        bottomUrls = new ArrayList<>();
+        shoeUrls = new ArrayList<>();
 
-        getCurrUserInfo();
-        getOutfitList();
+        topIdx = 0;
+        bottomIdx = 0;
+        shoeIdx = 0;
 
     }
 
@@ -124,7 +128,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         shoePre.setOnClickListener(this);
         shoeNxt.setOnClickListener(this);
 
+        getCurrUserInfo();
+        getOutfitList();
+//        setTopImage();
+//        setBottomImage();
+//        setShoeImage();
         setWeatherTextViewImageView();
+
         return view;
     }
 
@@ -133,23 +143,63 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         int clickedID = view.getId();
         switch (clickedID) {
             case R.id.topPrevious:
+                topIdx -= 1;
+                if (topIdx < 0) topIdx = topUrls.size() - 1;
+                Log.d(TAG, "topPre clicked! idx: " + topIdx);
+                setTopImage();
                 break;
             case R.id.topNext:
+                topIdx += 1;
+                if (topIdx == topUrls.size()) topIdx = 0;
+                Log.d(TAG, "topNxt clicked! idx: " + topIdx);
+                setTopImage();
                 break;
             case R.id.bottomPrevious:
+                bottomIdx -= 1;
+                if (bottomIdx < 0) bottomIdx = bottomUrls.size() - 1;
+                Log.d(TAG, "bottomPre clicked! idx: " + bottomIdx);
+                setBottomImage();
                 break;
             case R.id.bottomNext:
+                bottomIdx += 1;
+                if (bottomIdx == bottomUrls.size()) bottomIdx = 0;
+                Log.d(TAG, "bottomNxt clicked! idx: " + bottomIdx);
+                setBottomImage();
                 break;
             case R.id.shoePrevious:
+                shoeIdx -= 1;
+                if (shoeIdx < 0) shoeIdx = shoeUrls.size() - 1;
+                Log.d(TAG, "shoePre clicked! idx: " + shoeIdx);
+                setShoeImage();
                 break;
             case R.id.shoeNext:
+                shoeIdx += 1;
+                if (shoeIdx == shoeUrls.size()) shoeIdx = 0;
+                Log.d(TAG, "shoeNxt clicked! idx: " + shoeIdx);
+                setShoeImage();
                 break;
         }
     }
 
-    private void setTopImage() {}
-    private void setBottomImage() {}
-    private void setShoeImage() {}
+    private void setTopImage() {
+        if (topImage != null && !topUrls.isEmpty()) {
+            Picasso.get().load(topUrls.get(topIdx)).into(topImage);
+        } else {
+            Log.e(TAG, "top urls is empty, failed to set top");
+        }
+    }
+
+    private void setBottomImage() {
+        if (bottomImage != null && !bottomUrls.isEmpty()) {
+            Picasso.get().load(bottomUrls.get(bottomIdx)).into(bottomImage);
+        }
+    }
+
+    private void setShoeImage() {
+        if (shoeImage != null && !shoeUrls.isEmpty()) {
+            Picasso.get().load(shoeUrls.get(shoeIdx)).into(shoeImage);
+        }
+    }
 
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     public void setWeatherTextViewImageView() {
@@ -229,6 +279,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         }
                     }
                     Log.d(TAG, "season Top: " + topUrls);
+                    if (curOccasion == null) setTopImage();
                 }
             }
             @Override
@@ -252,6 +303,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         }
                     }
                     Log.d(TAG, "season bottom: " + bottomUrls);
+                    if (curOccasion == null) setBottomImage();
                 }
             }
             @Override
@@ -275,6 +327,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         }
                     }
                     Log.d(TAG, "season shoe: " + shoeUrls);
+                    if (curOccasion == null) setShoeImage();
                 }
             }
             @Override
@@ -293,11 +346,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     if (snapshot.exists()) {
                         for (DataSnapshot d : snapshot.getChildren()) {
                             String itemUrl = Objects.requireNonNull(d.getValue()).toString();
-                            if (!itemUrl.isEmpty()) {
+                            if (!itemUrl.isEmpty() && !topUrls.contains(itemUrl)) {
                                 Log.d(TAG, "occasion top URL: " + itemUrl);
                                 topUrls.add(itemUrl);
                             }
                         }
+                        setTopImage();
                     }
                 }
                 @Override
@@ -314,11 +368,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     if (snapshot.exists()) {
                         for (DataSnapshot d : snapshot.getChildren()) {
                             String itemUrl = Objects.requireNonNull(d.getValue()).toString();
-                            if (!itemUrl.isEmpty()) {
+                            if (!itemUrl.isEmpty() && !bottomUrls.contains(itemUrl)) {
                                 Log.d(TAG, "occasion bottom URL: " + itemUrl);
                                 bottomUrls.add(itemUrl);
                             }
                         }
+                        setBottomImage();
                     }
                 }
                 @Override
@@ -335,11 +390,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     if (snapshot.exists()) {
                         for (DataSnapshot d : snapshot.getChildren()) {
                             String itemUrl = Objects.requireNonNull(d.getValue()).toString();
-                            if (!itemUrl.isEmpty()) {
+                            if (!itemUrl.isEmpty() && !shoeUrls.contains(itemUrl)) {
                                 Log.d(TAG, "occasion shoe URL: " + itemUrl);
                                 shoeUrls.add(itemUrl);
                             }
                         }
+                        setShoeImage();
                     }
                 }
                 @Override
