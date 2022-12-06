@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.OccasionsList;
@@ -43,7 +45,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private FirebaseDatabase database;
     private DatabaseReference userRef;
     private FirebaseAuth userAuth;
-    private String userEmail = "",userEmailKey = "";
+    private String userEmailKey = "";
+    private List<String> topUrls, bottomUrls, shoeUrls;
     private String mParam1;
     private String mParam2;
 
@@ -71,10 +74,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         userRef = database.getReference().child("OutfitTodayUsers");
         userAuth = FirebaseAuth.getInstance();
         if (userAuth.getCurrentUser() != null && userAuth.getCurrentUser().getEmail() != null) {
-            userEmail = userAuth.getCurrentUser().getEmail();
             userEmailKey = userAuth.getCurrentUser().getEmail().replace(".", "-");
         }
+        topUrls = new ArrayList<>();
+        bottomUrls = new ArrayList<>();
+        shoeUrls = new ArrayList<>();
+
         getCurrUserInfo();
+        getOutfitList();
     }
 
     @SuppressLint("MissingInflatedId")
@@ -93,7 +100,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         bottomImage = (ImageView) view.findViewById(R.id.bottomImage);
         shoeImage = (ImageView) view.findViewById(R.id.shoeImage);
 
+        topPre = (TextView) view.findViewById(R.id.topPrevious);
+        topNxt = (TextView) view.findViewById(R.id.topNext);
+        bottomPre = (TextView) view.findViewById(R.id.bottomPrevious);
+        bottomNxt = (TextView) view.findViewById(R.id.bottomNext);
+        shoePre = (TextView) view.findViewById(R.id.shoePrevious);
+        shoeNxt = (TextView) view.findViewById(R.id.shoeNext);
 
+        topPre.setOnClickListener(this);
+        topNxt.setOnClickListener(this);
+        bottomPre.setOnClickListener(this);
+        bottomNxt.setOnClickListener(this);
+        shoePre.setOnClickListener(this);
+        shoeNxt.setOnClickListener(this);
 
         setWeatherTextViewImageView();
         return view;
@@ -101,8 +120,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-
+        int clickedID = view.getId();
+        switch (clickedID) {
+            case R.id.topPrevious:
+                break;
+            case R.id.topNext:
+                break;
+            case R.id.bottomPrevious:
+                break;
+            case R.id.bottomNext:
+                break;
+            case R.id.shoePrevious:
+                break;
+            case R.id.shoeNext:
+                break;
+        }
     }
+
+    private void setTopImage() {}
+    private void setBottomImage() {}
+    private void setShoeImage() {}
 
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     public void setWeatherTextViewImageView() {
@@ -149,18 +186,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
                 else {
                     OccasionsList occasionsList = task.getResult().child("occasionsList").getValue(OccasionsList.class);
-                    if (occasionsList != null && occasionsList.checkOccasion() != "No occasion configured") {
-                        String curOccasion = occasionsList.checkOccasion();
-                        Log.d(TAG, "current occasion: " + curOccasion);
-                        setOccasionTextView("Occasion based on your setting: " + curOccasion);
-                    } else {
-                        Log.d(TAG, "No occasion found!");
-                        setOccasionTextView("No occasion found, add occasions for better suggestion!");
+                    if (occasionsList != null) {
+                        if (occasionsList.checkOccasion() != "No occasion configured") {
+                            String curOccasion = occasionsList.checkOccasion();
+                            Log.d(TAG, "current occasion: " + curOccasion);
+                            setOccasionTextView("Occasion based on your setting: " + curOccasion);
+                        } else {
+                            Log.d(TAG, "No occasion found!");
+                            setOccasionTextView("No occasion found, add occasions for better suggestion!");
+                        }
                     }
-
                 }
             }
         });
+    }
+
+    public void getOutfitList() {
+
     }
 
     private String checkCurSeason() {
