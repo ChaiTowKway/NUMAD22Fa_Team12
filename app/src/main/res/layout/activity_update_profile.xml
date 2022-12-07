@@ -217,4 +217,3 @@
         app:srcCompat="@drawable/outfit_profile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
