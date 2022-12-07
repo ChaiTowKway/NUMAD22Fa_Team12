@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,6 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.UUID;
 
+import edu.northeastern.numad22fa_team12.MainActivity;
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.CategoryEnum;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.Item;
@@ -42,7 +44,7 @@ import edu.northeastern.numad22fa_team12.outfitTodayModel.SeasonEnum;
 
 public class EditOutfitActivity extends AppCompatActivity {
 
-    Button imageAddButton;
+    Button imageAddButton, itemDeleteButton;
     ImageView outfitImageView;
     Button submitButton;
     Uri image_uri;
@@ -62,12 +64,16 @@ public class EditOutfitActivity extends AppCompatActivity {
     private DatabaseReference userRef;
     private FirebaseAuth userAuth;
     private StorageReference ref = FirebaseStorage.getInstance().getReference();
+    private String oldOccasion, oldSeason, oldCategory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_outfit);
         if(getIntent().getExtras() != null){
             outfit = getIntent().getExtras().getParcelable("outfit");
+            oldOccasion = OccasionEnum.values()[outfit.getOccasionId()].toString();
+            oldCategory = CategoryEnum.values()[outfit.getCategoryId()].toString();
+            oldSeason = SeasonEnum.values()[outfit.getSeasonId()].toString();
         }
         dao = new OutfitDAO();
         imageAddButton = findViewById(R.id.image_edit_button);
@@ -106,20 +112,63 @@ public class EditOutfitActivity extends AppCompatActivity {
                 Outfit newOutfit = new Outfit(categoryId,web_uri,id,userId ,seasonId,occasionId );
                 database.getReference("outfit").child(id).setValue(newOutfit);
 
-                String occasion = OccasionEnum.values()[outfit.getOccasionId()].toString();
-                String category = CategoryEnum.values()[outfit.getCategoryId()].toString();
-                String season = SeasonEnum.values()[outfit.getSeasonId()].toString();
+                String newOccasion = OccasionEnum.values()[newOutfit.getOccasionId()].toString();
+                String newCategory = CategoryEnum.values()[newOutfit.getCategoryId()].toString();
+                String newSeason = SeasonEnum.values()[newOutfit.getSeasonId()].toString();
 
                 Item item = new Item(seasonId, occasionId, categoryId, web_uri);
+
                 userRef.child(userId).child("wardrobe").child(id).setValue(item);
-                userRef.child(userId).child("categoryList").child(category).child("occasion").child(occasion).child(id).setValue(web_uri);
-                userRef.child(userId).child("categoryList").child(category).child("season").child(season).child(id).setValue(web_uri);
+
+                // remove the old category
+                userRef.child(userId).child("categoryList").child(oldCategory).child("occasion").child(oldOccasion).child(id).removeValue();
+                userRef.child(userId).child("categoryList").child(oldCategory).child("season").child(oldSeason).child(id).removeValue();
+
+                // add it to the new category
+                userRef.child(userId).child("categoryList").child(newCategory).child("occasion").child(newOccasion).child(id).setValue(web_uri);
+                userRef.child(userId).child("categoryList").child(newCategory).child("season").child(newSeason).child(id).setValue(web_uri);
 
                 finish();
 
             }
         });
         submitButton.setEnabled(false);
+
+        // delete item
+        itemDeleteButton = findViewById(R.id.outfitDeleteButton);
+        itemDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog deleteConfirmDialog = new Dialog(EditOutfitActivity.this);
+                deleteConfirmDialog.setContentView(R.layout.delete_confirm_dialog_layout);
+                final Button cancelBtn = deleteConfirmDialog.findViewById(R.id.deleteCancelBtn),
+                        deleteBtn = deleteConfirmDialog.findViewById(R.id.deleteOkBtn);
+                deleteConfirmDialog.setCanceledOnTouchOutside(true);
+                cancelBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        deleteConfirmDialog.dismiss();
+                    }
+                });
+                deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String outfitId = outfit.getItemId();
+                        userRef.child(userId).child("wardrobe").child(outfitId).removeValue();
+
+                        // remove the old category
+                        userRef.child(userId).child("categoryList").child(oldCategory).child("occasion").child(oldOccasion).child(outfitId).removeValue();
+                        userRef.child(userId).child("categoryList").child(oldCategory).child("season").child(oldSeason).child(outfitId).removeValue();
+                        database.getReference("outfit").child(outfitId).removeValue();
+
+                        Toast.makeText(EditOutfitActivity.this,
+                                "Outfit has been deleted", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+                deleteConfirmDialog.show();
+            }
+        });
 
         occasionSpinner = findViewById(R.id.occasion_spinner);
         seasonSpinner = findViewById(R.id.season_spinner);

@@ -6,8 +6,13 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import edu.northeastern.numad22fa_team12.MainActivity;
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.Outfit;
 
@@ -72,9 +78,11 @@ public class WardrodeActivity extends AppCompatActivity {
                     Outfit t = snap.getValue(Outfit.class);
                     outfits.add(t);
                     Log.d(TAG, outfits.toString());
-//                    System.out.println(1);
                 }
-
+                if (outfits.isEmpty()) {
+                    Toast.makeText(WardrodeActivity.this,
+                            "No outfit in the wardrobe!", Toast.LENGTH_SHORT).show();
+                }
                wardrobeAdapter.notifyDataSetChanged();
 
             }
@@ -84,6 +92,13 @@ public class WardrodeActivity extends AppCompatActivity {
                 System.out.println(error);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), OutfitToday.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     @Override
