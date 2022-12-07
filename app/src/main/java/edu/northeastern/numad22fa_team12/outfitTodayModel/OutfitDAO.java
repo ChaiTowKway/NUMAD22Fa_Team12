@@ -24,7 +24,11 @@ public class OutfitDAO {
         result = new ArrayList<>();
     }
 
+    public void addOutfit(Outfit outfit){
+        String id = outfit.getItemId();;
+        db.child(id).setValue(outfit);
 
+    }
     public void getOutfitsBySeason(String userId , SeasonEnum season){
         Query query = db.orderByChild("userId").equalTo(userId);
 

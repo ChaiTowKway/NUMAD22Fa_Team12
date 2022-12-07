@@ -10,76 +10,105 @@
         android:id="@+id/textViewTitle"
         android:layout_width="264dp"
         android:layout_height="49dp"
-        android:text="Here are your nearby friends!"
+        android:text="Here are your 3 nearby friends!"
         android:textAlignment="center"
         android:textColor="@color/mainColor"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.564"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.155" />
+        app:layout_constraintVertical_bias="0.18" />
 
     <TextView
         android:id="@+id/textViewUser1"
         android:layout_width="115dp"
         android:layout_height="47dp"
-        android:text="User1"
+        android:layout_marginTop="88dp"
+        android:text="1"
         android:textAlignment="center"
         android:textColor="@color/mainColor"
         android:textSize="20sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/check1Btn"
-        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
     <TextView
         android:id="@+id/textViewUser2"
         android:layout_width="115dp"
         android:layout_height="47dp"
-        android:text="User2"
+        android:layout_marginTop="56dp"
+        android:text="2"
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUser1" />
+
+    <TextView
+        android:id="@+id/textViewUser3"
+        android:layout_width="115dp"
+        android:layout_height="47dp"
+        android:text="3"
         android:textAlignment="center"
         android:textColor="@color/mainColor"
         android:textSize="20sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/check2Btn"
-        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.549" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewUser2"
+        app:layout_constraintVertical_bias="0.167" />
 
     <Button
         android:id="@+id/check1Btn"
         android:layout_width="169dp"
         android:layout_height="55dp"
         android:backgroundTint="@color/mainColor"
-        android:text="check wardrobe"
+        android:text="check wardrobe1"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.405" />
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toEndOf="@+id/textViewUser1"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+        app:layout_constraintVertical_bias="0.158" />
 
     <Button
         android:id="@+id/check2Btn"
         android:layout_width="169dp"
         android:layout_height="55dp"
+        android:layout_marginTop="37dp"
         android:backgroundTint="@color/mainColor"
-        android:text="check wardrobe"
+        android:text="check wardrobe2"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.933"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.556" />
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toEndOf="@+id/textViewUser2"
+        app:layout_constraintTop_toBottomOf="@+id/check1Btn"
+        app:layout_constraintVertical_bias="0.01" />
+
+    <Button
+        android:id="@+id/check3Btn"
+        android:layout_width="169dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/mainColor"
+        android:text="check wardrobe3"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toEndOf="@+id/textViewUser3"
+        app:layout_constraintTop_toBottomOf="@+id/check2Btn"
+        app:layout_constraintVertical_bias="0.136" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,34 +1,34 @@
 package edu.northeastern.numad22fa_team12.outfitTodayModel;
 
 public class Item {
-    private String season;
-    private String occasion;
-    private String category;
+    private int season;
+    private int occasion;
+    private int category;
     private String imageUrl;
 
     public Item() {
-        this.season = "winter";
-        this.occasion = "work";
-        this.category = "tops";
-        this.imageUrl = "url";
+        this.season = 0;
+        this.occasion = 0;
+        this.category = 0;
+        this.imageUrl = "";
     }
 
-    public Item(String season, String occasion, String category, String imageUrl) {
+    public Item(int season, int occasion, int category, String imageUrl) {
         this.season = season;
         this.occasion = occasion;
         this.category = category;
         this.imageUrl = imageUrl;
     }
 
-    public String getSeason() {
+    public int getSeason() {
         return this.season;
     }
 
-    public String getOccasion() {
+    public int getOccasion() {
         return this.occasion;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return this.category;
     }
 
@@ -36,15 +36,15 @@ public class Item {
         return this.imageUrl;
     }
 
-    public void setSeason(String season) {
+    public void setSeason(int season) {
         this.season = season;
     }
 
-    public void setOccasion(String occasion) {
+    public void setOccasion(int occasion) {
         this.occasion = occasion;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 

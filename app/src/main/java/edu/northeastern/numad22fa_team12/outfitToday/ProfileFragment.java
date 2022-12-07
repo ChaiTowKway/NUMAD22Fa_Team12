@@ -19,8 +19,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.UserInfo;
@@ -85,6 +87,7 @@ public class ProfileFragment extends Fragment {
             userEmail = userAuth.getCurrentUser().getEmail();
             userEmailKey = userAuth.getCurrentUser().getEmail().replace(".", "-");
         }
+        getCurrUserInfo();
     }
 
     @Override
@@ -94,7 +97,6 @@ public class ProfileFragment extends Fragment {
         View inflatedview = inflater.inflate(R.layout.fragment_profile, container, false);
         userNameTV = (TextView) inflatedview.findViewById(R.id.textView_user);
         wardrobeTV = (TextView) inflatedview.findViewById(R.id.textView_stock);
-        getCurrUserInfo();
         return inflatedview;
     }
 
@@ -113,13 +115,29 @@ public class ProfileFragment extends Fragment {
                     if (userNameTV != null) {
                         userNameTV.setText(helloMsg);
                     }
-                    DataSnapshot snapshot = task.getResult().child("wardrobe");
-                    long wadrobeCount = snapshot.getChildrenCount();
-                    Log.d(TAG, "wardobe count: " + wadrobeCount);
-                    if (wardrobeTV != null) {
-                        wardrobeTV.setText(String.format("Wardrobe Stock: %d", wadrobeCount));
-                    }
+//                    DataSnapshot snapshot = task.getResult().child("wardrobe");
+//                    long wardrobeCount = snapshot.getChildrenCount();
+//                    Log.d(TAG, "wardobe count: " + wardrobeCount);
+//                    if (wardrobeTV != null) {
+//                        wardrobeTV.setText(String.format("Wardrobe Stock: %d", wardrobeCount));
+//                    }
                 }
+            }
+        });
+
+        userRef.child(userEmailKey).child("wardrobe").addValueEventListener(new ValueEventListener() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long wardrobeCount = snapshot.getChildrenCount();
+                Log.d(TAG, "wardobe count: " + wardrobeCount);
+                if (wardrobeTV != null) {
+                    wardrobeTV.setText(String.format("Wardrobe Stock: %d", wardrobeCount));
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
