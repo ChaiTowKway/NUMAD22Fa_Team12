@@ -59,12 +59,13 @@ public class EditOutfitActivity extends AppCompatActivity {
     OutfitDAO dao;
     String userId = "1";
     Outfit outfit;
-    String web_uri;
+    String web_uri = "";
     public FirebaseDatabase database;
     private DatabaseReference userRef;
     private FirebaseAuth userAuth;
     private StorageReference ref = FirebaseStorage.getInstance().getReference();
-    private String oldOccasion, oldSeason, oldCategory;
+    private String oldOccasion, oldSeason, oldCategory, oldUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +75,7 @@ public class EditOutfitActivity extends AppCompatActivity {
             oldOccasion = OccasionEnum.values()[outfit.getOccasionId()].toString();
             oldCategory = CategoryEnum.values()[outfit.getCategoryId()].toString();
             oldSeason = SeasonEnum.values()[outfit.getSeasonId()].toString();
+            oldUri = outfit.getUrl();
         }
         dao = new OutfitDAO();
         imageAddButton = findViewById(R.id.image_edit_button);
@@ -107,32 +109,55 @@ public class EditOutfitActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String id = outfit.getItemId();
-                String userId = outfit.getUserId();
-                Outfit newOutfit = new Outfit(categoryId,web_uri,id,userId ,seasonId,occasionId );
-                database.getReference("outfit").child(id).setValue(newOutfit);
+                if (web_uri.isEmpty()) {
+                    String id = outfit.getItemId();
+                    String userId = outfit.getUserId();
+                    Outfit newOutfit = new Outfit(categoryId, oldUri, id, userId, seasonId, occasionId);
+                    database.getReference("outfit").child(id).setValue(newOutfit);
 
-                String newOccasion = OccasionEnum.values()[newOutfit.getOccasionId()].toString();
-                String newCategory = CategoryEnum.values()[newOutfit.getCategoryId()].toString();
-                String newSeason = SeasonEnum.values()[newOutfit.getSeasonId()].toString();
+                    String newOccasion = OccasionEnum.values()[newOutfit.getOccasionId()].toString();
+                    String newCategory = CategoryEnum.values()[newOutfit.getCategoryId()].toString();
+                    String newSeason = SeasonEnum.values()[newOutfit.getSeasonId()].toString();
 
-                Item item = new Item(seasonId, occasionId, categoryId, web_uri);
+                    Item item = new Item(seasonId, occasionId, categoryId, oldUri);
 
-                userRef.child(userId).child("wardrobe").child(id).setValue(item);
+                    userRef.child(userId).child("wardrobe").child(id).setValue(item);
 
-                // remove the old category
-                userRef.child(userId).child("categoryList").child(oldCategory).child("occasion").child(oldOccasion).child(id).removeValue();
-                userRef.child(userId).child("categoryList").child(oldCategory).child("season").child(oldSeason).child(id).removeValue();
+                    // remove the old category
+                    userRef.child(userId).child("categoryList").child(oldCategory).child("occasion").child(oldOccasion).child(id).removeValue();
+                    userRef.child(userId).child("categoryList").child(oldCategory).child("season").child(oldSeason).child(id).removeValue();
 
-                // add it to the new category
-                userRef.child(userId).child("categoryList").child(newCategory).child("occasion").child(newOccasion).child(id).setValue(web_uri);
-                userRef.child(userId).child("categoryList").child(newCategory).child("season").child(newSeason).child(id).setValue(web_uri);
+                    // add it to the new category
+                    userRef.child(userId).child("categoryList").child(newCategory).child("occasion").child(newOccasion).child(id).setValue(oldUri);
+                    userRef.child(userId).child("categoryList").child(newCategory).child("season").child(newSeason).child(id).setValue(oldUri);
+                } else {
+                    String id = outfit.getItemId();
+                    String userId = outfit.getUserId();
+                    Outfit newOutfit = new Outfit(categoryId, web_uri, id, userId, seasonId, occasionId);
+                    database.getReference("outfit").child(id).setValue(newOutfit);
+
+                    String newOccasion = OccasionEnum.values()[newOutfit.getOccasionId()].toString();
+                    String newCategory = CategoryEnum.values()[newOutfit.getCategoryId()].toString();
+                    String newSeason = SeasonEnum.values()[newOutfit.getSeasonId()].toString();
+
+                    Item item = new Item(seasonId, occasionId, categoryId, web_uri);
+
+                    userRef.child(userId).child("wardrobe").child(id).setValue(item);
+
+                    // remove the old category
+                    userRef.child(userId).child("categoryList").child(oldCategory).child("occasion").child(oldOccasion).child(id).removeValue();
+                    userRef.child(userId).child("categoryList").child(oldCategory).child("season").child(oldSeason).child(id).removeValue();
+
+                    // add it to the new category
+                    userRef.child(userId).child("categoryList").child(newCategory).child("occasion").child(newOccasion).child(id).setValue(web_uri);
+                    userRef.child(userId).child("categoryList").child(newCategory).child("season").child(newSeason).child(id).setValue(web_uri);
+                }
 
                 finish();
 
             }
         });
-        submitButton.setEnabled(false);
+//        submitButton.setEnabled(false);
 
         // delete item
         itemDeleteButton = findViewById(R.id.outfitDeleteButton);
@@ -282,7 +307,7 @@ public class EditOutfitActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             web_uri = String.valueOf(uri);
-                            submitButton.setEnabled(true);
+//                            submitButton.setEnabled(true);
                         }
                     });
                 }
