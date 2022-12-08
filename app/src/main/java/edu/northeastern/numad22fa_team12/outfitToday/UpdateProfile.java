@@ -239,9 +239,10 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(UpdateProfile.this, OutfitToday.class);
-        startActivity(intent);
+//        super.onBackPressed();
+//        Intent intent = new Intent(UpdateProfile.this, OutfitToday.class);
+//        startActivity(intent);
+        finish();
     }
 
     @SuppressLint("NonConstantResourceId")
