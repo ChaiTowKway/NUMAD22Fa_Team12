@@ -245,10 +245,13 @@ public class SearchByLocation extends AppCompatActivity {
 //                    Log.d("RETRIEVE1", String.valueOf(task.getResult().getValue()));
 //                    Log.d("RETRIEVE", String.valueOf(task.getResult().getValue().getClass()));
                     allInfo = (Map) task.getResult().getValue();
+//                    Log.d("RETRIEVE2", String.valueOf(allInfo));
+//                    Log.d("RETRIEVE222", String.valueOf(allInfo.keySet()));
                     for(String userId : allInfo.keySet()) {
-//                        Log.d("RETRIEVE2", userId);
+
+                        Log.d("RETRIEVE22", userId);
                         Map<String, Map> details = (Map) allInfo.get(userId).get("userInfo");
-//                        Log.d("RETRIEVE3", String.valueOf(details));
+                        Log.d("RETRIEVE3", String.valueOf(details));
                         if(details.get("location") != null) {
 //                            Log.d("RETRIEVE4", String.valueOf(details.get("location")));
                             allUserLocation.put(userId, details.get("location"));
@@ -280,12 +283,12 @@ public class SearchByLocation extends AppCompatActivity {
                         user1Buttonn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-//                                //get the first close userId
-//                                String ID = threeFriends[0][0];
-//                                //apply intent
-//                                Intent i = new Intent(getApplicationContext(), WardrodeActivity.class);
-//                                i.putExtra("userId", ID);
-//                                startActivity(i);
+                                //get the first close userId
+                                String ID = threeFriends[0][0];
+                                //apply intent
+                                Intent i = new Intent(getApplicationContext(), WardrodeActivity.class);
+                                i.putExtra("userId", ID);
+                                startActivity(i);
                             }
                         });
 
@@ -305,12 +308,12 @@ public class SearchByLocation extends AppCompatActivity {
                         user2Buttonn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-//                                //get the second close userId
-//                                String ID = threeFriends[1][0];
-//                                //apply intent
-//                                Intent i = new Intent(getApplicationContext(), WardrodeActivity.class);
-//                                i.putExtra("userId", ID);
-//                                startActivity(i);
+                                //get the second close userId
+                                String ID = threeFriends[1][0];
+                                //apply intent
+                                Intent i = new Intent(getApplicationContext(), WardrodeActivity.class);
+                                i.putExtra("userId", ID);
+                                startActivity(i);
 
                             }
                         });
@@ -329,12 +332,12 @@ public class SearchByLocation extends AppCompatActivity {
                         user3Buttonn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-//                                //get the third close userId
-//                                String ID = threeFriends[2][0];
-//                                //apply intent
-//                                Intent i = new Intent(getApplicationContext(), WardrodeActivity.class);
-//                                i.putExtra("userId", ID);
-//                                startActivity(i);
+                                //get the third close userId
+                                String ID = threeFriends[2][0];
+                                //apply intent
+                                Intent i = new Intent(getApplicationContext(), WardrodeActivity.class);
+                                i.putExtra("userId", ID);
+                                startActivity(i);
 
                             }
                         });
