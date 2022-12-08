@@ -38,12 +38,12 @@
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="155dp"
-        android:layout_height="36dp"
+        android:layout_width="201dp"
+        android:layout_height="54dp"
         android:text="Update Your Profile"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textColor="@color/mainColor"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,6 +114,7 @@
         android:layout_height="wrap_content"
         android:text="Latitute:\nLongtidue:"
         android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.146"
@@ -214,6 +215,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/outfit_profile" />
+        app:srcCompat="@drawable/contact" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
