@@ -38,7 +38,7 @@ public class WardrodeActivity extends AppCompatActivity {
     public FirebaseDatabase database;
     public DatabaseReference db;
     private String userId;
-    private boolean viewMyWardrobe;
+    private boolean viewMyWardrobe = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,9 +96,10 @@ public class WardrodeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), OutfitToday.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+//        Intent intent = new Intent(getApplicationContext(), OutfitToday.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+        finish();
     }
 
     @Override
