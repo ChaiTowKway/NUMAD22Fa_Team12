@@ -329,6 +329,15 @@ public class SearchByLocation extends AppCompatActivity {
                                 i.putExtra("userId", ID);
                                 startActivity(i);
 
+                                // connect to notification
+                                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference ref = database.getReference();
+                                DatabaseReference usersRef = ref.child("OutfitTodayUsers").child(threeFriends[1][0]);
+                                Log.d("noti1", String.valueOf(usersRef));
+
+                                Log.d("noti2", String.valueOf(centerUserName));
+                                usersRef.child("wardrobeViewBy").setValue(centerUserName);
+
                             }
                         });
                     }
@@ -352,6 +361,17 @@ public class SearchByLocation extends AppCompatActivity {
                                 Intent i = new Intent(getApplicationContext(), WardrodeActivity.class);
                                 i.putExtra("userId", ID);
                                 startActivity(i);
+
+                                // connect to notification
+                                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference ref = database.getReference();
+                                DatabaseReference usersRef = ref.child("OutfitTodayUsers").child(threeFriends[2][0]);
+                                Log.d("noti1", String.valueOf(usersRef));
+//                                DatabaseReference centerUsersRef = ref.child("OutfitTodayUsers").child(centerUserId).child("userInfo");
+//                                centerUserName = centerUsersRef.child("userName");
+
+                                Log.d("noti2", String.valueOf(centerUserName));
+                                usersRef.child("wardrobeViewBy").setValue(centerUserName);
 
                             }
                         });
