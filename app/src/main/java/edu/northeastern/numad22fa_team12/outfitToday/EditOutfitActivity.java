@@ -78,8 +78,8 @@ public class EditOutfitActivity extends AppCompatActivity {
             oldUri = outfit.getUrl();
         }
         dao = new OutfitDAO();
-        imageAddButton = findViewById(R.id.image_edit_button);
-        outfitImageView = findViewById(R.id.outfit_image_view);
+        imageAddButton = findViewById(R.id.image_edit_button2);
+        outfitImageView = findViewById(R.id.outfit_image_view2);
         imageAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,7 +105,7 @@ public class EditOutfitActivity extends AppCompatActivity {
             userId = userAuth.getCurrentUser().getEmail().replace(".", "-");
         }
 
-        submitButton = findViewById(R.id.outfitAddSubmitButton1);
+        submitButton = findViewById(R.id.outfitAddSubmitButton2);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,6 +153,8 @@ public class EditOutfitActivity extends AppCompatActivity {
                     userRef.child(userId).child("categoryList").child(newCategory).child("season").child(newSeason).child(id).setValue(web_uri);
                 }
 
+                Toast.makeText(EditOutfitActivity.this,
+                        "Outfit has been updated", Toast.LENGTH_SHORT).show();
                 finish();
 
             }
@@ -195,9 +197,9 @@ public class EditOutfitActivity extends AppCompatActivity {
             }
         });
 
-        occasionSpinner = findViewById(R.id.occasion_spinner);
-        seasonSpinner = findViewById(R.id.season_spinner);
-        categorySpinner = findViewById(R.id.category_spinner);
+        occasionSpinner = findViewById(R.id.occasion_spinner2);
+        seasonSpinner = findViewById(R.id.season_spinner2);
+        categorySpinner = findViewById(R.id.category_spinner2);
         String[] seasonList = {"spring","summer","fall","winter"};
         String[] occasionList = {"casual",
                 "formal",

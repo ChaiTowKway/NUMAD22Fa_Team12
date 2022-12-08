@@ -7,63 +7,60 @@ android:layout_height="match_parent"
 tools:context=".outfitToday.EditOutfitActivity">
 
     <Spinner
-        android:id="@+id/occasion_spinner"
+        android:id="@+id/occasion_spinner2"
         android:layout_width="120dp"
         android:layout_height="42dp"
-        android:layout_marginTop="104dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonLinearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/outfit_image_view"
+        app:layout_constraintTop_toBottomOf="@+id/outfit_image_view2"
         app:layout_constraintVertical_bias="0.502" />
 
     <Spinner
-        android:id="@+id/season_spinner"
+        android:id="@+id/season_spinner2"
         android:layout_width="120dp"
         android:layout_height="42dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="104dp"
         android:layout_marginEnd="15dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonLinearLayout"
-        app:layout_constraintEnd_toStartOf="@+id/occasion_spinner"
-        app:layout_constraintStart_toEndOf="@+id/category_spinner"
-        app:layout_constraintTop_toBottomOf="@+id/outfit_image_view"
+        app:layout_constraintEnd_toStartOf="@+id/occasion_spinner2"
+        app:layout_constraintStart_toEndOf="@+id/category_spinner2"
+        app:layout_constraintTop_toBottomOf="@+id/outfit_image_view2"
         app:layout_constraintVertical_bias="0.502" />
 
     <ImageView
-        android:id="@+id/outfit_image_view"
-        android:layout_width="390dp"
-        android:layout_height="202dp"
+        android:id="@+id/outfit_image_view2"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
         android:layout_marginStart="6dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="6dp"
         android:src="@drawable/edit_outfit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_edit_button" />
+        app:layout_constraintBottom_toTopOf="@+id/season_spinner2"
+        app:layout_constraintTop_toBottomOf="@+id/image_edit_button2" />
 
     <Button
-        android:id="@+id/image_edit_button"
+        android:id="@+id/image_edit_button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="306dp"
         android:backgroundTint="@color/mainColor"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="17dp"
         android:text="Upload photo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/outfit_image_view2"/>
 
     <Spinner
-        android:id="@+id/category_spinner"
+        android:id="@+id/category_spinner2"
         android:layout_width="120dp"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="104dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonLinearLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/outfit_image_view"
+        app:layout_constraintTop_toBottomOf="@+id/outfit_image_view2"
         app:layout_constraintVertical_bias="0.502" />
 
     <LinearLayout
@@ -72,7 +69,7 @@ tools:context=".outfitToday.EditOutfitActivity">
         android:orientation="horizontal"
         android:id="@+id/buttonLinearLayout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/season_spinner">
+        app:layout_constraintTop_toBottomOf="@+id/season_spinner2">
 
         <Button
             android:id="@+id/outfitDeleteButton"
@@ -89,7 +86,7 @@ tools:context=".outfitToday.EditOutfitActivity">
             android:layout_height="match_parent" />
 
         <Button
-            android:id="@+id/outfitAddSubmitButton1"
+            android:id="@+id/outfitAddSubmitButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

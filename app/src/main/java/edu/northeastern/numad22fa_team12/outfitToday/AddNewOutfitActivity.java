@@ -72,8 +72,8 @@ public class AddNewOutfitActivity extends AppCompatActivity {
         }
 
         dao = new OutfitDAO();
-        imageAddButton = findViewById(R.id.image_edit_button);
-        outfitImageView = findViewById(R.id.outfit_image_view);
+        imageAddButton = findViewById(R.id.image_edit_button1);
+        outfitImageView = findViewById(R.id.outfit_image_view1);
 
         imageAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,9 +100,9 @@ public class AddNewOutfitActivity extends AppCompatActivity {
             userId = userAuth.getCurrentUser().getEmail().replace(".", "-");
         }
 
-        occasionSpinner = findViewById(R.id.occasion_spinner);
-        seasonSpinner = findViewById(R.id.season_spinner);
-        categorySpinner = findViewById(R.id.category_spinner);
+        occasionSpinner = findViewById(R.id.occasion_spinner1);
+        seasonSpinner = findViewById(R.id.season_spinner1);
+        categorySpinner = findViewById(R.id.category_spinner1);
       String[] seasonList = {"spring","summer","fall","winter"};
       String[] occasionList = {"casual",
               "formal",

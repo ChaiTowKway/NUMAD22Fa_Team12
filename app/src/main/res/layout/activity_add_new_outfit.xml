@@ -8,87 +8,72 @@
     tools:context=".outfitToday.AddNewOutfitActivity">
 
     <Spinner
-        android:id="@+id/occasion_spinner"
+        android:id="@+id/occasion_spinner1"
         android:layout_width="120dp"
         android:layout_height="42dp"
-        android:layout_marginTop="104dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toTopOf="@+id/outfitAddSubmitButton1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/outfit_image_view"
+        app:layout_constraintTop_toBottomOf="@+id/outfit_image_view1"
         app:layout_constraintVertical_bias="0.502" />
 
     <Spinner
-        android:id="@+id/season_spinner"
+        android:id="@+id/season_spinner1"
         android:layout_width="120dp"
         android:layout_height="42dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="104dp"
         android:layout_marginEnd="15dp"
         app:layout_constraintBottom_toTopOf="@+id/outfitAddSubmitButton1"
-        app:layout_constraintEnd_toStartOf="@+id/occasion_spinner"
-        app:layout_constraintStart_toEndOf="@+id/category_spinner"
-        app:layout_constraintTop_toBottomOf="@+id/outfit_image_view"
-        app:layout_constraintVertical_bias="0.502" />
+        app:layout_constraintEnd_toStartOf="@+id/occasion_spinner1"
+        app:layout_constraintStart_toEndOf="@+id/category_spinner1"
+        app:layout_constraintTop_toBottomOf="@+id/outfit_image_view1" />
 
     <ImageView
-        android:id="@+id/outfit_image_view"
-        android:layout_width="376dp"
-        android:layout_height="165dp"
+        android:id="@+id/outfit_image_view1"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
         android:layout_marginStart="6dp"
         android:layout_marginTop="9dp"
         android:layout_marginEnd="6dp"
         android:src="@drawable/edit_outfit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_edit_button" />
+        app:layout_constraintTop_toBottomOf="@+id/image_edit_button1"
+        app:layout_constraintBottom_toTopOf="@+id/season_spinner1"/>
 
     <Button
-        android:id="@+id/image_edit_button"
+        android:id="@+id/image_edit_button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="306dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="17dp"
-
-
         android:backgroundTint="@color/mainColor"
-
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="17dp"
         android:text="Upload photo"
-
-        android:textStyle="bold"
-
-
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/outfit_image_view1" />
 
     <Spinner
-        android:id="@+id/category_spinner"
+        android:id="@+id/category_spinner1"
         android:layout_width="120dp"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="104dp"
         app:layout_constraintBottom_toTopOf="@+id/outfitAddSubmitButton1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/outfit_image_view"
+        app:layout_constraintTop_toBottomOf="@+id/outfit_image_view1"
         app:layout_constraintVertical_bias="0.502" />
 
     <Button
         android:id="@+id/outfitAddSubmitButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="108dp"
         android:backgroundTint="@color/mainColor"
         android:text="Submit"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/season_spinner1"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
