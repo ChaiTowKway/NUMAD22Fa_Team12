@@ -40,7 +40,7 @@
                     android:id="@+id/textView_stock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Wardrobe Stock: ###"
+                    android:text="Wardrobe Stock: ##"
                     android:textAlignment="center"
                     android:textColor="@color/mainColor"
                     android:textSize="20sp"
