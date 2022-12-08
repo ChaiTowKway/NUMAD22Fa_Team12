@@ -97,6 +97,7 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
             }
         };
 
+
         locationRequest = new LocationRequest();
         locationRequest.setInterval(INTERVAL);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -166,7 +167,30 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
             case R.id.button_nearbyOutfits:
                 Intent nearbyIntent = new Intent(getApplicationContext(), SearchByLocation.class);
                 nearbyIntent.putExtra("centerUserId", userEmailKey);
-                startActivity(nearbyIntent);
+//                userName = (String) userRef.child(userEmailKey).child("userInfo").child("userName");
+//                UserInfo userInfo = task.getResult().getValue(UserInfo.class);
+//                userName = userInfo.getUserName();
+                userRef.child(userEmailKey).child("userInfo").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @SuppressLint("DefaultLocale")
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (!task.isSuccessful()) {
+                            Log.e("firebase", "Error getting data", task.getException());
+                            Log.e(TAG, "Error getting data", task.getException());
+                        } else {
+                            UserInfo userInfo = task.getResult().getValue(UserInfo.class);
+                            userName = userInfo.getUserName();
+                            Log.d("noti4", String.valueOf(userName));
+                            nearbyIntent.putExtra("centerUserName", userName);
+                            startActivity(nearbyIntent);
+
+                        }
+                    }
+                });
+
+
+                Log.d("noti5", String.valueOf(userEmailKey));
+
                 break;
             case R.id.button_updateMyProfile:
                 Log.d(TAG, "onClick: update my profile");
