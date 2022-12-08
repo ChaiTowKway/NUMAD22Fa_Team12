@@ -10,7 +10,7 @@
         android:id="@+id/textViewTitle"
         android:layout_width="264dp"
         android:layout_height="49dp"
-        android:text="Here are your 3 nearby friends!"
+        android:text="Here are your nearby friends!"
         android:textAlignment="center"
         android:textColor="@color/mainColor"
         android:textSize="20sp"
@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.564"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintVertical_bias="0.177" />
 
     <TextView
         android:id="@+id/textViewUser1"
