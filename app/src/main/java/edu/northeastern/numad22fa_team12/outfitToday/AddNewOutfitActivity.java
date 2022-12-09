@@ -185,7 +185,10 @@ public class AddNewOutfitActivity extends AppCompatActivity {
                 userRef.child(userId).child("wardrobe").child(imageId).setValue(item);
                 userRef.child(userId).child("categoryList").child(category).child("occasion").child(occasion).child(imageId).setValue(web_uri);
                 userRef.child(userId).child("categoryList").child(category).child("season").child(season).child(imageId).setValue(web_uri);
-                finish();
+
+                Intent intent = new Intent(getApplicationContext(), OutfitToday.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
 
             }
         });
@@ -202,6 +205,15 @@ public class AddNewOutfitActivity extends AppCompatActivity {
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
     }
+
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(getApplicationContext(), OutfitToday.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+////        finish();
+//    }
+
 
     // Hand permission result
     @SuppressLint("MissingSuperCall")
