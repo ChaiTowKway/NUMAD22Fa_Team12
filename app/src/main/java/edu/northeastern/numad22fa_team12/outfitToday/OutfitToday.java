@@ -3,6 +3,7 @@ package edu.northeastern.numad22fa_team12.outfitToday;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,9 +11,17 @@ import androidx.fragment.app.FragmentTransaction;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -32,8 +41,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +61,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import edu.northeastern.numad22fa_team12.LocationService.SearchByLocation;
 import edu.northeastern.numad22fa_team12.MainActivity;
@@ -74,6 +86,8 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
     private ProgressBar progressBar;
     private String userEmail = "",userEmailKey = "", userName = "";
     private String[] tempData;
+    private final  int NOTIFICATION_UNIQUE_ID = 6;
+    private static int notificationGeneration = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +110,6 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
                 }
             }
         };
-
 
         locationRequest = new LocationRequest();
         locationRequest.setInterval(INTERVAL);
@@ -127,6 +140,9 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
             }
             return true;
         });
+
+        createNotificationChannel();
+        getNotificationInfo();
     }
 
     private void putDataToBundle(Fragment fragment) {
@@ -368,6 +384,59 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
                 }
             });
         }
+    }
+
+    public void createNotificationChannel() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Notification Name";
+            String description = "Description";
+            int importanceDefault = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("OutfitTodayChannel", name, importanceDefault);
+            channel.setDescription(description);
+            channel.enableLights(true);
+            channel.setLightColor(Color.RED);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    public void sendNotification(String wardrobeViewBy){
+        Intent intent = new Intent(this, OutfitToday.class);
+        PendingIntent readIntent = PendingIntent.getActivity(this, (int)System.currentTimeMillis(), intent, PendingIntent.FLAG_MUTABLE);
+
+        String channelID = "OutfitTodayChannel";
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.register);
+        Notification noti = new NotificationCompat.Builder(this, channelID)
+                .setContentTitle("OutfitToday")
+                .setContentText(wardrobeViewBy + " is viewing your wardrobe now!")
+                .setSmallIcon(R.drawable.appicon)
+                .setTicker("Ticker text")
+                .setLargeIcon(bm)
+                .addAction(R.drawable.ic_launcher_foreground, "Open OutfitToday", readIntent)
+                .setContentIntent(readIntent).build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        noti.flags |= Notification.FLAG_AUTO_CANCEL;
+        notificationManager.notify(NOTIFICATION_UNIQUE_ID, noti);
+    }
+
+    private void getNotificationInfo() {
+        userRef.child(userEmailKey).child("wardrobeViewBy").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!Objects.equals(snapshot.getValue(String.class), "")) {
+                    String wardrobeViewBy = snapshot.getValue(String.class);
+                    if (wardrobeViewBy != null) {
+                        sendNotification(wardrobeViewBy);
+                        userRef.child(userEmailKey).child("wardrobeViewBy").setValue("");
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
 }

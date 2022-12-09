@@ -66,9 +66,6 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
     private Button getLocation, updateProfile;
     private String userEmail = "",userEmailKey = "", userName = "", contactNumber = "", location = "";
 
-    private final  int NOTIFICATION_UNIQUE_ID = 6;
-    private static int notificationGeneration = 1;
-
     public LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationCallback mLocationCallback;
@@ -84,14 +81,12 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
     LocationCallback locationCallback;
 
 
-
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
-        createNotificationChannel();
+
         userEmailTV = findViewById(R.id.textView_UserEmail);
         userNameTV = findViewById(R.id.editText_Name);
         contactNumberTV = findViewById(R.id.editTextPhone);
@@ -108,27 +103,7 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
 
         }
         getCurrUserInfo();
-        getNotificationInfo();
 
-//        checkPermission();
-//        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-//        createLocationRequest();
-//        mLocationCallback = new LocationCallback() {
-//            @Override
-//            public void onLocationResult(LocationResult locationResult) {
-//                if (locationResult == null) {
-//                    return;
-//                }
-//                for (Location location : locationResult.getLocations()) {
-//                    try {
-//                        latitude = location.getLatitude();
-//                        longitude = location.getLongitude();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        };
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         locationRequest = new LocationRequest();
@@ -282,57 +257,6 @@ public class UpdateProfile extends AppCompatActivity implements View.OnClickList
                 }
                 break;
         }
-    }
-
-    public void createNotificationChannel() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Notification Name";
-            String description = "Description";
-            int importanceDefault = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("OutfitTodayChannel", name, importanceDefault);
-            channel.setDescription(description);
-            channel.enableLights(true);
-            channel.setLightColor(Color.RED);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
-
-    public void sendNotification(String wardrobeViewBy){
-        Intent intent = new Intent(this, OutfitToday.class);
-        PendingIntent readIntent = PendingIntent.getActivity(this, (int)System.currentTimeMillis(), intent, PendingIntent.FLAG_MUTABLE);
-
-        String channelID = "OutfitTodayChannel";
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.register);
-        Notification noti = new NotificationCompat.Builder(this, channelID)
-                .setContentTitle("OutfitToday")
-                .setContentText(wardrobeViewBy + " is viewing your wardrobe now!")
-                .setSmallIcon(R.drawable.appicon)
-                .setTicker("Ticker text")
-                .setLargeIcon(bm)
-                .addAction(R.drawable.ic_launcher_foreground, "Open OutfitToday", readIntent)
-                .setContentIntent(readIntent).build();
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        noti.flags |= Notification.FLAG_AUTO_CANCEL;
-        notificationManager.notify(NOTIFICATION_UNIQUE_ID, noti);
-    }
-
-    private void getNotificationInfo() {
-        userRef.child(userEmailKey).child("wardrobeViewBy").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!Objects.equals(snapshot.getValue(String.class), "")) {
-                    String wardrobeViewBy = snapshot.getValue(String.class);
-                    sendNotification(wardrobeViewBy);
-                    userRef.child(userEmailKey).child("wardrobeViewBy").setValue("");
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
     }
 
 //    private void createLocationRequest() {
