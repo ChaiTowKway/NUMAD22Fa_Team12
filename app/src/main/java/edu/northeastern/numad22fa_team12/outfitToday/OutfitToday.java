@@ -80,7 +80,7 @@ public class OutfitToday extends AppCompatActivity implements View.OnClickListen
     private LocationCallback locationCallback;
     private LocationRequest locationRequest;
     private String longitude, latitude;
-    private final static int INTERVAL = 60000 * 20;
+    private final static int INTERVAL = 60000 * 200;
     private ActivityOutfitTodayBinding binding;
     private Handler mHandler = new Handler();
     private ProgressBar progressBar;
