@@ -188,19 +188,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void setTopImage() {
         if (topImage != null && !topUrls.isEmpty()) {
-            Picasso.get().load(topUrls.get(topIdx)).into(topImage);
+            Picasso.get().load(topUrls.get(topIdx)).rotate(90).into(topImage);
         }
     }
 
     private void setBottomImage() {
         if (bottomImage != null && !bottomUrls.isEmpty()) {
-            Picasso.get().load(bottomUrls.get(bottomIdx)).into(bottomImage);
+            Picasso.get().load(bottomUrls.get(bottomIdx)).rotate(90).into(bottomImage);
         }
     }
 
     private void setShoeImage() {
         if (shoeImage != null && !shoeUrls.isEmpty()) {
-            Picasso.get().load(shoeUrls.get(shoeIdx)).into(shoeImage);
+            Picasso.get().load(shoeUrls.get(shoeIdx)).rotate(90).into(shoeImage);
         }
     }
 

@@ -125,7 +125,7 @@ public class AddNewOutfitActivity extends AppCompatActivity {
         occasionSpinner.setAdapter(occasionAdapter);
         categorySpinner.setAdapter(categoryAdapter);
         if(outfit != null){
-            Picasso.get().load(outfit.getUrl()).into(outfitImageView);
+            Picasso.get().load(outfit.getUrl()).rotate(90).into(outfitImageView);
             seasonSpinner.setSelection(outfit.getSeasonId());
             occasionSpinner.setSelection(outfit.getOccasionId());
             categorySpinner.setSelection(outfit.getCategoryId());

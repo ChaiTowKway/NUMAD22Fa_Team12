@@ -72,7 +72,7 @@ public class WardrobeAdapter extends RecyclerView.Adapter<WardrobeAdapter.Wardro
             String category = CategoryEnum.values()[outfit.getCategoryId()].toString();
             String season = SeasonEnum.values()[outfit.getSeasonId()].toString();
             System.out.println(outfit.toString());
-            Picasso.get().load(outfit.getUrl()).into(imageView);
+            Picasso.get().load(outfit.getUrl()).rotate(90).into(imageView);
             description = String.format("Category: %s\nSeason: %s\nOccasion: %s",category,season,occasion);
             textView.setText(description);
             editButton.setOnClickListener(new View.OnClickListener() {
