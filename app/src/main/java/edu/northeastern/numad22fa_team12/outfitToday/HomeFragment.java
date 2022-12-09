@@ -32,6 +32,7 @@ import java.util.Set;
 
 import edu.northeastern.numad22fa_team12.R;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.OccasionsList;
+import edu.northeastern.numad22fa_team12.outfitTodayModel.Outfit;
 import edu.northeastern.numad22fa_team12.outfitTodayModel.SeasonEnum;
 
 /**
@@ -50,11 +51,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private int topIdx, bottomIdx, shoeIdx;
     private String minTemp, maxTemp, avgTemp;
     private FirebaseDatabase database;
-    private DatabaseReference userRef;
+    private DatabaseReference userRef, outfitRef;
     private FirebaseAuth userAuth;
     private String userEmailKey = "";
     private String curOccasion;
     private List<String> topUrls, bottomUrls, shoeUrls;
+    private String curSeason;
     private String mParam1;
     private String mParam2;
 
@@ -84,6 +86,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference().child("OutfitTodayUsers");
+        outfitRef = database.getReference().child("outfit");
         userAuth = FirebaseAuth.getInstance();
         if (userAuth.getCurrentUser() != null && userAuth.getCurrentUser().getEmail() != null) {
             userEmailKey = userAuth.getCurrentUser().getEmail().replace(".", "-");
@@ -95,6 +98,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         topIdx = 0;
         bottomIdx = 0;
         shoeIdx = 0;
+
+        curSeason = checkCurSeason();
 
     }
 
@@ -129,7 +134,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         shoeNxt.setOnClickListener(this);
 
         getCurrUserInfo();
-        getOutfitList();
+//        getOutfitList();
 //        setTopImage();
 //        setBottomImage();
 //        setShoeImage();
@@ -184,8 +189,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void setTopImage() {
         if (topImage != null && !topUrls.isEmpty()) {
             Picasso.get().load(topUrls.get(topIdx)).into(topImage);
-        } else {
-            Log.e(TAG, "top urls is empty, failed to set top");
         }
     }
 
@@ -255,87 +258,44 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             Log.d(TAG, "No occasion found!");
                             setOccasionTextView("No occasion found, add occasions for better suggestion!");
                         }
+                        getOutfitList();
                     }
                 }
             }
         });
     }
 
+//    public Boolean checkSeasonMatch(String itemKey) {
+//        final Boolean[] res = {false};
+//        outfitRef.child(itemKey).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    Outfit curOutfit = snapshot.getValue(Outfit.class);
+//                    if (curOutfit != null && Objects.equals(curSeason.trim(), SeasonEnum.values()[curOutfit.getSeasonId()].toString().trim())) {
+//                        res[0] = true;
+//                        Log.d(TAG, "current season: " + curSeason);
+//                        Log.d(TAG, "outfit season: " + SeasonEnum.values()[curOutfit.getSeasonId()].toString());
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        });
+//        Log.d(TAG, "compare res: " + res[0].toString());
+//        return res[0];
+//    }
+
     public void getOutfitList() {
-        String curSeason = checkCurSeason();
+        topUrls.clear();
+        bottomUrls.clear();
+        shoeUrls.clear();
 
-        // season for top
-        userRef.child(userEmailKey).child("categoryList").child("tops").child("season").child(curSeason).addValueEventListener(new ValueEventListener() {
-            @SuppressLint("DefaultLocale")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot d : snapshot.getChildren()) {
-                        String itemUrl = Objects.requireNonNull(d.getValue()).toString();
-                        if (!itemUrl.isEmpty()) {
-                            Log.d(TAG, "curSeason: " + curSeason);
-                            Log.d(TAG, "top season URL: " + itemUrl);
-                            topUrls.add(itemUrl);
-                        }
-                    }
-                    Log.d(TAG, "season Top: " + topUrls);
-                    if (curOccasion == null) setTopImage();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        // season for bottoms
-        userRef.child(userEmailKey).child("categoryList").child("bottoms").child("season").child(curSeason).addValueEventListener(new ValueEventListener() {
-            @SuppressLint("DefaultLocale")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot d : snapshot.getChildren()) {
-                        String itemUrl = Objects.requireNonNull(d.getValue()).toString();
-                        if (!itemUrl.isEmpty()) {
-                            Log.d(TAG, "curSeason: " + curSeason);
-                            Log.d(TAG, "bottom season URL: " + itemUrl);
-                            bottomUrls.add(itemUrl);
-                        }
-                    }
-                    Log.d(TAG, "season bottom: " + bottomUrls);
-                    if (curOccasion == null) setBottomImage();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        // season for shoes
-        userRef.child(userEmailKey).child("categoryList").child("shoes").child("season").child(curSeason).addValueEventListener(new ValueEventListener() {
-            @SuppressLint("DefaultLocale")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot d : snapshot.getChildren()) {
-                        String itemUrl = Objects.requireNonNull(d.getValue()).toString();
-                        if (!itemUrl.isEmpty()) {
-                            Log.d(TAG, "curSeason: " + curSeason);
-                            Log.d(TAG, "shoe season URL: " + itemUrl);
-                            shoeUrls.add(itemUrl);
-                        }
-                    }
-                    Log.d(TAG, "season shoe: " + shoeUrls);
-                    if (curOccasion == null) setShoeImage();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
+        // first check if we have preset occasion
         if (curOccasion != null) {
+            // add outfit match both season and occasion
             Log.d(TAG, "current occasion: " + curOccasion);
 
             // occasion for top
@@ -346,12 +306,29 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     if (snapshot.exists()) {
                         for (DataSnapshot d : snapshot.getChildren()) {
                             String itemUrl = Objects.requireNonNull(d.getValue()).toString();
-                            if (!itemUrl.isEmpty() && !topUrls.contains(itemUrl)) {
-                                Log.d(TAG, "occasion top URL: " + itemUrl);
-                                topUrls.add(itemUrl);
+                            if (!itemUrl.isEmpty()) {
+                                String itemKey = Objects.requireNonNull(d.getKey()).toString();
+                                outfitRef.child(itemKey).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()) {
+                                            Outfit curOutfit = snapshot.getValue(Outfit.class);
+                                            if (curOutfit != null && Objects.equals(curSeason.trim(), SeasonEnum.values()[curOutfit.getSeasonId()].toString().trim())) {
+                                                if (!topUrls.contains(itemUrl)) {
+                                                    Log.d(TAG, "occasion top URL: " + itemUrl);
+                                                    topUrls.add(itemUrl);
+                                                }
+                                            }
+                                        }
+                                        setTopImage();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                    }
+                                });
                             }
                         }
-                        setTopImage();
                     }
                 }
                 @Override
@@ -368,12 +345,29 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     if (snapshot.exists()) {
                         for (DataSnapshot d : snapshot.getChildren()) {
                             String itemUrl = Objects.requireNonNull(d.getValue()).toString();
-                            if (!itemUrl.isEmpty() && !bottomUrls.contains(itemUrl)) {
-                                Log.d(TAG, "occasion bottom URL: " + itemUrl);
-                                bottomUrls.add(itemUrl);
+                            if (!itemUrl.isEmpty()) {
+                                String itemKey = Objects.requireNonNull(d.getKey()).toString();
+                                outfitRef.child(itemKey).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()) {
+                                            Outfit curOutfit = snapshot.getValue(Outfit.class);
+                                            if (curOutfit != null && Objects.equals(curSeason.trim(), SeasonEnum.values()[curOutfit.getSeasonId()].toString().trim())) {
+                                                if (!bottomUrls.contains(itemUrl)) {
+                                                    Log.d(TAG, "occasion bottom URL: " + itemUrl);
+                                                    bottomUrls.add(itemUrl);
+                                                }
+                                            }
+                                        }
+                                        setBottomImage();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                    }
+                                });
                             }
                         }
-                        setBottomImage();
                     }
                 }
                 @Override
@@ -390,12 +384,37 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     if (snapshot.exists()) {
                         for (DataSnapshot d : snapshot.getChildren()) {
                             String itemUrl = Objects.requireNonNull(d.getValue()).toString();
-                            if (!itemUrl.isEmpty() && !shoeUrls.contains(itemUrl)) {
-                                Log.d(TAG, "occasion shoe URL: " + itemUrl);
-                                shoeUrls.add(itemUrl);
+
+                            if (!itemUrl.isEmpty()) {
+                                String itemKey = Objects.requireNonNull(d.getKey()).toString();
+
+                                outfitRef.child(itemKey).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()) {
+                                            Outfit curOutfit = snapshot.getValue(Outfit.class);
+                                            if (curOutfit != null && Objects.equals(curSeason.trim(), SeasonEnum.values()[curOutfit.getSeasonId()].toString().trim())) {
+                                                if (!shoeUrls.contains(itemUrl)) {
+                                                    Log.d(TAG, "occasion shoe URL: " + itemUrl);
+                                                    shoeUrls.add(itemUrl);
+                                                }
+                                            }
+                                        }
+                                        setShoeImage();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                    }
+                                });
+//                                if (checkSeasonMatch(itemKey)) {
+//                                    if (!shoeUrls.contains(itemUrl)) {
+//                                        Log.d(TAG, "occasion shoe URL: " + itemUrl);
+//                                        shoeUrls.add(itemUrl);
+//                                    }
+//                                }
                             }
                         }
-                        setShoeImage();
                     }
                 }
                 @Override
@@ -403,9 +422,82 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                 }
             });
-        }
+        } else {
+            // only check for season if there is no occasion found
+            // season for top
+            userRef.child(userEmailKey).child("categoryList").child("tops").child("season").child(curSeason).addValueEventListener(new ValueEventListener() {
+                @SuppressLint("DefaultLocale")
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot d : snapshot.getChildren()) {
+                            String itemUrl = Objects.requireNonNull(d.getValue()).toString();
+                            if (!itemUrl.isEmpty()) {
+                                Log.d(TAG, "curSeason: " + curSeason);
+                                Log.d(TAG, "top season URL: " + itemUrl);
+                                topUrls.add(itemUrl);
+                            }
+                        }
+                        Log.d(TAG, "season Top: " + topUrls);
+                        setTopImage();
+                    }
+                }
 
-//        checkIntersectionAddData();
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            // season for bottoms
+            userRef.child(userEmailKey).child("categoryList").child("bottoms").child("season").child(curSeason).addValueEventListener(new ValueEventListener() {
+                @SuppressLint("DefaultLocale")
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot d : snapshot.getChildren()) {
+                            String itemUrl = Objects.requireNonNull(d.getValue()).toString();
+                            if (!itemUrl.isEmpty()) {
+                                Log.d(TAG, "curSeason: " + curSeason);
+                                Log.d(TAG, "bottom season URL: " + itemUrl);
+                                bottomUrls.add(itemUrl);
+                            }
+                        }
+                        Log.d(TAG, "season bottom: " + bottomUrls);
+                        setBottomImage();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            // season for shoes
+            userRef.child(userEmailKey).child("categoryList").child("shoes").child("season").child(curSeason).addValueEventListener(new ValueEventListener() {
+                @SuppressLint("DefaultLocale")
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot d : snapshot.getChildren()) {
+                            String itemUrl = Objects.requireNonNull(d.getValue()).toString();
+                            if (!itemUrl.isEmpty()) {
+                                Log.d(TAG, "curSeason: " + curSeason);
+                                Log.d(TAG, "shoe season URL: " + itemUrl);
+                                shoeUrls.add(itemUrl);
+                            }
+                        }
+                        Log.d(TAG, "season shoe: " + shoeUrls);
+                        setShoeImage();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }
     }
 
 //    private void checkIntersectionAddData() {

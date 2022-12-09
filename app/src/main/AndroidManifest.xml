@@ -41,7 +41,8 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".outfitToday.occasions.MyOccasions"/>
+            android:name=".outfitToday.occasions.MyOccasions"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".outfitToday.AddNewOutfitActivity"
@@ -57,7 +58,8 @@
         </activity>
         <activity
             android:name=".LocationService.SearchByLocation"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".outfitToday.NewUserRegisterActivity"
             android:exported="false">
