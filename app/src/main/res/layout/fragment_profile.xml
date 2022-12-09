@@ -14,7 +14,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="21dp" />
+            android:layout_height="60dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,6 +48,9 @@
             </LinearLayout>
 
         </LinearLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,62 +85,56 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="39dp" />
+            android:layout_height="5dp" />
 
-        <ScrollView
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="334dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <Button
+                android:id="@+id/button_myOutfitSuggestion"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:onClick="onClick"
+                android:text="My Outfit Suggestions"
+                android:textColor="@color/mainColor"
+                android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/button_myOutfitSuggestion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
-                    android:onClick="onClick"
-                    android:text="My Outfit Suggestions"
-                    android:textColor="@color/mainColor"
-                    android:textStyle="bold" />
+            <Button
+                android:id="@+id/button_nearbyOutfits"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:onClick="onClick"
+                android:text="Nearby Outfits"
+                android:textColor="@color/mainColor"
+                android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/button_nearbyOutfits"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
-                    android:onClick="onClick"
-                    android:text="Nearby Outfits"
-                    android:textColor="@color/mainColor"
-                    android:textStyle="bold" />
+            <Button
+                android:id="@+id/button_updateMyProfile"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:onClick="onClick"
+                android:text="Update My Profile"
+                android:textColor="@color/mainColor"
+                android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/button_updateMyProfile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
-                    android:onClick="onClick"
-                    android:text="Update My Profile"
-                    android:textColor="@color/mainColor"
-                    android:textStyle="bold" />
+            <Button
+                android:id="@+id/button_logOut"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:onClick="onClick"
+                android:text="Log Out"
+                android:textColor="@color/warningColor"
+                android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/button_logOut"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
-                    android:onClick="onClick"
-                    android:text="Log Out"
-                    android:textColor="@color/warningColor"
-                    android:textStyle="bold" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="320dp" />
-            </LinearLayout>
-        </ScrollView>
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>
