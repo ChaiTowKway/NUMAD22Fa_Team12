@@ -9,7 +9,7 @@ https://github.com/ChaiTowKway/NUMAD22Fa_Team12
 
 4. Final Project Presentation Link
 https://drive.google.com/drive/folders/1ymnfyNBETWy4GMgJ9nnzRRYn9-BMgT_L
- 1) Xiaodong Li: Part1--User login, my profile screen
+ 1) Xiaodong Li: Part1--User login, my profile screen, notification
  2) Siran Cao: Part2--Home screen, outfit suggestion logic
  3) Yuanhao Xu: Part3--Add outfits, Wardrobe screen
  4) Qian Lang: Part4--Nearby wardrobes, notification
